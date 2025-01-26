@@ -4,7 +4,7 @@
 *.egg-info
 # magic environments
 .magic
-/main.mojo
-*/**/.so
+main.mojo
+./mjui/libc/fltk.so
 /mjui/libc/bin
 /.vscode
