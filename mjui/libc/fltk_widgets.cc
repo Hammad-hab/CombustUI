@@ -4,8 +4,9 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Grid.H>
-#include "fltk_utils.cc"
+#include "Buttons.cc"
 #include<stdint.h>
+
 
 // Window
 Fl_Double_Window *fltk_create_window_new(int width, int height, char *title)
@@ -16,10 +17,10 @@ Fl_Double_Window *fltk_create_window_new(int width, int height, char *title)
 }
 
 
-Fl_Button *fltk_create_button_new(int x, int y, int w, int h, int8_t *label_r)
+Button *fltk_create_button_new(int x, int y, int w, int h, int8_t *label_r)
 {
     char *label = int8ToChar(label_r); // convert int8 to char
-    Fl_Button *btn = new Fl_Button(x, y, w, h, label);
+    Button *btn = new Button(x, y, w, h, label);
     btn->box(FL_FLAT_BOX);
     btn->label(label);
     return btn;

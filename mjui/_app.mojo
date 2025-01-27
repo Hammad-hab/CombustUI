@@ -1,4 +1,4 @@
-from .const import FLTK_WIDGET_POINTER, __dll
+from .const import FLTK_WIDGET_POINTER, __dll, fl_ready, fl_check
 struct Application:
     var __dll: DLHandle
 
@@ -8,6 +8,13 @@ struct Application:
     
     fn execute(mut self) raises -> None:
         # fltk_exec() # low-level call
-        self.__dll.call['fltk_execute']()
+        print('Welcome to MojoUI')
+        var fn_ = __dll.get_function[fn() -> NoneType]('listEvents')
+        print('Starting Application...')
+        while True:
+            if fl_ready() == 1:
+                _ = fl_check()
+            # app.execute()
+            fn_()
 
         

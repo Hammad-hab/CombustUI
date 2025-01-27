@@ -2,9 +2,9 @@
 #include<cstring>
 #include <FL/Fl.H>
 #include <FL/Fl_Widget.H>
-#include<stdio.h>
 
 using namespace std;
+
 
 char *int8ToChar(const int8_t *int8Array) {
     // First, determine the length of the input array
@@ -53,6 +53,7 @@ void set_widget_color2(Fl_Widget *window, Fl_Color c)
 {
     window->color2(c);
 }
+
 
 void show_widget(Fl_Widget *widget)
 {

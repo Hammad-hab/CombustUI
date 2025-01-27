@@ -8,10 +8,8 @@ alias FLTK_WIDGET_POINTER = UnsafePointer[FLTK_POINTER]
 alias c_void = NoneType
 alias StringBytes  = Span[UInt8, StaticConstantOrigin]
 
-var __dll = DLHandle('/Users/hammad/Documents/Hammad/Mojo/mojo-ui/mjui/libc/fltk.so')
+var __dll = DLHandle('/Users/hammad/Documents/Hammad/Mojo/mojo-ui/mjui/libc/fltk.dylib')
 
-fn dllGetFunctionSymbol[type: AnyTrivialRegType](name:String) -> type:
-    return dllGetFunctionSymbol[type]('show_widget')
 
 alias FL_CURSOR_DEFAULT = 0
 alias FL_CURSOR_ARROW = 35
@@ -35,25 +33,57 @@ alias FL_CURSOR_W = 36
 alias FL_CURSOR_NW = 68
 alias FL_CURSOR_NONE = 255
 
+alias FL_NO_EVENT                    = 0
+alias FL_PUSH                        = 1
+alias FL_RELEASE                     = 2
+alias FL_ENTER                       = 3
+alias FL_LEAVE                       = 4
+alias FL_DRAG                        = 5
+alias FL_FOCUS                       = 6
+alias FL_UNFOCUS                     = 7
+alias FL_KEYDOWN                     = 8
+alias FL_KEYBOARD                    = 8
+alias FL_KEYUP                       = 9
+alias FL_CLOSE                       = 10
+alias FL_MOVE                        = 11
+alias FL_SHORTCUT                    = 12
+alias FL_DEACTIVATE                  = 13
+alias FL_ACTIVATE                    = 14
+alias FL_HIDE                        = 15
+alias FL_SHOW                        = 16
+alias FL_PASTE                       = 17
+alias FL_SELECTIONCLEAR              = 18
+alias FL_MOUSEWHEEL                  = 19
+alias FL_DND_ENTER                   = 20
+alias FL_DND_DRAG                    = 21
+alias FL_DND_LEAVE                   = 22
+alias FL_DND_RELEASE                 = 23
+alias FL_SCREEN_CONFIGURATION_CHANGED = 24
+alias FL_FULLSCREEN                  = 25
+alias FL_ZOOM_GESTURE                = 26
+alias FL_ZOOM_EVENT                  = 27
+
 # Main functionality
-var show_widget = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER) -> c_void]('show_widget')
-var fltk_exec = dllGetFunctionSymbol[fn() -> c_void]('fltk_execute')
-var end_widget_child_append = dllGetFunctionSymbol[fn(widget: FLTK_WIDGET_POINTER) -> c_void]('end_widget_child_append')
-var fltk_grid_assign_pos = dllGetFunctionSymbol[fn(grid: FLTK_WIDGET_POINTER, widget: FLTK_WIDGET_POINTER, row:Int32, col:Int32) -> c_void]('fltk_grid_assign_pos')
-var set_widget_color = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color')
-var set_selection_color = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color2')
-var get_height = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_height')
-var get_width = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_width')
-var set_cursor = dllGetFunctionSymbol[fn(window: FLTK_WIDGET_POINTER, cursor:UInt32) -> NoneType]('set_window_cursor')
-var set_widget_callback = dllGetFunctionSymbol[fn(w: FLTK_WIDGET_POINTER, handler:UnsafePointer[fn(w: FLTK_WIDGET_POINTER, *args:c_void)->NoneType, alignment=1]) -> NoneType]('set_widget_callback')
+var show_widget = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> c_void]('show_widget')
+var fltk_exec = __dll.get_function[fn() -> c_void]('fltk_execute')
+var end_widget_child_append = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER) -> c_void]('end_widget_child_append')
+var fltk_grid_assign_pos = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, widget: FLTK_WIDGET_POINTER, row:Int32, col:Int32) -> c_void]('fltk_grid_assign_pos')
+var set_widget_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color')
+var set_selection_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color2')
+var get_height = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_height')
+var get_width = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_width')
+var set_cursor = __dll.get_function[fn(window: FLTK_WIDGET_POINTER, cursor:UInt32) -> NoneType]('set_window_cursor')
+var set_widget_callback = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, handler:UnsafePointer[fn(w: FLTK_WIDGET_POINTER, *args:c_void)->NoneType, alignment=1]) -> NoneType]('set_widget_callback')
+var fl_ready = __dll.get_function[fn() -> Int32]('fltk_check')
+var fl_check = __dll.get_function[fn() -> Int32]('fltk_ready')
 
 
 # Widgets
-var fltk_create_window_new = dllGetFunctionSymbol[fn(w: UInt32, h:UInt32, l:String) -> FLTK_WIDGET_POINTER]('fltk_create_window_new')
-var fltk_create_button_new = dllGetFunctionSymbol[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_button_new")
-var fltk_create_input_new = dllGetFunctionSymbol[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_input_new")
-var fltk_layout_grid = dllGetFunctionSymbol[fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER]("fltk_layout_grid")
-var fltk_set_grid_layout_dimensions = dllGetFunctionSymbol[fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void]("fltk_set_grid_layout_dimensions")
+var fltk_create_window_new = __dll.get_function[fn(w: UInt32, h:UInt32, l:String) -> FLTK_WIDGET_POINTER]('fltk_create_window_new')
+var fltk_create_button_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_button_new")
+var fltk_create_input_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_input_new")
+var fltk_layout_grid = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER]("fltk_layout_grid")
+var fltk_set_grid_layout_dimensions = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void]("fltk_set_grid_layout_dimensions")
 
 
 struct Color:

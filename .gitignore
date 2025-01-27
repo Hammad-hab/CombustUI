@@ -8,3 +8,4 @@ main.mojo
 ./mjui/libc/fltk.so
 /mjui/libc/bin
 /.vscode
+.DS_Store
