@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <string>
 
-std::unordered_map<const char*, int> Events;
+std::unordered_map<int, int> Events;
 
 extern "C" {
 

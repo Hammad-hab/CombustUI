@@ -1,23 +1,9 @@
-#include<stdio.h>
-
-void enqueueEvent(const char* id, int event) {
-    Events[id] = event;
-}
-
-void unqueueEvent(const char* id) {
-    Events[id] = 0;
-}
-
-int widgetHandle(const char* id, int event)
+class MJUI_Widget
 {
-    enqueueEvent(id, event);
-
-    return event;
-}
-
-
-void listEvents() {
-      for (auto x : Events) {
-    puts(x.first);
-}
-}
+    public:
+        
+        long int id;
+        void setId(long int new_id) {
+            id = new_id;
+        }
+};

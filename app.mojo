@@ -17,13 +17,14 @@ fn main() raises:
     var button2 = fltk_create_button_new(0, 0, 0, 0, string)
     set_widget_color(button2, rgb_to_i32(255, 166, 214))
     set_selection_color(button2, rgb_to_i32(250, 152, 204))
-
+    set_button_id(button2, 4232)
     fltk_grid_assign_pos(grid, input, 4, 2)
     fltk_grid_assign_pos(grid, button2, 5, 2)
 
     end_widget_child_append(grid)
     end_widget_child_append(window)
     show_widget(window)
+    
     
     app.execute()
     # fltk_exec()

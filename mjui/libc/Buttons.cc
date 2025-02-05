@@ -2,18 +2,16 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
-#include "BaseWidget.cc"
+#include "BaseWidgetHelpers.cc"
 #include "fltk_utils.cc"
+#include "BaseWidget.cc"
 
-class Button : public Fl_Button {
-    private:
-        const char* id;
+
+class Button : public Fl_Button, public  MJUI_Widget {
     public: 
         Button(int x, int y, int w, int h, char* label): Fl_Button(x, y, w, h, label) {
-            id="buttonidherd";
+            id=333333;
         };
-
-
     int handle(int event) override {
         switch (event) {
             case FL_PUSH:
@@ -34,3 +32,4 @@ class Button : public Fl_Button {
     }
 
 };
+

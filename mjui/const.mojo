@@ -1,5 +1,5 @@
 from .utils import rgb_to_i32, str_to_int8
-from sys.ffi import DLHandle, UnsafePointer
+from sys.ffi import DLHandle, UnsafePointer, c_char
 from memory import Span
 from memory.pointer import Pointer
 
@@ -84,6 +84,7 @@ var fltk_create_button_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:
 var fltk_create_input_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_input_new")
 var fltk_layout_grid = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER]("fltk_layout_grid")
 var fltk_set_grid_layout_dimensions = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void]("fltk_set_grid_layout_dimensions")
+var set_button_id = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, id: Int32) -> c_void]("set_id")
 
 
 struct Color:

@@ -54,3 +54,8 @@ Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, i
 void fltk_grid_assign_pos(Fl_Grid *grid, Fl_Widget *widget, int row, int col) {
     grid->widget(widget, row, col);
 }
+
+
+void set_id(Button *btn, long int id) {
+    btn->setId(id);
+}

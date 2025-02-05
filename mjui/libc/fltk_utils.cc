@@ -2,9 +2,9 @@
 #include<cstring>
 #include <FL/Fl.H>
 #include <FL/Fl_Widget.H>
+#include <stdexcept>
 
 using namespace std;
-
 
 char *int8ToChar(const int8_t *int8Array) {
     // First, determine the length of the input array
