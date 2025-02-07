@@ -85,7 +85,8 @@
         "algorithm": "cpp",
         "gtk.h": "c",
         "gtkcss.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,3 +1,4 @@
+
 class MJUI_Widget
 {
     public:

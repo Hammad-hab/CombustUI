@@ -3,10 +3,9 @@ from mjui.const import *
 from memory.pointer import Pointer
 from mjui.const import __dll
 
-
 fn main() raises:
     var app = Application()
-    var window = fltk_create_window_new(1000, 500, "Window")
+    var window = fltk_create_window_new(1000, 500, "Window".as_bytes())
     var grid = fltk_layout_grid(0, 0, get_width(window), get_height(window))
     fltk_set_grid_layout_dimensions(grid, 10, 5, -1, 10)
     set_widget_color(grid, rgb_to_i32(77, 0, 42))
@@ -18,10 +17,10 @@ fn main() raises:
     set_widget_color(button2, rgb_to_i32(255, 166, 214))
     set_selection_color(button2, rgb_to_i32(250, 152, 204))
     set_button_id(button2, 4232)
+
     fltk_grid_assign_pos(grid, input, 4, 2)
     fltk_grid_assign_pos(grid, button2, 5, 2)
 
-    end_widget_child_append(grid)
     end_widget_child_append(window)
     show_widget(window)
     

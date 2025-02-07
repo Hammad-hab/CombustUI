@@ -67,6 +67,7 @@ alias FL_ZOOM_EVENT                  = 27
 var show_widget = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> c_void]('show_widget')
 var fltk_exec = __dll.get_function[fn() -> c_void]('fltk_execute')
 var end_widget_child_append = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER) -> c_void]('end_widget_child_append')
+var begin_widget_child_append = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER) -> c_void]('begin_widget_child_append')
 var fltk_grid_assign_pos = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, widget: FLTK_WIDGET_POINTER, row:Int32, col:Int32) -> c_void]('fltk_grid_assign_pos')
 var set_widget_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color')
 var set_selection_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color2')
@@ -79,7 +80,7 @@ var fl_check = __dll.get_function[fn() -> Int32]('fltk_ready')
 
 
 # Widgets
-var fltk_create_window_new = __dll.get_function[fn(w: UInt32, h:UInt32, l:String) -> FLTK_WIDGET_POINTER]('fltk_create_window_new')
+var fltk_create_window_new = __dll.get_function[fn(w: UInt32, h:UInt32, l:StringBytes) -> FLTK_WIDGET_POINTER]('fltk_create_window_new')
 var fltk_create_button_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_button_new")
 var fltk_create_input_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_input_new")
 var fltk_layout_grid = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER]("fltk_layout_grid")

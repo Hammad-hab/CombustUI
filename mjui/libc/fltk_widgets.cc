@@ -9,11 +9,22 @@
 
 
 // Window
-Fl_Double_Window *fltk_create_window_new(int width, int height, char *title)
+Fl_Double_Window *fltk_create_window_new(int width, int height, int8_t *title_r)
 {
+    char *title = int8ToChar(title_r);
     Fl_Double_Window *window = new Fl_Double_Window(width, height, title); // Create a window
     window->resizable(window);
     return window;
+}
+
+
+Button *fltk_create_button_new(int x, int y, int w, int h, int8_t *label_r)
+{
+    char *label = int8ToChar(label_r); // convert int8 to char
+    Button *btn = new Button(x, y, w, h, label);
+    btn->box(FL_FLAT_BOX);
+    btn->label(label);
+    return btn;
 }
 
 

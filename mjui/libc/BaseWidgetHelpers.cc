@@ -34,11 +34,12 @@ int widgetHandle(int id, int event)
     return event;
 }
 
-int listEvents() {
+int64_t listEvents() {
     for (auto x : Events) {
-        // if (x.second == 0) continue;
-        // Events[x.first] = 0;
-        return (x.first);
+        if (x.second == 0) continue;
+        Events[x.first] = 0;
+        uint64_t combined = ((uint64_t)x.first << 32) | x.second;
+        return (combined);
     }
     // return "NULL"
     return 2;
