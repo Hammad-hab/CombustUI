@@ -6,6 +6,28 @@
 
 using namespace std;
 
+#ifndef FLTK_UTILS_H
+
+#define FLTK_UTILS_H
+
+int* charToInt8(const char *charArray) {
+    // First, determine the length of the input array
+    size_t length = strlen(charArray);
+
+    // Allocate memory for the int8_t array
+    int *int8Array = new int[length + 1]; // +1 for null terminator
+
+    // Copy each character to int8_t array
+    for (size_t i = 0; i < length; ++i) {
+        int8Array[i] = static_cast<int>(charArray[i]);
+    }
+
+    // Null-terminate the int8_t array (optional, depending on use case)
+    int8Array[length] = '\0'; // Only if you need a null terminator
+
+    return int8Array;
+}
+
 char *int8ToChar(const int8_t *int8Array) {
     // First, determine the length of the input array
     size_t length = 0;
@@ -71,7 +93,6 @@ void begin_widget_child_append(Fl_Group *widget) {
 
 
 
-
 /** Dimensions */
 int get_height(Fl_Widget *widget) {
     return widget->h();
@@ -80,3 +101,6 @@ int get_height(Fl_Widget *widget) {
 int get_width(Fl_Widget *widget) {
     return widget->w();
 }
+
+
+#endif

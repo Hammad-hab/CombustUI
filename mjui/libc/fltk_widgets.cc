@@ -4,8 +4,11 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Grid.H>
+#include <FL/Fl_Flex.H>
 #include "Buttons.cc"
+#include "Input.cc"
 #include<stdint.h>
+#include<stdio.h>
 
 
 // Window
@@ -28,20 +31,10 @@ Button *fltk_create_button_new(int x, int y, int w, int h, int8_t *label_r)
 }
 
 
-Button *fltk_create_button_new(int x, int y, int w, int h, int8_t *label_r)
+Input *fltk_create_input_new(int x, int y, int w, int h, int8_t *label_r)
 {
     char *label = int8ToChar(label_r); // convert int8 to char
-    Button *btn = new Button(x, y, w, h, label);
-    btn->box(FL_FLAT_BOX);
-    btn->label(label);
-    return btn;
-}
-
-
-Fl_Input *fltk_create_input_new(int x, int y, int w, int h, int8_t *label_r)
-{
-    char *label = int8ToChar(label_r); // convert int8 to char
-    Fl_Input *input = new Fl_Input(x, y, w, h, label);
+    Input *input = new Input(x, y, w, h, label);
     input->box(FL_FLAT_BOX);
     input->label(label);
 
@@ -56,6 +49,12 @@ Fl_Grid *fltk_layout_grid(int x, int y, int w, int h)
     return grid;
 }
 
+Fl_Flex *fltk_layout_flex(int x, int y, int w, int h)
+{
+    Fl_Flex *flex = new Fl_Grid(x, y, w, h);
+    return flex;
+}
+
 Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, int margin, int gap)
 {   
     grid->layout(rows, columns, margin, gap);
@@ -67,6 +66,9 @@ void fltk_grid_assign_pos(Fl_Grid *grid, Fl_Widget *widget, int row, int col) {
 }
 
 
-void set_id(Button *btn, long int id) {
-    btn->setId(id);
+const char* get_input_value(Fl_Input *input)
+{
+    const char* value = (input->value());
+    return (value);
 }
+

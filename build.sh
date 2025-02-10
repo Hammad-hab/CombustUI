@@ -1,4 +1,6 @@
 cd mjui/libc
-g++ -shared -Wc++11-extensions ./fltk.cc -o ./fltk.dylib `fltk-config --cxxflags --ldflags --libs`
+echo "Compiling mjui-fltk bindings..."
+g++ -shared -Wc++11-extensions ./fltk.cc -o ./fltk.dylib `fltk-config --cxxflags --ldflags --libs` -std=c++11
 # gcc -I/opt/homebrew/include/gtk-4.0 -I/opt/homebrew/include/glib-2.0 -I/opt/homebrew/lib/glib-2.0/include $(pkg-config --cflags gtk4) -o libgtk.dylib -shared gtk_ui.c $(pkg-config --libs gtk4)
 cd ../../
+echo "Successfully compiled"

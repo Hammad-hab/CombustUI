@@ -86,7 +86,8 @@
         "gtk.h": "c",
         "gtkcss.h": "c",
         "stdio.h": "c",
-        "random": "cpp"
+        "random": "cpp",
+        "Input.C": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

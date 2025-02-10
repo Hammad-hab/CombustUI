@@ -9,3 +9,4 @@ main.mojo
 /mjui/libc/bin
 /.vscode
 .DS_Store
+./*/**/.dylib
