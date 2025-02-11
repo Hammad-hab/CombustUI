@@ -91,8 +91,6 @@ void begin_widget_child_append(Fl_Group *widget) {
     widget->begin();
 }
 
-
-
 /** Dimensions */
 int get_height(Fl_Widget *widget) {
     return widget->h();

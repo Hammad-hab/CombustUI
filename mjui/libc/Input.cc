@@ -5,17 +5,15 @@
 
 #include "BaseWidgetHelpers.cc"
 #include "fltk_utils.cc"
-#include "BaseWidget.hh"
+#include "BaseWidget.cc"
 
 
 class Input : public Fl_Input, public  MJUI_Widget {
     public: 
-        long int id;
         Input(int x, int y, int w, int h, char* label): Fl_Input(x, y, w, h, label), MJUI_Widget() {
             id=110000;
         };
-        
-
+    
 
     int handle(int event) override {
         switch (event) {

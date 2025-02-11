@@ -5,16 +5,15 @@
 
 #include "BaseWidgetHelpers.cc"
 #include "fltk_utils.cc"
-#include "BaseWidget.hh"
+#include "BaseWidget.cc"
 
 
 class Button : public Fl_Button, public  MJUI_Widget {
     public: 
-    long int id;
-        Button(int x, int y, int w, int h, char* label): Fl_Button(x, y, w, h, label), MJUI_Widget() {
+        Button(int x, int y, int w, int h, char* label): Fl_Button(x, y, w, h, label) {
             id=100000;
         };
-
+       
     int handle(int event) override {
         switch (event) {
             case FL_PUSH:

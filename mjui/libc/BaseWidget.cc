@@ -12,4 +12,5 @@ class MJUI_Widget
         } ;
 };
 
+
 #endif

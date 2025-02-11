@@ -1,4 +1,4 @@
-from .dll import FLTK_WIDGET_POINTER, __dll, fl_ready, fl_check, grabEventFromFLTK, get_input_value
+from .dll import FLTK_WIDGET_POINTER, __dll, fl_ready, fl_check, grabEventFromFLTK, set_id
 from collections import Dict
 from sys.ffi import DLHandle
 
@@ -18,12 +18,15 @@ struct Application:
 
     fn setElementById(mut self, id: Int, element: FLTK_WIDGET_POINTER):
         self.__elements[id] = element
+    
+    fn setElementId(mut self, element: FLTK_WIDGET_POINTER, id: Int):
+        set_id(element, id)
 
     fn getElementById(mut self, id: Int) raises -> FLTK_WIDGET_POINTER:
         var pointer = self.__elements[id]
         return pointer
        
-    fn execute(mut self, widget: FLTK_WIDGET_POINTER) raises -> None:
+    fn execute(mut self) raises -> None:
 
         print('Welcome to MojoUI')
         print('Starting Application...')

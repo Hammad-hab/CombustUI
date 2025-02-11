@@ -49,12 +49,6 @@ Fl_Grid *fltk_layout_grid(int x, int y, int w, int h)
     return grid;
 }
 
-Fl_Flex *fltk_layout_flex(int x, int y, int w, int h)
-{
-    Fl_Flex *flex = new Fl_Grid(x, y, w, h);
-    return flex;
-}
-
 Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, int margin, int gap)
 {   
     grid->layout(rows, columns, margin, gap);
@@ -72,3 +66,7 @@ const char* get_input_value(Fl_Input *input)
     return (value);
 }
 
+
+void set_id (Input *widget, long int id) {
+    widget->setId(id);
+}

@@ -19,6 +19,7 @@ var set_selection_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt3
 var get_height = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_height')
 var get_width = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_width')
 var set_cursor = __dll.get_function[fn(window: FLTK_WIDGET_POINTER, cursor:UInt32) -> NoneType]('set_window_cursor')
+var set_id = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER, id:Int) -> NoneType]('set_id')
 var set_widget_callback = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, handler:UnsafePointer[fn(w: FLTK_WIDGET_POINTER, *args:c_void)->NoneType, alignment=1]) -> NoneType]('set_widget_callback')
 var fl_ready = __dll.get_function[fn() -> Int32]('fltk_check')
 var fl_check = __dll.get_function[fn() -> Int32]('fltk_ready')
