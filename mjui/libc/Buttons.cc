@@ -2,7 +2,6 @@
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
-
 #include "BaseWidgetHelpers.cc"
 #include "fltk_utils.cc"
 #include "BaseWidget.cc"

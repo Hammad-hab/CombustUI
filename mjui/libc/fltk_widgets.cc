@@ -11,6 +11,8 @@
 #include<stdio.h>
 
 
+
+
 // Window
 Fl_Double_Window *fltk_create_window_new(int width, int height, int8_t *title_r)
 {
@@ -49,6 +51,13 @@ Fl_Grid *fltk_layout_grid(int x, int y, int w, int h)
     return grid;
 }
 
+Fl_Flex *fltk_layout_flex(int x, int y, int w, int h)
+{
+    Fl_Flex *flex = new Fl_Flex(x, y, w, h, Fl_Flex::HORIZONTAL);
+    return flex;
+}
+
+
 Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, int margin, int gap)
 {   
     grid->layout(rows, columns, margin, gap);
@@ -67,6 +76,10 @@ const char* get_input_value(Fl_Input *input)
 }
 
 
-void set_id (Input *widget, long int id) {
+void set_id (Button *widget, long int id) {
     widget->setId(id);
+}
+
+Fl_Box *fltk_create_image(const char* path) {
+    return create_image(path);
 }

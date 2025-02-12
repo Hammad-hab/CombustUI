@@ -15,6 +15,7 @@ var end_widget_child_append = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER)
 var begin_widget_child_append = __dll.get_function[fn(widget: FLTK_WIDGET_POINTER) -> c_void]('begin_widget_child_append')
 var fltk_grid_assign_pos = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, widget: FLTK_WIDGET_POINTER, row:Int32, col:Int32) -> c_void]('fltk_grid_assign_pos')
 var set_widget_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color')
+var set_text_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_text_color')
 var set_selection_color = __dll.get_function[fn(w: FLTK_WIDGET_POINTER, c: UInt32) -> c_void]('set_widget_color2')
 var get_height = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_height')
 var get_width = __dll.get_function[fn(w: FLTK_WIDGET_POINTER) -> Int32]('get_width')
@@ -33,6 +34,7 @@ var fltk_layout_grid = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32)
 var fltk_set_grid_layout_dimensions = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void]("fltk_set_grid_layout_dimensions")
 var grabEventFromFLTK = __dll.get_function[fn() -> Int]('listEvents')
 var get_input_value = __dll.get_function[fn(input: FLTK_WIDGET_POINTER) -> StringBytes]('get_input_value')
+var fltk_create_image = __dll.get_function[fn(path: StringBytes) -> FLTK_WIDGET_POINTER]('fltk_create_image')
 
 
 

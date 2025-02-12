@@ -25,3 +25,12 @@ fn readFromStringBytes(bytes: StringBytes) -> String:
         i += 1
     list.append(0)
     return list
+
+
+fn createIdFrom(id: String) raises -> Int:
+    var strn: String = ""
+    for char in id:
+       intrepr = ord(char)
+       strn += str(intrepr)
+    
+    return int(strn)

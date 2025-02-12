@@ -2,7 +2,7 @@ from .dll import FLTK_WIDGET_POINTER, __dll, fl_ready, fl_check, grabEventFromFL
 from collections import Dict
 from sys.ffi import DLHandle
 
-
+var isRunning = True
 struct Application:
     var __dll: DLHandle
     var __event_dict: Dict[Int, fn() raises]
@@ -25,13 +25,15 @@ struct Application:
     fn getElementById(mut self, id: Int) raises -> FLTK_WIDGET_POINTER:
         var pointer = self.__elements[id]
         return pointer
-       
-    fn execute(mut self) raises -> None:
+
+
+    fn execute(mut self) raises:
 
         print('Welcome to MojoUI')
         print('Starting Application...')
-        while True:
-            if fl_ready() == 1:
+        while isRunning:
+            
+            if fl_ready() == 1 :
                 _ = fl_check()
 
             var event = grabEventFromFLTK()

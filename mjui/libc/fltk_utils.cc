@@ -70,6 +70,11 @@ void set_widget_color(Fl_Widget *window, Fl_Color c)
     window->color(c);
 }
 
+void set_text_color(Fl_Widget *widget, Fl_Color c)
+{
+    widget->labelcolor(c);
+}
+
 
 void set_widget_color2(Fl_Widget *window, Fl_Color c)
 {
