@@ -1,4 +1,5 @@
-from .dll import FLTK_WIDGET_POINTER, __dll, fl_ready, fl_check, grabEventFromFLTK, set_id
+from .fltk_bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, set_id
+from .fltk_bindings.dll import __dll
 from collections import Dict
 from sys.ffi import DLHandle
 
@@ -36,7 +37,7 @@ struct Application:
             if fl_ready() == 1 :
                 _ = fl_check()
 
-            var event = grabEventFromFLTK()
+            var event = grab_fltk_event()
             if event != 2:
                 var event_type =  (event & 4294967295)
                 var identifier =  (event >> 32) & 4294967295

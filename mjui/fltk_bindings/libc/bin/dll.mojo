@@ -4,7 +4,7 @@ from memory.pointer import Pointer
 from .const import *
 from .types import *
 
-var __dll = DLHandle('/Users/hammad/Documents/Hammad/Mojo/mojo-ui/mjui/libc/fltk.dylib')
+var __dll = DLHandle('/Users/hammad/Documents/Hammad/Mojo/mojo-ui/mjui/libc/out/fltk.dylib')
 
 
 
@@ -32,7 +32,7 @@ var fltk_create_button_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:
 var fltk_create_input_new = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER]("fltk_create_input_new")
 var fltk_layout_grid = __dll.get_function[fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER]("fltk_layout_grid")
 var fltk_set_grid_layout_dimensions = __dll.get_function[fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void]("fltk_set_grid_layout_dimensions")
-var grabEventFromFLTK = __dll.get_function[fn() -> Int]('listEvents')
+var grab_fltk_event = __dll.get_function[fn() -> Int]('listEvents')
 var get_input_value = __dll.get_function[fn(input: FLTK_WIDGET_POINTER) -> StringBytes]('get_input_value')
 var fltk_create_image = __dll.get_function[fn(path: StringBytes) -> FLTK_WIDGET_POINTER]('fltk_create_image')
 
