@@ -36,3 +36,11 @@ fn createIdFrom(id: String) raises -> Int:
     return int(strn)
 
 
+fn filter[listType: CollectionElement](list:List[listType], modifier: fn(element:listType)->Bool) -> List[listType]:
+    var new_list = List[listType]()
+    for element in list:
+        var shouldIncludeValue = modifier(element[])
+        if shouldIncludeValue:
+            new_list.append(element[])
+
+    return new_list

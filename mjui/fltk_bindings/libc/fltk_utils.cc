@@ -87,6 +87,11 @@ void show_widget(Fl_Widget *widget)
     widget->show();
 }
 
+void hide_widget(Fl_Widget *widget)
+{
+    widget->hide();
+}
+
 
 void end_widget_child_append(Fl_Group *widget) {
     widget->end();

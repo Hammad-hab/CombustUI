@@ -80,6 +80,6 @@ void set_id (Button *widget, long int id) {
     widget->setId(id);
 }
 
-Fl_Box *fltk_create_image(const char* path, int w, int h) {
-    return create_image(path, w, h);
+Fl_Box *fltk_create_image(const char* path) {
+    return create_image(path);
 }

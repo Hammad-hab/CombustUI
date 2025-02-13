@@ -23,4 +23,4 @@ alias DEFINATION_FLTK_LAYOUT_GRID = fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FL
 alias DEFINATION_FLTK_SET_GRID_LAYOUT_DIMENSIONS = fn(grid: FLTK_WIDGET_POINTER, rows:Int32, cols:Int32, margin:Int32, gap:Int32) -> c_void
 alias DEFINATION_GRAB_EVENT_FROM_FLTK = fn() -> Int
 alias DEFINATION_GET_INPUT_VALUE = fn(input: FLTK_WIDGET_POINTER) -> StringBytes
-alias DEFINATION_FLTK_CREATE_IMAGE = fn(path: StringBytes, w:Int64, h:Int64) -> FLTK_WIDGET_POINTER
+alias DEFINATION_FLTK_CREATE_IMAGE = fn(path: StringBytes) -> FLTK_WIDGET_POINTER
