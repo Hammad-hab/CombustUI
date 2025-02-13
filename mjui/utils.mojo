@@ -1,4 +1,5 @@
 from .types import StringBytes
+from collections import Optional
 
 fn rgb_to_i32(r:UInt32, g:UInt32, b:UInt32) -> UInt32:
     """
@@ -44,3 +45,16 @@ fn filter[listType: CollectionElement](list:List[listType], modifier: fn(element
             new_list.append(element[])
 
     return new_list
+
+@value
+struct DataStore[dtype: CollectionElement]:
+    var _store: List[dtype]
+    var name: Optional[String]
+    fn __init__(mut self):
+        self._store = List[dtype]()
+        self .name = Optional[String]()
+        
+    fn store(mut self, data: dtype) -> Int:
+        self._store.append(data)
+        var index = len(self._store) - 1
+        return index

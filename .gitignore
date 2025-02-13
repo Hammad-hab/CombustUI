@@ -5,8 +5,8 @@
 # magic environments
 .magic
 main.mojo
-./mjui/libc/fltk.so
-/mjui/libc/bin
+mjui/fltk_bindings/libc/bin
 /.vscode
 .DS_Store
 ./*/**/.dylib
+*.png
