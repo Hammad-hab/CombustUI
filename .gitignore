@@ -10,3 +10,4 @@ mjui/fltk_bindings/libc/bin
 .DS_Store
 ./*/**/.dylib
 *.png
+app.mojo

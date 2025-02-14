@@ -52,9 +52,16 @@ struct DataStore[dtype: CollectionElement]:
     var name: Optional[String]
     fn __init__(mut self):
         self._store = List[dtype]()
-        self .name = Optional[String]()
+        self.name = Optional[String]()
         
     fn store(mut self, data: dtype) -> Int:
         self._store.append(data)
         var index = len(self._store) - 1
+        return index
+
+    fn getAt(mut self, index: Int) -> dtype:
+        return self._store[index]
+
+    fn storeAt(mut self, index:Int, data: dtype) -> Int:
+        self._store[index] = data
         return index

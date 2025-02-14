@@ -8,7 +8,7 @@ struct Application:
     var __dll: DLHandle
     var __event_dict: Dict[Int, fn() raises]
     var __elements: Dict[Int, FLTK_WIDGET_POINTER]
-
+    
     fn __init__(mut self):
         self.__dll = __dll
         self.__event_dict = Dict[Int, fn() raises]()
@@ -44,5 +44,6 @@ struct Application:
                 try:
                     var handler = self.__event_dict[identifier]
                     handler()
-                except:
+                except err:
                     print('[MJUI]: Failed to trace function for Fl_Widget#'+ str[Int32](identifier))
+                    print('[MJUI]: Handler raised error ' + err._message())
