@@ -1,5 +1,6 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_PNG_Image.H>
+#include <FL/fl_ask.H>
 
 Fl_Box *create_image(const char *filepath)
 {
@@ -15,3 +16,4 @@ Fl_Box *create_image(const char *filepath)
     box->image(image);
     return box;
 }
+

@@ -1,7 +1,8 @@
-from .fltk_bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, set_id
+from .fltk_bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, set_id, message_dialog
 from .fltk_bindings.dll import __dll
 from collections import Dict
 from sys.ffi import DLHandle
+from sys.terminate import exit
 
 var isRunning = True
 struct Application:
@@ -30,7 +31,7 @@ struct Application:
 
     fn execute(mut self) raises:
 
-        print('Welcome to MojoUI')
+        print('Welcome to CombustUI')
         print('Starting Application...')
         while isRunning:
             
@@ -45,5 +46,7 @@ struct Application:
                     var handler = self.__event_dict[identifier]
                     handler()
                 except err:
-                    print('[MJUI]: Failed to trace function for Fl_Widget#'+ str[Int32](identifier))
-                    print('[MJUI]: Handler raised error ' + err._message())
+                    var error = ('[MJUI]: Failed to trace event handler function for Widget#').as_bytes()
+                    message_dialog(error)
+
+                    # print('[MJUI]: Handler raised error ' + err.

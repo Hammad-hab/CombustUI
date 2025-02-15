@@ -10,3 +10,4 @@ var fltk_layout_grid = __dll.get_function[DEFINATION_FLTK_LAYOUT_GRID]("fltk_lay
 var fltk_set_grid_layout_dimensions = __dll.get_function[DEFINATION_FLTK_SET_GRID_LAYOUT_DIMENSIONS]("fltk_set_grid_layout_dimensions")
 var get_input_value = __dll.get_function[DEFINATION_GET_INPUT_VALUE]('get_input_value')
 var fltk_create_image = __dll.get_function[DEFINATION_FLTK_CREATE_IMAGE]('fltk_create_image')
+var message_dialog = __dll.get_function[DEFINATION_MESSAGE_DIALOG]('msg_dialog_bx')
