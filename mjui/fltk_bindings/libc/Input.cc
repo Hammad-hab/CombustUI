@@ -14,7 +14,6 @@ class Input : public Fl_Input, public  MJUI_Widget {
             id=110000;
         };
     
-
     int handle(int event) override {
         switch (event) {
             case FL_KEYDOWN:

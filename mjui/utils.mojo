@@ -32,9 +32,9 @@ fn createIdFrom(id: String) raises -> Int:
     var strn: String = ""
     for char in id:
        intrepr = ord(char)
-       strn += str(intrepr)
+       strn += String(intrepr)
     
-    return int(strn)
+    return Int(strn)
 
 
 fn filter[listType: CollectionElement](list:List[listType], modifier: fn(element:listType)->Bool) -> List[listType]:

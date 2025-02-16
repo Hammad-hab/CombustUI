@@ -9,6 +9,7 @@
 #include "Input.cc"
 #include<stdint.h>
 #include<stdio.h>
+#include "MJUI_Flex.cc"
 
 
 
@@ -18,6 +19,7 @@ Fl_Double_Window *fltk_create_window_new(int width, int height, int8_t *title_r)
 {
     char *title = int8ToChar(title_r);
     Fl_Double_Window *window = new Fl_Double_Window(width, height, title); // Create a window
+
     window->resizable(window);
     return window;
 }
@@ -51,9 +53,10 @@ Fl_Grid *fltk_layout_grid(int x, int y, int w, int h)
     return grid;
 }
 
-Fl_Flex *fltk_layout_flex(int x, int y, int w, int h)
+MJUI_Flex *fltk_layout_flex(int x, int y, int w, int h, int dir=Fl_Flex::HORIZONTAL)
 {
-    Fl_Flex *flex = new Fl_Flex(x, y, w, h, Fl_Flex::HORIZONTAL);
+    MJUI_Flex *flex = new MJUI_Flex(x, y, w, h, Fl_Flex::HORIZONTAL);
+    // flex->resizable(invisible_box);
     return flex;
 }
 
@@ -82,4 +85,10 @@ void set_id (Button *widget, long int id) {
 
 Fl_Box *fltk_create_image(const char* path) {
     return create_image(path);
+}
+
+
+Fl_Box *fltk_create_empty(int x, int y, int w, int h) {
+    Fl_Box *box = new Fl_Box(x, y, w, h);
+    return box;
 }

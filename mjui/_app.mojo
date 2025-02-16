@@ -46,7 +46,7 @@ struct Application:
                     var handler = self.__event_dict[identifier]
                     handler()
                 except err:
-                    var error = ('[MJUI]: Failed to trace event handler function for Widget#').as_bytes()
+                    var error = ('[MJUI]: Failed to trace event handler function for Widget').as_bytes()
                     message_dialog(error)
 
                     # print('[MJUI]: Handler raised error ' + err.
