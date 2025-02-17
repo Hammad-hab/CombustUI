@@ -19,4 +19,4 @@ var set_widget_callback = __dll.get_function[DEFINATION_SET_WIDGET_CALLBACK]('se
 var fl_ready = __dll.get_function[DEFINATION_FL_READY]('fltk_check')
 var fl_check = __dll.get_function[DEFINATION_FL_CHECK]('fltk_ready')
 var grab_fltk_event = __dll.get_function[DEFINATION_GRAB_EVENT_FROM_FLTK]('listEvents')
-# var set_image_scale = __dll.get_function[DEFINATION_SET_IMAGE_SIZE]('set_image_scale')
+var set_label = __dll.get_function[DEFINATION_SET_LABEL]('set_label')

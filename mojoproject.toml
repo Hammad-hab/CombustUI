@@ -2,7 +2,7 @@
 authors = ["CW team <hammadalibutt30@gmail.com>"]
 channels = ["conda-forge", "https://conda.modular.com/max", "https://repo.prefix.dev/modular-community"]
 description = "Add a short description here"
-name = "CombustUI"
+name = "mojo-ui"
 platforms = ["osx-arm64"]
 version = "0.1.0"
 

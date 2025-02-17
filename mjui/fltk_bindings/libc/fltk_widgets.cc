@@ -67,6 +67,12 @@ Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, i
     return grid;
 }
 
+Fl_Box* fltk_create_label(int x, int y, int w, int h, int8_t *label_r) {
+    char *label = int8ToChar(label_r);
+    Fl_Box *label_el = new Fl_Box(x, y, w, h, label);
+    return label_el;
+}
+
 void fltk_grid_assign_pos(Fl_Grid *grid, Fl_Widget *widget, int row, int col) {
     grid->widget(widget, row, col);
 }

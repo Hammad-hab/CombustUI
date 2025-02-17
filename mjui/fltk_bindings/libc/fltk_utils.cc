@@ -92,6 +92,10 @@ void hide_widget(Fl_Widget *widget)
     widget->hide();
 }
 
+void set_label(Fl_Box* box, int8_t* label_r) {
+    char *label = int8ToChar(label_r);
+    box->label(label);
+}
 
 void end_widget_child_append(Fl_Group *widget) {
     widget->end();

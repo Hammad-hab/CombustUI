@@ -12,4 +12,5 @@ var fltk_layout_flex = __dll.get_function[DEFINATION_FLTK_LAYOUT_FLEX]("fltk_lay
 var fltk_set_grid_layout_dimensions = __dll.get_function[DEFINATION_FLTK_SET_GRID_LAYOUT_DIMENSIONS]("fltk_set_grid_layout_dimensions")
 var get_input_value = __dll.get_function[DEFINATION_GET_INPUT_VALUE]('get_input_value')
 var fltk_create_image = __dll.get_function[DEFINATION_FLTK_CREATE_IMAGE]('fltk_create_image')
+var fltk_create_text_label = __dll.get_function[DEFINATION_FLTK_CREATE_TEXT_LABEL]('fltk_create_label')
 var message_dialog = __dll.get_function[DEFINATION_MESSAGE_DIALOG]('msg_dialog_bx')
