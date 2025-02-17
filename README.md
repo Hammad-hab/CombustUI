@@ -1,8 +1,8 @@
 # CombustUI – Lightweight GUI Bindings for Mojo
 
-<div style="display:block; margin: auto;">
+<p align="center">
     <img src="mjui/examples/logo.jpeg" alt="drawing" width="200" style="border-radius: 10px"/>
-</div>
+</p>
 
 <br/>
 CombustUI is a GUI library for Mojo, built on top of FLTK (Fast Light Toolkit) from C++. It provides low-level control by directly calling FLTK functions. Currently, it supports basic event handling and essential widgets such as inputbox, button, window, and grid.
