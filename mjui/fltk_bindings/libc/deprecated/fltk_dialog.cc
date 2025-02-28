@@ -26,10 +26,15 @@ class MJUI_DialogBox: public Fl_Double_Window {
 
             size_t length = strlen("MJUI_ERROR");
             Fl_Box *heading = new Fl_Box(0, 0, 100, 100, "MJUI_ERROR");
-            heading->position(10 + length, (this->h()/2) - image->h() - 10);
+            heading->labelcolor(FL_WHITE);
 
+            heading->position(10 + length, (this->h()/2));
+
+
+            size_t txtlen = strlen(l);
             Fl_Box *text = new Fl_Box(0, 0, 100, 100, l);
-            text->position(this->w()/2, (this->h()/2) - image->h()/2);
+            text->labelcolor(FL_WHITE);
+            text->position((this->w()/2)-50 , 10);
 
             Fl_Button *btn = new Fl_Button(this->w()/2 - 50, (this->h()) - 50, 100, 25, "Exit");
             btn->box(FL_FLAT_BOX);

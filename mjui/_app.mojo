@@ -1,4 +1,4 @@
-from .fltk_bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, set_id, message_dialog
+from .fltk_bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, set_id
 from .fltk_bindings.dll import __dll
 from collections import Dict
 from sys.ffi import DLHandle
@@ -28,7 +28,6 @@ struct Application:
         var pointer = self.__elements[id]
         return pointer
 
-
     fn execute(mut self) raises:
 
         print('Welcome to CombustUI')
@@ -46,7 +45,5 @@ struct Application:
                     var handler = self.__event_dict[identifier]
                     handler()
                 except err:
-                    var error = ('[MJUI]: Failed to trace event handler function for Widget').as_bytes()
-                    message_dialog(error)
-
-                    # print('[MJUI]: Handler raised error ' + err.
+                    var error = ('[MJUI]: Failed to trace event handler function for Widget#'+str[Int32](identifier))
+                    print(error)

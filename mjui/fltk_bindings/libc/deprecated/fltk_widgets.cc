@@ -13,14 +13,15 @@
 
 
 
-
 // Window
-Fl_Double_Window *fltk_create_window_new(int width, int height, int8_t *title_r)
+
+Fl_Double_Window *fltk_create_window_new(int width, int height, int8_t *title_r, int32_t fullscreen)
 {
     char *title = int8ToChar(title_r);
     Fl_Double_Window *window = new Fl_Double_Window(width, height, title); // Create a window
-
     window->resizable(window);
+    if (fullscreen)
+        window->hide();
     return window;
 }
 
@@ -61,7 +62,7 @@ MJUI_Flex *fltk_layout_flex(int x, int y, int w, int h, int dir=Fl_Flex::HORIZON
 }
 
 
-Fl_Grid *fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, int margin, int gap)
+Fl_Grid* fltk_set_grid_layout_dimensions(Fl_Grid *grid, int rows, int columns, int margin, int gap)
 {   
     grid->layout(rows, columns, margin, gap);
     return grid;
@@ -97,4 +98,22 @@ Fl_Box *fltk_create_image(const char* path) {
 Fl_Box *fltk_create_empty(int x, int y, int w, int h) {
     Fl_Box *box = new Fl_Box(x, y, w, h);
     return box;
+}
+
+static MJUI_Widget* LOADED_WIDGET;
+void LOAD_POINTER(MJUI_Widget* pointer) {
+    LOADED_WIDGET = pointer;
+}
+
+void KILL_POINTER() {
+    LOADED_WIDGET = nullptr;
+}
+MJUI_Widget* LOAD_IDENTIFIER_TO_WIDGET() {
+    if (LOADED_WIDGET == nullptr) {
+        fprintf(stderr, "Error: LOADED_WIDGET is nullptr!\n");
+        return LOADED_WIDGET;
+    }
+    LOADED_WIDGET->setId(252);
+    printf("Widget ID set to 252\n");
+    return LOADED_WIDGET;
 }

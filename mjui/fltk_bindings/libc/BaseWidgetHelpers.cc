@@ -5,6 +5,7 @@
 
 #define UTILS
 
+
 void enqueueEvent(int id, int event) {
     Events[id] = event;
 }
@@ -27,8 +28,58 @@ int64_t listEvents() {
         uint64_t combined = ((uint64_t)x.first << 32) | x.second;
         return (combined);
     }
-    // return "NULL"
     return 2;
+}
+
+
+void show_widget(Fl_Widget *widget)
+{
+    widget->show();
+}
+
+void hide_widget(Fl_Widget *widget)
+{
+    widget->hide();
+}
+
+void end_widget_child_append(Fl_Group *widget) {
+    widget->end();
+}
+
+void begin_widget_child_append(Fl_Group *widget) {
+    widget->begin();
+}
+
+/** Dimensions */
+int get_height(Fl_Widget *widget) {
+    return widget->h();
+}
+
+int get_width(Fl_Widget *widget) {
+    return widget->w();
+}
+
+
+
+void set_widget_color(Fl_Widget *window, Fl_Color c)
+{
+    window->color(c);
+}
+
+void set_text_color(Fl_Widget *widget, Fl_Color c)
+{
+    widget->labelcolor(c);
+}
+
+
+void set_widget_color2(Fl_Widget *window, Fl_Color c)
+{
+    window->color2(c);
+}
+
+void set_widget_box(Fl_Widget *widget, Fl_Boxtype x)
+{
+    widget->box(x);
 }
 
 

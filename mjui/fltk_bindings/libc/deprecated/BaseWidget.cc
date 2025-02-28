@@ -3,7 +3,7 @@
 #define BASE_WIDGET_H
 
 
-class BaseWidget
+class MJUI_Widget
 {
     public:
         long int id;

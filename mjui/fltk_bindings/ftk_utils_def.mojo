@@ -14,6 +14,7 @@ var set_selection_color = __dll.get_function[DEFINATION_SET_SELECTION_COLOR]('se
 var get_height = __dll.get_function[DEFINATION_GET_HEIGHT]('get_height')
 var get_width = __dll.get_function[DEFINATION_GET_WIDTH]('get_width')
 var set_cursor = __dll.get_function[DEFINATION_SET_CURSOR]('set_window_cursor')
+var set_border = __dll.get_function[DEFINATION_SET_CURSOR]('set_border')
 var set_id = __dll.get_function[DEFINATION_SET_ID]('set_id')
 var set_widget_callback = __dll.get_function[DEFINATION_SET_WIDGET_CALLBACK]('set_widget_callback')
 var fl_ready = __dll.get_function[DEFINATION_FL_READY]('fltk_check')

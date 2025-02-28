@@ -1,17 +1,21 @@
 #include <FL/Fl.H>
-#include <FL/Fl_Double_Window.H>
+#include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
-#include "BaseWidgetHelpers.cc"
-#include "fltk_utils.cc"
-#include "BaseWidget.cc"
+#include "../BaseWidgetHelpers.cc"
+#include "../BaseWidget.cc"
 
 
-class Button : public Fl_Button, public  MJUI_Widget {
+class Button : public Fl_Button, public BaseWidget {
     public: 
+        long int id;
         Button(int x, int y, int w, int h, char* label): Fl_Button(x, y, w, h, label) {
             id=100000;
         };
+
+    void setId(long int new_id) override {
+        id = new_id;
+    }
        
     int handle(int event) override {
         switch (event) {

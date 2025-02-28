@@ -16,9 +16,9 @@ alias DEFINATION_SET_ID = fn(w: FLTK_WIDGET_POINTER, id:Int) -> NoneType
 alias DEFINATION_SET_WIDGET_CALLBACK = fn(w: FLTK_WIDGET_POINTER, handler:UnsafePointer[fn(w: FLTK_WIDGET_POINTER, *args:c_void)->NoneType, alignment=1]) -> NoneType
 alias DEFINATION_FL_READY = fn() -> Int32
 alias DEFINATION_FL_CHECK = fn() -> Int32
-alias DEFINATION_FLTK_CREATE_WINDOW_NEW = fn(w: UInt32, h:UInt32, l:StringBytes) -> FLTK_WIDGET_POINTER
-alias DEFINATION_FLTK_CREATE_BUTTON_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER
-alias DEFINATION_FLTK_CREATE_INPUT_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes) -> FLTK_WIDGET_POINTER
+alias DEFINATION_FLTK_CREATE_WINDOW_NEW = fn(w: UInt32, h:UInt32, resize: Int, no_border:Int, fullscreen:Int, l:StringBytes) -> FLTK_WIDGET_POINTER
+alias DEFINATION_FLTK_CREATE_BUTTON_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes, ) -> FLTK_WIDGET_POINTER
+alias DEFINATION_FLTK_CREATE_INPUT_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes,) -> FLTK_WIDGET_POINTER
 alias DEFINATION_FLTK_LAYOUT_GRID = fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER
 alias DEFINATION_FLTK_LAYOUT_FLEX = DEFINATION_FLTK_LAYOUT_GRID
 alias DEFINATION_FLTK_CREATE_EMPTY = DEFINATION_FLTK_LAYOUT_FLEX
