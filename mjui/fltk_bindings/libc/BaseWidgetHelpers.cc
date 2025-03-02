@@ -37,6 +37,8 @@ void show_widget(Fl_Widget *widget)
     widget->show();
 }
 
+
+
 void hide_widget(Fl_Widget *widget)
 {
     widget->hide();

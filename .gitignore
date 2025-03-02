@@ -6,6 +6,8 @@
 .magic
 main.mojo
 mjui/fltk_bindings/libc/bin
+mjui/fltk_bindings/libc/deprecated/*.cc
+mjui/fltk_bindings/libc/deprecated/
 /.vscode
 .DS_Store
 ./*/**/.dylib

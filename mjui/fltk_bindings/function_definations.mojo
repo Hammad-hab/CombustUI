@@ -17,8 +17,11 @@ alias DEFINATION_SET_WIDGET_CALLBACK = fn(w: FLTK_WIDGET_POINTER, handler:Unsafe
 alias DEFINATION_FL_READY = fn() -> Int32
 alias DEFINATION_FL_CHECK = fn() -> Int32
 alias DEFINATION_FLTK_CREATE_WINDOW_NEW = fn(w: UInt32, h:UInt32, resize: Int, no_border:Int, fullscreen:Int, l:StringBytes) -> FLTK_WIDGET_POINTER
+alias MJUI_SET_WINDOW_TITLE = fn(window: FLTK_WIDGET_POINTER, title: StringBytes) -> c_void
+alias MJUI_GET_WINDOW_VISBILITY = fn(window: FLTK_WIDGET_POINTER, condition: Int) -> Int
+
 alias DEFINATION_FLTK_CREATE_BUTTON_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes, ) -> FLTK_WIDGET_POINTER
-alias DEFINATION_FLTK_CREATE_INPUT_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes,) -> FLTK_WIDGET_POINTER
+alias DEFINATION_FLTK_xCREATE_INPUT_NEW = fn(x:Int32, y:Int32, w:Int32, h:Int32, l:StringBytes,) -> FLTK_WIDGET_POINTER
 alias DEFINATION_FLTK_LAYOUT_GRID = fn(x:Int32, y:Int32, w:Int32, h:Int32) -> FLTK_WIDGET_POINTER
 alias DEFINATION_FLTK_LAYOUT_FLEX = DEFINATION_FLTK_LAYOUT_GRID
 alias DEFINATION_FLTK_CREATE_EMPTY = DEFINATION_FLTK_LAYOUT_FLEX
@@ -30,3 +33,5 @@ alias DEFINATION_FLTK_CREATE_IMAGE = fn(path: StringBytes) -> FLTK_WIDGET_POINTE
 alias DEFINATION_MESSAGE_DIALOG = fn(message: StringBytes) -> c_void
 
 alias DEFINATION_SET_LABEL = fn(w: FLTK_WIDGET_POINTER, str: StringBytes) -> c_void
+
+

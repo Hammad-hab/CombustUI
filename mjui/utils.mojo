@@ -1,5 +1,6 @@
 from .types import StringBytes
 from collections import Optional
+import sys
 
 fn rgb_to_i32(r:UInt32, g:UInt32, b:UInt32) -> UInt32:
     """
@@ -65,3 +66,4 @@ struct DataStore[dtype: CollectionElement]:
     fn storeAt(mut self, index:Int, data: dtype) -> Int:
         self._store[index] = data
         return index
+    
