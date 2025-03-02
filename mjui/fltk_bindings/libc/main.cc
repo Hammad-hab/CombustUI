@@ -10,6 +10,7 @@ std::unordered_map<int, int> Events;
 extern "C" {
 
     #include "Window/MJUIWindow.cc"
+    #include "Label/MJUILabel.cc"
     #include "BaseWidgetHelpers.cc"
 
     void fltk_execute() {

@@ -85,6 +85,11 @@ void set_widget_box(Fl_Widget *widget, Fl_Boxtype x)
 }
 
 
+void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label)
+{
+    widget->label(label);
+}
+
 
 
 #endif

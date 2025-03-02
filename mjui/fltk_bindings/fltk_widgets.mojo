@@ -6,6 +6,8 @@ from ..types import *
 var mjuiSpawnWindow = __dll.get_function[DEFINATION_FLTK_CREATE_WINDOW_NEW]('mjuiCreateWindow')
 var mjuiSetWindowTitle = __dll.get_function[MJUI_SET_WINDOW_TITLE]('mjuiWindowTitleSet')
 var mjuiGetWindowStatus = __dll.get_function[MJUI_GET_WINDOW_VISBILITY]('mjuiWindowVisibilityStatus')
+var mjuiCreateLabel = __dll.get_function[DEFINATION_FLTK_CREATE_TEXT_LABEL]('mjuiCreateLabel')
+var mjuiSetTextProperties = __dll.get_function[MJUI_SET_TEXT_PARAMS]('mjuiSetTextProperties')
 # var fltk_create_button_new = __dll.get_function[DEFINATION_FLTK_CREATE_BUTTON_NEW]("fltk_create_button_new")
 # var fltk_create_input_new = __dll.get_function[DEFINATION_FLTK_CREATE_INPUT_NEW]("fltk_create_input_new")
 # var fltk_layout_grid = __dll.get_function[DEFINATION_FLTK_LAYOUT_GRID]("fltk_layout_grid")
