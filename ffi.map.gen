@@ -1,0 +1,101 @@
+{
+    "@basicWidgetPointerFunction": {
+        "templateDescription": "Basic template for most widget functions",
+        "arguments": {
+            "x": "Int32",
+            "y": "Int32",
+            "w": "Int32",
+            "h": "Int32",
+            "label": "StringBytes"
+        },
+        "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    "fl_ready": {
+        "arguments": {}, 
+        "returns": "Int32",
+        "@cbindto": "fltk_check"
+    },
+
+    "fl_check": {
+        "@redef": "fl_ready",
+        "@cbindto": "fltk_ready"
+    }, 
+
+    "mjuiShowWidget": {
+        "@cbindto": "show_widget",
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiWidgetColor": {
+        "@cbindto": "set_widget_color",
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "colour": "UInt32"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiWidgetTextColor": {
+        "@cbindto": "set_text_color",
+        "@redef": "mjuiWidgetColor"
+    },
+
+    "mjuiSetSelectionColor": {
+        "@cbindto": "set_widget_color2",
+        "@redef": "mjuiWidgetColor"
+    },
+    
+    "grab_fltk_event": {
+        "arguments": {},
+        "returns": "Int",
+        "@cbindto": "listEvents"
+    },
+
+    "mjuiSpawnWindow": {
+        "arguments": {
+            "w": "Int32",
+            "h": "Int32",
+            "resize": "Int",
+            "no_border": "Int",
+            "fullscreen": "Int",
+            "label": "StringBytes"
+        },
+        "returns": "FLTK_WIDGET_POINTER",
+        "@cbindto": "mjuiCreateWindow"
+    },
+
+
+    "mjuiCreateLabel": {
+        "@redef": "@basicWidgetPointerFunction",
+        "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    "mjuiSetTextProperties": {
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "size": "Int32",
+            "colour": "UInt32"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiSetWindowTitle": {
+        "arguments": {
+            "window": "FLTK_WIDGET_POINTER",
+            "title": "StringBytes"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiWindowVisibilityStatus": {
+        "arguments": {
+            "window": "FLTK_WIDGET_POINTER",
+            "condition": "Int"
+        },
+        "returns": "Int"
+    }
+}
