@@ -9,7 +9,6 @@ mjui/fltk_bindings/libc/bin
 mjui/fltk_bindings/libc/deprecated/*.cc
 mjui/fltk_bindings/libc/deprecated/
 mjui/fltk_bindings/deprecated/
-/mjui/
 /.vscode
 .DS_Store
 ./*/**/.dylib
