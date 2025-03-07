@@ -1,16 +1,8 @@
 {
-    "@basicWidgetPointerFunction": {
-        "templateDescription": "Basic template for most widget functions",
-        "arguments": {
-            "x": "Int32",
-            "y": "Int32",
-            "w": "Int32",
-            "h": "Int32",
-            "label": "StringBytes"
-        },
-        "returns": "FLTK_WIDGET_POINTER"
-    },
-
+    "@includes": [
+        "templates.map.gen"
+    ],
+    
     "fl_ready": {
         "arguments": {}, 
         "returns": "Int32",
