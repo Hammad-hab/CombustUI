@@ -19,7 +19,7 @@ rm ./build.sh
 cd ./mjui/fltk_bindings/
 DIR="$(pwd)"
 echo "Altering DLL path"
-echo "from sys.ffi import DLHandle, UnsafePointer\nvar __dll = DLHandle('$DIR/mjui/fltk_bindings/libc/out/fltk.dylib')" > dll.mojo
+echo "from sys.ffi import DLHandle, UnsafePointer\nvar __dll = DLHandle('$DIR/libc/out/fltk.dylib')" > dll.mojo
 cd libc
 echo "Removing C++ files.."
 rm *.cc
@@ -28,7 +28,7 @@ echo "[project]
 authors = [\"$USER\"]
 channels = [\"conda-forge\", \"https://conda.modular.com/max\", \"https://repo.prefix.dev/modular-community\"]
 description = \"$APP_DESC\"
-name = "$APP_NAME"
+name = \"$APP_NAME\"
 platforms = [\"osx-arm64\"]
 version = \"0.1.0\"
 
