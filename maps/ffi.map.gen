@@ -22,6 +22,15 @@
         "returns": "c_void"
     },
 
+    "mjuiLoadImage": {
+        "@cbindto": "load_img",
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "file": "StringBytes"
+        },
+        "returns": "c_void"
+    },
+
     "mjuiWidgetColor": {
         "@cbindto": "set_widget_color",
         "arguments": {
@@ -32,13 +41,21 @@
     },
 
     "mjuiWidgetTextColor": {
-        "@cbindto": "set_text_color",
-        "@redef": "mjuiWidgetColor"
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "colour": "UInt32"
+        },
+        "returns": "c_void",
+        "@cbindto": "set_text_color"
     },
 
     "mjuiSetSelectionColor": {
-        "@cbindto": "set_widget_color2",
-        "@redef": "mjuiWidgetColor"
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "colour": "UInt32"
+        },
+        "returns": "c_void",
+        "@cbindto": "set_widget_color2"
     },
     
     "grab_fltk_event": {
@@ -62,6 +79,11 @@
 
 
     "mjuiCreateLabel": {
+        "@redef": "@basicWidgetPointerFunction",
+        "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    "mjuiCreateButton": {
         "@redef": "@basicWidgetPointerFunction",
         "returns": "FLTK_WIDGET_POINTER"
     },
