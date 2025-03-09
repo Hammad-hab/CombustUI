@@ -1,24 +1,30 @@
-#include <FL/Fl.H>
+#include "utils.cc"
 #include <unordered_map>
 #include <string>
 #include <stdio.h>
-#include "utils.cc"
-#include<FL/Fl_PNG_Image.H>
+#include <FL/Fl.H>
+#include<FL/Fl_JPEG_Image.H>
+#include <FL/Fl.H>
+#include <FL/Fl_Button.H>
+#include <FL/fl_draw.H>
+
 
 
 std::unordered_map<int, int> Events;
 
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 
     #include "Window/MJUIWindow.cc"
     #include "Label/MJUILabel.cc"
     #include "Button/MJUIButton.cc"
     #include "BaseWidgetHelpers.cc"
-
     void fltk_execute() {
         Fl::run();
     }
+    
 
     int fltk_check() {
         return Fl::check();
@@ -28,4 +34,6 @@ extern "C" {
         return Fl::ready();
     }
 
+#ifdef __cplusplus
 }
+#endif

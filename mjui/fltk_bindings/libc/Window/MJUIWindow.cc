@@ -20,7 +20,7 @@ Fl_Double_Window* mjuiCreateWindow(
 
     if (no_border)
         window->clear_border();
-    
+
     return window;
 }
 

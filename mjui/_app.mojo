@@ -25,9 +25,6 @@ struct Application:
     fn setElementById(mut self, id: Int, element: FLTK_WIDGET_POINTER):
         self.__elements[id] = element
     
-    # fn setElementId(mut self, element: FLTK_WIDGET_POINTER, id: Int):
-    #     set_id(element, id)
-
     fn getElementById(mut self, id: Int) raises -> FLTK_WIDGET_POINTER:
         var pointer = self.__elements[id]
         return pointer

@@ -61,7 +61,11 @@ int get_width(Fl_Widget *widget) {
     return widget->w();
 }
 
-
+void load_img(Fl_Widget *widget, const char* file)
+{
+    Fl_JPEG_Image *img = new Fl_JPEG_Image(file);
+    widget->image(img);
+}
 
 void set_widget_color(Fl_Widget *window, Fl_Color c)
 {

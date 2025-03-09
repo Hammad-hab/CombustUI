@@ -3,6 +3,7 @@
 .pixi
 *.egg-info
 # magic environments
+.vscode
 .magic
 main.mojo
 mjui/fltk_bindings/libc/bin
