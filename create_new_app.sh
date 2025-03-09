@@ -19,7 +19,7 @@ rm ./build.sh
 cd ./mjui/fltk_bindings/
 DIR="$(pwd)"
 echo "Altering DLL path"
-echo "from sys.ffi import DLHandle, UnsafePointer\nvar __dll = DLHandle('$DIR/libc/out/fltk.dylib')" > dll.mojo
+echo "from sys.ffi import DLHandle, UnsafePointer\nvar __dll = DLHandle('$DIR/libc/out/mjui.dylib')" > dll.mojo
 cd libc
 echo "Removing C++ files.."
 rm *.cc
