@@ -1,4 +1,5 @@
 from sys.ffi import DLHandle, UnsafePointer, c_char
+from collections import Dict
 from memory import Span
 
 alias FLTK_POINTER = fn() -> Int32

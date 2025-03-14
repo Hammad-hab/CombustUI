@@ -24,7 +24,6 @@ extern "C" {
     void fltk_execute() {
         Fl::run();
     }
-    
 
     int fltk_check() {
         return Fl::check();
@@ -33,6 +32,8 @@ extern "C" {
     int fltk_ready() {
         return Fl::ready();
     }
+
+    void set_id_button(Button *btn, long int id) {btn->setId(id);}
 
 #ifdef __cplusplus
 }

@@ -64,6 +64,7 @@ int get_width(Fl_Widget *widget) {
 void load_img(Fl_Widget *widget, const char* file)
 {
     Fl_JPEG_Image *img = new Fl_JPEG_Image(file);
+    img->scale(widget->w(), widget->h());
     widget->image(img);
 }
 
