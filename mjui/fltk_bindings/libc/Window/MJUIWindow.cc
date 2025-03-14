@@ -1,6 +1,5 @@
 #include "MJUIWindow.hh"
 #include<FL/Fl_Box.H>
-
 Fl_Double_Window* mjuiCreateWindow(
     int width,
     int height,

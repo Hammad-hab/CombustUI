@@ -3,6 +3,22 @@
         "templates.map.gen"
     ],
     
+    "@concat_variations": {
+        "target": "mjuiSetWidgetId",
+        "variations": [
+            "_button"
+        ]
+    },
+    "mjuiSetWidgetId":
+    {
+        "@cbindto": "set_id",
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "id": "Int"
+        },
+        "returns": "c_void"
+    },
+
     "fl_ready": {
         "arguments": {}, 
         "returns": "Int32",
@@ -97,12 +113,16 @@
         "returns": "c_void"
     },
 
-    "mjuiSetWindowTitle": {
+    "mjuiSetWidgetLabel": {
         "arguments": {
-            "window": "FLTK_WIDGET_POINTER",
+            "widget": "FLTK_WIDGET_POINTER",
             "title": "StringBytes"
         },
         "returns": "c_void"
+    },
+
+    "mjuiSetWindowTitle": {
+        "@redef": "mjuiSetWidgetLabel"
     },
 
     "mjuiWindowVisibilityStatus": {

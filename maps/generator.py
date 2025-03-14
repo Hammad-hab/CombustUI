@@ -24,18 +24,30 @@ if File:
         bindings = []
         new_parsed_contents = copy.deepcopy(parsed_contents)
         for key, value in parsed_contents.items():
+            
             if key.startswith("@"):
                 if key == '@includes': 
                     for file in value:
                         with open(file) as f:
                             parsed_import = j.loads(f.read())
                             new_parsed_contents.update(parsed_import)
-
+                            
+                if key == '@concat_variations': 
+                    kvpair = value
+                    target = kvpair['target']
+                    target_def = parsed_contents[target]
+                    for varation in kvpair['variations']:
+                        if '@cbindto' in target_def.keys():
+                            target_def['@cbindto'] = target_def['@cbindto']+varation
+                        new_parsed_contents[target+varation] = target_def
+                    new_parsed_contents[target] = None
+                    
         for key, value in new_parsed_contents.items():
-            if key.startswith("@"):
+            if key.startswith("@") or not value:
                 continue
             if '@redef' in value.keys():
                 value = new_parsed_contents[value['@redef']]
+                
             args = [f"{arg_name}: {dtype}" for arg_name, dtype in value['arguments'].items()]
             args_str = ', '.join(args)
             defination = f'{key.upper()}_DEFINATION'
