@@ -7,7 +7,6 @@
 <br/>
 CombustUI is a GUI library for Mojo, built on top of FLTK (Fast Light Toolkit) from C++. It provides low-level control by directly calling FLTK functions. Currently, it supports basic event handling and essential widgets such as inputbox, button, window, and grid.
 
-
 ## Installation
 
 To use CombustUI, you first need to have mojo installed on your machine. Once you have mojo set up, run the following commmand to download the app initalization script:
@@ -19,6 +18,7 @@ curl https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/crea
 Basically this command downloads the installation script from this github repository, makes it executable and moves it to the `/usr/local/bin` directory to make it accessable directly via cli.
 
 Once installed, run the following command to initalise your app:
+
 ```sh
 ignite_app
 ```
@@ -28,33 +28,40 @@ The CLI tool will prompt you for your app's name and description before generati
 ## Example Application
 
 ```mojo
-from mjui._app import Application, FLTK_WIDGET_POINTER, isRunning
-from mjui.fltk_bindings import *
+from mjui._app import Application, FLTK_WIDGET_POINTER
+from mjui.fltk_bindings.bindings import *
 from memory.pointer import Pointer
 from mjui.fltk_bindings.dll import __dll
-from mjui.utils import readFromStringBytes, rgb_to_i32, filter, DataStore
+from mjui.utils import readFromStringBytes, rgb_to_i32
+from mjui.EventHandler import EventHandler
+from mjui.const import *
 import os
 
+var app = Application()
+
+fn printer() raises:
+   print("Hi there!")
+
 fn main() raises:
-    var app = Application()
 
-    var window = fltk_create_window_new(1000, 500, "The end".as_bytes())
-    begin_widget_child_append(window)
-    var flexbox = fltk_layout_flex(0, 0, 1000, 100)
-    end_widget_child_append(window)
-    begin_widget_child_append(window)
-    begin_widget_child_append(flexbox)
+  
+    var window = mjuiSpawnWindow(1000, 500, 1, 0, 0, "New Window".as_bytes())
+    mjuiWidgetColor(window, rgb_to_i32(255, 255, 255))
 
-    var btn = fltk_create_button_new(0, 0, 10, 10, "Exit".as_bytes())
-    var btn2 = fltk_create_button_new(0, 0, 10, 10, "Save".as_bytes())
-    var label = fltk_create_text_label(0, 0, 100, 100, "Hello World".as_bytes())
+    var label = mjuiCreateLabel(500, 250, 100, 100, "This app crashes things!".as_bytes())
+    var button = mjuiCreateButton(500, 250, 50, 25, "Crash App!".as_bytes())
+    var printerHandler = EventHandler()
 
-    show_widget(flexbox)
-    show_widget(window)
-
+    printerHandler.attachHandler(printer)
+    printerHandler.attachTrigger(MJUI_PUSH)
+    mjuiSetWidgetId_button(button, 12312)
+    app.setElementById(23, label)
+    app.addEventListener(12312, printerHandler)
+  
+    mjuiShowWidget(window)
+    app.markWindowPTRAsMain(window)
     app.execute()
 
 ```
 
 For now, the API is functional but as soon as the basics are completed, a struct-trait-based API will be introduced.
-
