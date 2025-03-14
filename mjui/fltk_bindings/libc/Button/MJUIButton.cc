@@ -1,7 +1,7 @@
 #include "../BaseWidgetHelpers.cc"
 #include "../BaseWidget.cc"
 #include "./MJUIButton.hh"
-
+#include "string.h"
 Button::Button(int x, int y, int w, int h, char* label): Fl_Button(x, y, w, h, label) {
     id=100000;
     isHovered = false;
@@ -41,7 +41,7 @@ int Button::handle(int event) {
 
 void Button::draw()
 {
-
+    const char* button_label = label();
     if (this->isHovered)
         fl_color(color2());
     else
@@ -49,7 +49,7 @@ void Button::draw()
     fl_rounded_rectf(x(), y(), w(), h(), borderRadius); // Set radius to 10
     fl_font(labelfont(), 14);
     fl_color(labelcolor());
-    fl_draw(label(), x(), y(), w(), h(), FL_ALIGN_CENTER);
+    fl_draw(button_label, x(), y(), w(), h(), FL_ALIGN_CENTER);
 }
 
 void Button::setBorderRadius(int radius)
