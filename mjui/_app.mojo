@@ -4,6 +4,7 @@ from .fltk_bindings.dll import __dll
 from collections import Dict
 from sys.ffi import DLHandle
 from sys.terminate import exit
+from .const import getEventNameFromNum
 
 struct Application:
     var __dll: DLHandle
@@ -56,7 +57,7 @@ struct Application:
                     if handler.triggerEvent == event_type:
                        handler.trigger()
                     else:
-                        var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier))
+                        var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier) + " while resolving event " + getEventNameFromNum(event_type))
                         print(error)
                 except err:
                     var error = ('[MJUI]: Failed to trace event handler function for Widget#'+ str[Int](identifier))

@@ -1,0 +1,29 @@
+{
+    "mjuiCreateLayoutFlex": {
+        "returns": "FLTK_WIDGET_POINTER",
+        "arguments":
+        {
+            "x": "Int",
+            "y": "Int",
+            "w": "Int",
+            "h": "Int",
+            "dir": "Int"
+        }
+    },
+    "END_WIDGET_APPEND": {
+        "returns": "c_void",
+        "@cbindto": "end_widget_child_append",
+        "arguments": 
+        {
+            "w": "FLTK_WIDGET_POINTER"
+        }
+    },
+    "BEGIN_WIDGET_APPEND": {
+        "returns": "c_void",
+        "@cbindto": "begin_widget_child_append",
+        "arguments": 
+        {
+            "w": "FLTK_WIDGET_POINTER"
+        }
+    }
+}

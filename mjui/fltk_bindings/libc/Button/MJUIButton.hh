@@ -10,10 +10,10 @@ class Button : public Fl_Button, public BaseWidget {
         virtual void setId(long int new_id) override;
         virtual void setBorderRadius(int radius) override;
         virtual int handle(int event) override;
-        Button(int x, int y, int w, int h, char* label);
+        Button(int x, int y, int w, int h, long int nid, char* label);
         virtual void draw() override;
 };
 
-Button* mjuiCreateButton(int w, int h, int x, int y, int8_t* label_r);
+Button* mjuiCreateButton(int w, int h, int x, int y, long int id, int8_t* label_r);
 
 #endif

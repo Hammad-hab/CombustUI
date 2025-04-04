@@ -1,3 +1,5 @@
+from collections import Dict
+
 alias MJUI_CURSOR_DEFAULT = 0
 alias MJUI_CURSOR_ARROW = 35
 alias MJUI_CURSOR_CROSS = 66
@@ -52,3 +54,18 @@ alias MJUI_ZOOM_EVENT                  = 27
 
 alias MJUI_MJUIEX_HORIZONTAL = 1
 alias MJUI_MJUIEX_VERTICAL = 0
+
+
+fn getEventNameFromNum(num: Int) -> String:
+    var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",
+                     "MJUI_DRAG", "MJUI_FOCUS", "MJUI_UNFOCUS", "MJUI_KEYDOWN / MJUI_KEYBOARD",
+                     "MJUI_KEYUP", "MJUI_CLOSE", "MJUI_MOVE", "MJUI_SHORTCUT", "MJUI_DEACTIVATE",
+                     "MJUI_ACTIVATE", "MJUI_HIDE", "MJUI_SHOW", "MJUI_PASTE", "MJUI_SELECTIONCLEAR",
+                     "MJUI_MOUSEWHEEL", "MJUI_DND_ENTER", "MJUI_DND_DRAG", "MJUI_DND_LEAVE",
+                     "MJUI_DND_RELEASE", "MJUI_SCREEN_CONFIGURATION_CHANGED", "MJUI_FULLSCREEN",
+                     "MJUI_ZOOM_GESTURE", "MJUI_ZOOM_EVENT")
+
+    if num >= 0 and num < len(event_map):
+        return event_map[num]
+
+    return "UNKNOWN_EVENT"
