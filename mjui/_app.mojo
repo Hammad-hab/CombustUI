@@ -55,6 +55,7 @@ struct Application:
                 try:
                     var handler = self.__event_dict[identifier]
                     if handler.triggerEvent == event_type:
+                       print('Triggering event: ' + getEventNameFromNum(event_type))
                        handler.trigger()
                     else:
                         var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier) + " while resolving event " + getEventNameFromNum(event_type))

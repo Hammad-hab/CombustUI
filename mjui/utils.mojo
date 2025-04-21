@@ -20,14 +20,13 @@ fn str_to_int8(str: String) -> List[Int8]:
     return list
 
 fn readFromStringBytes(bytes: StringBytes) -> String:
-    var list = List[UInt8]()
+    var string: String = ""
     var i = 0
     while bytes._data[i] != 0:
         var data = bytes._data[i]
-        list.append(data)
+        string += str(data)
         i += 1
-    list.append(0)
-    return list
+    return string
 
 
 fn createIdFrom(id: String) raises -> Int:
@@ -68,7 +67,7 @@ struct DataStore[dtype: CollectionElement]:
         self._store[index] = data
         return index
     
-fn PDCTStringBytes(str: String) -> StringBytes:
+fn convertStringToBytes(str: String) -> StringBytes:
     var ptr = str.unsafe_cstr_ptr()
     var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=str.__len__())
     return span
