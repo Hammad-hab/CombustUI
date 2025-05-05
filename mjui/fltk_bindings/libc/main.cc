@@ -6,6 +6,7 @@
 #include<FL/Fl_JPEG_Image.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Input.H>
 #include <FL/fl_draw.H>
 
 
@@ -20,7 +21,10 @@ extern "C" {
     #include "Window/MJUIWindow.cc"
     #include "Label/MJUILabel.cc"
     #include "Button/MJUIButton.cc"
+    #include "Input/MJUIInput.cc"
+    #include "Layout/MJUILayouts.cc"
     #include "BaseWidgetHelpers.cc"
+
     void fltk_execute() {
         Fl::run();
     }

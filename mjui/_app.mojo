@@ -4,6 +4,7 @@ from .fltk_bindings.dll import __dll
 from collections import Dict
 from sys.ffi import DLHandle
 from sys.terminate import exit
+from .const import getEventNameFromNum
 
 struct Application:
     var __dll: DLHandle
@@ -11,6 +12,7 @@ struct Application:
     var __elements: Dict[Int, FLTK_WIDGET_POINTER]
     var __main_window: FLTK_WIDGET_POINTER
     var hasMainWindow: Bool
+    var disableLogging: Bool
     
     fn __init__(mut self):
         self.__dll = __dll
@@ -18,6 +20,7 @@ struct Application:
         self.__main_window = FLTK_WIDGET_POINTER()
         self.hasMainWindow = False
         self.__elements = Dict[Int, FLTK_WIDGET_POINTER]()
+        self.disableLogging = False
 
     fn addEventListener(mut self, id: Int, handler: EventHandler):
         self.__event_dict[id] = handler
@@ -44,8 +47,8 @@ struct Application:
                     
                     break
 
-            if fl_ready() == 1 :
-                _ = fl_check()
+            if fl_check() == 1 :
+                _ = fl_ready()
 
             var event = grab_fltk_event()
             if event != 2:
@@ -56,8 +59,10 @@ struct Application:
                     if handler.triggerEvent == event_type:
                        handler.trigger()
                     else:
-                        var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier))
-                        print(error)
+                        var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier) + " while resolving event " + getEventNameFromNum(event_type))
+                        if not self.disableLogging:
+                            print(error)
                 except err:
                     var error = ('[MJUI]: Failed to trace event handler function for Widget#'+ str[Int](identifier))
-                    print(error)
+                    if not self.disableLogging:
+                        print(error)

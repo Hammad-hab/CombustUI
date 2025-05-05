@@ -1,6 +1,7 @@
 {
     "@includes": [
-        "templates.map.gen"
+        "templates.map.gen",
+        "layouts.map.gen"
     ],
     
     "@concat_variations": {
@@ -9,12 +10,39 @@
             "_button"
         ]
     },
+
     "mjuiSetWidgetId":
     {
         "@cbindto": "set_id",
         "arguments": {
             "widget": "FLTK_WIDGET_POINTER",
             "id": "Int"
+        },
+        "returns": "c_void"
+    },
+
+     "mjuiWindowSetResizable":
+    {
+        "arguments": {
+            "window": "FLTK_WIDGET_POINTER",
+            "widgit": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "c_void"
+    },
+
+ "mjuiFlexCalculateLayout":
+    {
+        "arguments": {
+            "layout": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiSetFlexResize":
+    {
+        "arguments": {
+            "layout": "FLTK_WIDGET_POINTER",
+            "direction": "Int"
         },
         "returns": "c_void"
     },
@@ -100,8 +128,20 @@
     },
 
     "mjuiCreateButton": {
-        "@redef": "@basicWidgetPointerFunction",
+        "@redef": "@basicIDWidgetPointerFunction",
         "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    "mjuiCreateInput": {
+        "@redef": "@basicIDWidgetPointerFunction",
+        "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    "mjuiGrabInput": {
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "StringBytes"
     },
 
     "mjuiSetTextProperties": {
