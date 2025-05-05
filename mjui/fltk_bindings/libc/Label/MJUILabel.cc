@@ -1,4 +1,5 @@
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Flex.H>
 #include "../BaseWidgetHelpers.cc"
 #include "../BaseWidget.cc"
 #include "./MJUILabel.hh"

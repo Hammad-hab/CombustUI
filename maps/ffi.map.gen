@@ -21,6 +21,32 @@
         "returns": "c_void"
     },
 
+     "mjuiWindowSetResizable":
+    {
+        "arguments": {
+            "window": "FLTK_WIDGET_POINTER",
+            "widgit": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "c_void"
+    },
+
+ "mjuiFlexCalculateLayout":
+    {
+        "arguments": {
+            "layout": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "c_void"
+    },
+
+    "mjuiSetFlexResize":
+    {
+        "arguments": {
+            "layout": "FLTK_WIDGET_POINTER",
+            "direction": "Int"
+        },
+        "returns": "c_void"
+    },
+
     "fl_ready": {
         "arguments": {}, 
         "returns": "Int32",

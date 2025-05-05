@@ -54,7 +54,13 @@ alias MJUI_ZOOM_EVENT                  = 27
 
 alias MJUI_MJUIEX_HORIZONTAL = 1
 alias MJUI_MJUIEX_VERTICAL = 0
+#define RESIZE_XY 100
+#define RESIZE_XONLY 110
+#define RESIZE_YONLY 111
 
+alias RESIZE_XY = 100
+alias RESIZE_XONLY = 110
+alias RESIZE_YONLY = 111
 
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",

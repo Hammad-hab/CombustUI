@@ -18,8 +18,8 @@ void Input::setId(long int new_id) {
 }
 
 int Input::handle(int event) {
-        enqueueEvent(id, event);
-        return Fl_Input::handle(event);
+        Fl_Input::handle(event);
+        return 1;
 }
 
 void Input::setBorderRadius(int radius)
@@ -36,6 +36,5 @@ Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r)
 {
     char* label = int8ToChar(label_r);
     Input* btn = new Input(x, y, w, h, id, label);
-    btn->box(FL_FLAT_BOX);
     return btn;
 }

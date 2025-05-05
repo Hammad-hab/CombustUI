@@ -4,6 +4,9 @@
 from .dll import __dll
 from ..types import *
 
+alias MJUIWINDOWSETRESIZABLE_DEFINATION= fn(window: FLTK_WIDGET_POINTER, widgit: FLTK_WIDGET_POINTER) -> c_void
+alias MJUIFLEXCALCULATELAYOUT_DEFINATION= fn(layout: FLTK_WIDGET_POINTER) -> c_void
+alias MJUISETFLEXRESIZE_DEFINATION= fn(layout: FLTK_WIDGET_POINTER, direction: Int) -> c_void
 alias FL_READY_DEFINATION= fn() -> Int32
 alias FL_CHECK_DEFINATION= fn() -> Int32
 alias MJUISHOWWIDGET_DEFINATION= fn(widget: FLTK_WIDGET_POINTER) -> c_void
@@ -26,6 +29,9 @@ alias END_WIDGET_APPEND_DEFINATION= fn(w: FLTK_WIDGET_POINTER) -> c_void
 alias BEGIN_WIDGET_APPEND_DEFINATION= fn(w: FLTK_WIDGET_POINTER) -> c_void
 alias MJUISETWIDGETID_BUTTON_DEFINATION= fn(widget: FLTK_WIDGET_POINTER, id: Int) -> c_void
 
+var mjuiWindowSetResizable = __dll.get_function[MJUIWINDOWSETRESIZABLE_DEFINATION]("mjuiWindowSetResizable")
+var mjuiFlexCalculateLayout = __dll.get_function[MJUIFLEXCALCULATELAYOUT_DEFINATION]("mjuiFlexCalculateLayout")
+var mjuiSetFlexResize = __dll.get_function[MJUISETFLEXRESIZE_DEFINATION]("mjuiSetFlexResize")
 var fl_ready = __dll.get_function[FL_READY_DEFINATION]("fltk_check")
 var fl_check = __dll.get_function[FL_CHECK_DEFINATION]("fltk_check")
 var mjuiShowWidget = __dll.get_function[MJUISHOWWIDGET_DEFINATION]("show_widget")

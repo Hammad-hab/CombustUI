@@ -16,20 +16,22 @@ void Button::setId(long int new_id) {
 }
 
 int Button::handle(int event) {
+        if (event == FL_ENTER) {
+            isHovered = true;
+            enqueueEvent(id, event);
+            redraw();
+            return 1;
+        }
+
+        if (event == FL_LEAVE) {
+            isHovered = false;
+            enqueueEvent(id, event);
+            redraw();
+            return 1;
+        }
         enqueueEvent(id, event);
-        if (FL_ENTER) {
-            this->isHovered = true;
-            redraw();
-            return Fl_Button::handle(event);
-        }
 
-        if (FL_LEAVE) {
-            this->isHovered = false;
-            redraw();
-            return Fl_Button::handle(event);
-        }
-
-        return Fl_Button::handle(event); // Pass all other events to base class
+        return 1; // Pass all other events to base class
 }
 
 void Button::draw()
