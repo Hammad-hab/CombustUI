@@ -75,7 +75,7 @@
         "returns": "c_void"
     },
 
-    "mjuiWidgetColor": {
+    "mjuiSetWidgetColor": {
         "@cbindto": "set_widget_color",
         "arguments": {
             "widget": "FLTK_WIDGET_POINTER",

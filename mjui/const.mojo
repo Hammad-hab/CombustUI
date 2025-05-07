@@ -62,6 +62,9 @@ alias RESIZE_XY = 100
 alias RESIZE_XONLY = 110
 alias RESIZE_YONLY = 111
 
+alias YES = 1
+alias NO = 0
+
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",
                      "MJUI_DRAG", "MJUI_FOCUS", "MJUI_UNFOCUS", "MJUI_KEYDOWN / MJUI_KEYBOARD",
