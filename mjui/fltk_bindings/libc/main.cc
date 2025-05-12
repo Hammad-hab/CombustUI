@@ -6,6 +6,7 @@
 #include<FL/Fl_JPEG_Image.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/fl_draw.H>
 

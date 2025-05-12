@@ -95,6 +95,7 @@ void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label)
     widget->label(label);
 }
 
+
 void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget* w)
 {
     window->resizable(w);

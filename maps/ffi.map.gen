@@ -30,6 +30,13 @@
         "returns": "c_void"
     },
 
+    "mjuiCheckButtonGetState": {
+        "arguments": {
+            "checkButton": "FLTK_WIDGET_POINTER"
+        },
+        "returns": "Int"
+    },
+
  "mjuiFlexCalculateLayout":
     {
         "arguments": {
@@ -131,6 +138,13 @@
         "@redef": "@basicIDWidgetPointerFunction",
         "returns": "FLTK_WIDGET_POINTER"
     },
+
+    "mjuiCreateCheckButton": {
+        "@redef": "@basicIDWidgetPointerFunction",
+        "returns": "FLTK_WIDGET_POINTER"
+    },
+
+    
 
     "mjuiCreateInput": {
         "@redef": "@basicIDWidgetPointerFunction",
