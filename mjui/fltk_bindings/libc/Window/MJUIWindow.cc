@@ -34,6 +34,14 @@ void mjuiWindowTitleSet(Fl_Double_Window* window, int8_t* new_title_r)
     }
 }
 
+void mjuiWindowPositionSet(Fl_Double_Window* window, int x, int y)
+{
+    if (window != nullptr)
+    {
+        window->position(x, y);
+    }
+}
+
 
 int mjuiWindowVisibilityStatus(Fl_Double_Window* window, int condition) {
     switch (condition) 

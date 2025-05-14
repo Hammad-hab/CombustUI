@@ -14,5 +14,5 @@ Fl_Double_Window *mjuiCreateWindow(int width,
 
 void mjuiWindowTitleSet(Fl_Double_Window* window, int8_t* new_title_r);
 int mjuiWindowVisibilityStatus(Fl_Double_Window* window, int condition);
-
+void mjuiWindowPositionSet(Fl_Double_Window* window, int x, int y);
 #endif

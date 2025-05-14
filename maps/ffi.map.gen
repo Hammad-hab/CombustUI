@@ -72,16 +72,6 @@
         },
         "returns": "c_void"
     },
-
-    "mjuiLoadImage": {
-        "@cbindto": "load_img",
-        "arguments": {
-            "widget": "FLTK_WIDGET_POINTER",
-            "file": "StringBytes"
-        },
-        "returns": "c_void"
-    },
-
     "mjuiSetWidgetColor": {
         "@cbindto": "set_widget_color",
         "arguments": {
@@ -115,13 +105,23 @@
         "@cbindto": "listEvents"
     },
 
+    "mjuiWindowPositionSet": {
+        "arguments": {
+            "window": "FLTK_WIDGET_POINTER",
+            "x": "Int",
+            "y": "Int"
+        },
+        "returns": "c_void",
+        "@cbindto": "mjuiWindowPositionSet"
+    },
+
     "mjuiSpawnWindow": {
         "arguments": {
             "w": "Int32",
             "h": "Int32",
             "resize": "Int",
-            "no_border": "Int",
             "fullscreen": "Int",
+            "no_border": "Int",
             "label": "StringBytes"
         },
         "returns": "FLTK_WIDGET_POINTER",
@@ -162,7 +162,8 @@
         "arguments": {
             "widget": "FLTK_WIDGET_POINTER",
             "size": "Int32",
-            "colour": "UInt32"
+            "colour": "UInt32",
+            "type": "Int32"
         },
         "returns": "c_void"
     },

@@ -1,5 +1,8 @@
 from collections import Dict
 
+alias MJUI_NULL = -1
+
+# Cursor Types
 alias MJUI_CURSOR_DEFAULT = 0
 alias MJUI_CURSOR_ARROW = 35
 alias MJUI_CURSOR_CROSS = 66
@@ -22,6 +25,7 @@ alias MJUI_CURSOR_W = 36
 alias MJUI_CURSOR_NW = 68
 alias MJUI_CURSOR_NONE = 255
 
+# Event Types
 alias MJUI_NO_EVENT                    = 0
 alias MJUI_PUSH                        = 1
 alias MJUI_RELEASE                     = 2
@@ -52,18 +56,27 @@ alias MJUI_FULLSCREEN                  = 25
 alias MJUI_ZOOM_GESTURE                = 26
 alias MJUI_ZOOM_EVENT                  = 27
 
+
+# Flex Layout Flags
 alias MJUI_MJUIEX_HORIZONTAL = 1
 alias MJUI_MJUIEX_VERTICAL = 0
-#define RESIZE_XY 100
-#define RESIZE_XONLY 110
-#define RESIZE_YONLY 111
 
+# Flex Resize Flags
 alias RESIZE_XY = 100
 alias RESIZE_XONLY = 110
 alias RESIZE_YONLY = 111
 
+# Yes / No, on / off, true / false, etc.
 alias YES = 1
 alias NO = 0
+
+# Label Types
+alias MJUI_LABEL_TYPE_NORMAL = 0
+alias MJUI_LABEL_TYPE_SHADOW = 1
+alias MJUI_LABEL_TYPE_EMBOSSED = 2
+alias MJUI_LABEL_TYPE_MULTI = 3
+alias MJUI_LABEL_TYPE_IMAGE = 4
+
 
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",
