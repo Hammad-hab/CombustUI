@@ -24,7 +24,7 @@ fn readFromStringBytes(bytes: StringBytes) -> String:
     var i = 0
     while bytes._data[i] != 0:
         var data = bytes._data[i]
-        string += str(data)
+        string += chr(int(data))
         i += 1
     return string
 

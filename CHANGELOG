@@ -1,0 +1,26 @@
+# Version 0.01
+
+- Added Two Buttons
+    - `mjuiCreateButton` (supports border radius)
+        - Supports IDs
+    - `mjuiCreateCheckBox` (no support for border radius)
+
+- Added Two Input types
+    - `mjuiCreateInput` (supports placeholders)
+        - Supports `mjuiGrabInput`
+    - `mjuiCreateMultilineInput` (no support for placeholders)
+        - Supports `mjuiGrabInput`
+        - Added Special function for getting checkbox state, `mjuiCheckButtonGetState`
+
+- Layouts
+    - `mjuiCreateLayoutFlex`
+        - `MJUI_MJUIEX_VERTICAL`
+        - `MJUI_MJUIEX_HORIZONTAL`
+            - `RESIZE_XONLY`
+            - `RESIZE_YONLY`
+            - `RESIZE_XY`
+
+- Added bindings for `mjuiSetWidgetBox`
+- Added placeholders for `mjuiCreateInput`, thereby enhancing UX slightly
+- Bug fix: `readFromStringBytes` returned a concatenated list of ASCII Char codes instead of the actual string value.
+

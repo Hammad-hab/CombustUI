@@ -38,6 +38,7 @@ int Input::handle(int event) {
                 textcolor(placeHolderColor);
             }
         }
+        enqueueEvent(id, event);
         Fl_Input::handle(event);
         return 1;
 }

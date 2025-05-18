@@ -39,6 +39,10 @@ extern "C" {
         return Fl::ready();
     }
 
+    int mjuiEventKey() {
+        return Fl::event_key();
+    }
+
     void set_id_button(Button *btn, long int id) {btn->setId(id);}
 
 #ifdef __cplusplus

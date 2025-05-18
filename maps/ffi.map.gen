@@ -161,6 +161,14 @@
         "returns": "StringBytes"
     },
 
+    "mjuiSetWidgetBox": {
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "box": "Int"
+        },
+        "returns": "c_void"
+    },
+
     "mjuiSetTextProperties": {
         "arguments": {
             "widget": "FLTK_WIDGET_POINTER",
@@ -188,6 +196,11 @@
             "window": "FLTK_WIDGET_POINTER",
             "condition": "Int"
         },
+        "returns": "Int"
+    },
+
+    "mjuiEventKey": {
+        "arguments": {},
         "returns": "Int"
     }
 }

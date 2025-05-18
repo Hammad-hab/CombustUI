@@ -3,11 +3,9 @@
 #include<FL/Fl_Group.H>
 #include<FL/Fl_Window.H>
 
-
 #ifndef UTILS
 
 #define UTILS
-
 
 void enqueueEvent(int id, int event) { Events[id] = event; }
 
@@ -54,7 +52,7 @@ void set_widget_color(Fl_Widget *window, Fl_Color c) { window->color(c); }
 void set_text_color(Fl_Widget *widget, Fl_Color c) { widget->labelcolor(c); }
 
 void set_widget_color2(Fl_Widget *window, Fl_Color c) { window->color2(c); }
-void set_widget_box(Fl_Widget *widget, Fl_Boxtype x) { widget->box(x); }
+void mjuiSetWidgetBox(Fl_Widget *widget, Fl_Boxtype x) { widget->box(x); }
 void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label) { widget->label(label); }
 void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget* w) { window->resizable(w); }
 
