@@ -14,6 +14,7 @@ Input::Input(int x, int y, int w, int h, long int nid, char* label): Fl_Input(x,
     placeholder = label;
     placeHolderColor = FL_DARK2;
     textcolor(placeHolderColor);
+    cursor_color(color());
     value(placeholder);
 };
 
@@ -23,18 +24,18 @@ void Input::setId(long int new_id) {
 }
 
 int Input::handle(int event) {
-        if (event == FL_KEYDOWN) {
-            const char* text = Fl::event_text();
-            int key = Fl::event_key();
-            const char* initialValue = value();
-            if (key == FL_BackSpace && strlen(initialValue) <= 0){
-                value(placeholder);
-                textcolor(placeHolderColor);
-                return 1;
-            }
-            if (strstr(initialValue, placeholder) != NULL) {
+        if (event == FL_FOCUS) {
+            cursor_color(color2());
+            if (strcmp(value(), placeholder) == 0) {
                 value("");
                 textcolor(FL_BLACK);
+            }
+        }
+        if (event == FL_UNFOCUS) {
+            cursor_color(color());
+            if (strlen(value()) <= 0) {
+                value(placeholder);
+                textcolor(placeHolderColor);
             }
         }
         Fl_Input::handle(event);
@@ -69,6 +70,7 @@ Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r)
 Fl_Multiline_Input* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r)
 {
     char* label = int8ToChar(label_r);
-    Fl_Multiline_Input* in = new Fl_Multiline_Input(x, y, w, h, label);
+    Fl_Multiline_Input* in = new Fl_Multiline_Input(x, y, w, h, "");
+    in->value(label);
     return in;
 }

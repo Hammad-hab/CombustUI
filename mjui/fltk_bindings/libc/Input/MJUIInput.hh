@@ -16,7 +16,5 @@ class Input : public Fl_Input, public BaseWidget {
         virtual void draw() override;
 };
 
-
-Input* mjuiCreateInput(int w, int h, int x, int y, long int id, int8_t* label_r);
-Fl_Multiline_Input* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r);
+Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r);
 #endif
