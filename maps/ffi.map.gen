@@ -144,7 +144,10 @@
         "returns": "FLTK_WIDGET_POINTER"
     },
 
-    
+    "mjuiCreateMultilineInput": {
+        "@redef": "@basicIDWidgetPointerFunction",
+        "returns": "FLTK_WIDGET_POINTER"
+    },
 
     "mjuiCreateInput": {
         "@redef": "@basicIDWidgetPointerFunction",
