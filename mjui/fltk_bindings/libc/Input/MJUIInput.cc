@@ -1,15 +1,21 @@
 #include "../BaseWidgetHelpers.cc"
 #include "../BaseWidget.cc"
 #include "./MJUIInput.hh"
-
+#include <FL/Fl_Input.H>
+#include <FL/Fl_Multiline_Input.H>
+#include<cstring>
 #include "string.h"
 
-Input::Input(int x, int y, int w, int h, long int nid, char* label): Fl_Input(x, y, w, h, label) {
+
+Input::Input(int x, int y, int w, int h, long int nid, char* label): Fl_Input(x, y, w, h, "") {
     id=nid;
     isHovered = false;
     borderRadius = 2;
-    labelcolor(FL_BLACK);
-    
+    placeholder = label;
+    placeHolderColor = FL_DARK2;
+    textcolor(placeHolderColor);
+    cursor_color(color());
+    value(placeholder);
 };
 
 
@@ -18,13 +24,35 @@ void Input::setId(long int new_id) {
 }
 
 int Input::handle(int event) {
+        if (event == FL_FOCUS) {
+            cursor_color(color2());
+            if (strcmp(value(), placeholder) == 0) {
+                value("");
+                textcolor(FL_BLACK);
+            }
+        }
+        if (event == FL_UNFOCUS) {
+            cursor_color(color());
+            if (strlen(value()) <= 0) {
+                value(placeholder);
+                textcolor(placeHolderColor);
+            }
+        }
+        enqueueEvent(id, event);
         Fl_Input::handle(event);
         return 1;
 }
 
+
+
 void Input::setBorderRadius(int radius)
 {
     this->borderRadius = radius;
+}
+
+
+void Input::draw() { 
+    Fl_Input::draw();
 }
 
 const char* mjuiGrabInput(Input* ptr) 
@@ -35,6 +63,15 @@ const char* mjuiGrabInput(Input* ptr)
 Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r)
 {
     char* label = int8ToChar(label_r);
-    Input* btn = new Input(x, y, w, h, id, label);
-    return btn;
+    Input* in = new Input(x, y, w, h, id, label);
+    return in;
+}
+
+
+Fl_Multiline_Input* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r)
+{
+    char* label = int8ToChar(label_r);
+    Fl_Multiline_Input* in = new Fl_Multiline_Input(x, y, w, h, "");
+    in->value(label);
+    return in;
 }

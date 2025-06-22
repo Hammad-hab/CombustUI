@@ -1,5 +1,8 @@
 from collections import Dict
 
+alias MJUI_NULL = -1
+
+# Cursor Types
 alias MJUI_CURSOR_DEFAULT = 0
 alias MJUI_CURSOR_ARROW = 35
 alias MJUI_CURSOR_CROSS = 66
@@ -22,6 +25,7 @@ alias MJUI_CURSOR_W = 36
 alias MJUI_CURSOR_NW = 68
 alias MJUI_CURSOR_NONE = 255
 
+# Event Types
 alias MJUI_NO_EVENT                    = 0
 alias MJUI_PUSH                        = 1
 alias MJUI_RELEASE                     = 2
@@ -52,15 +56,98 @@ alias MJUI_FULLSCREEN                  = 25
 alias MJUI_ZOOM_GESTURE                = 26
 alias MJUI_ZOOM_EVENT                  = 27
 
+
+# Flex Layout Flags
 alias MJUI_MJUIEX_HORIZONTAL = 1
 alias MJUI_MJUIEX_VERTICAL = 0
-#define RESIZE_XY 100
-#define RESIZE_XONLY 110
-#define RESIZE_YONLY 111
 
+# Flex Resize Flags
 alias RESIZE_XY = 100
 alias RESIZE_XONLY = 110
 alias RESIZE_YONLY = 111
+
+# Yes / No, on / off, true / false, etc.
+alias YES = 1
+alias NO = 0
+
+# Label Types
+alias MJUI_LABEL_TYPE_NORMAL = 0
+alias MJUI_LABEL_TYPE_SHADOW = 1
+alias MJUI_LABEL_TYPE_EMBOSSED = 2
+alias MJUI_LABEL_TYPE_MULTI = 3
+alias MJUI_LABEL_TYPE_IMAGE = 4
+
+# Box Types
+alias MJUI_NO_BOX = 0
+alias MJUI_FLAT_BOX = 1
+alias MJUI_UP_BOX = 2
+alias MJUI_DOWN_BOX = 3
+alias MJUI_UP_FRAME = 4
+alias MJUI_DOWN_FRAME = 5
+alias MJUI_THIN_UP_BOX = 6
+alias MJUI_THIN_DOWN_BOX = 7
+alias MJUI_THIN_UP_FRAME = 8
+alias MJUI_THIN_DOWN_FRAME = 9
+alias MJUI_ENGRAVED_BOX = 10
+alias MJUI_EMBOSSED_BOX = 11
+alias MJUI_ENGRAVED_FRAME = 12
+alias MJUI_EMBOSSED_FRAME = 13
+alias MJUI_BORDER_BOX = 14
+alias MJUI_SHADOW_BOX = 15
+alias MJUI_BORDER_FRAME = 16
+alias MJUI_SHADOW_FRAME = 17
+alias MJUI_ROUNDED_BOX = 18
+alias MJUI_RSHADOW_BOX = 19
+alias MJUI_ROUNDED_FRAME = 20
+alias MJUI_RFLAT_BOX = 21
+alias MJUI_ROUND_UP_BOX = 22
+alias MJUI_ROUND_DOWN_BOX = 23
+alias MJUI_DIAMOND_UP_BOX = 24
+alias MJUI_DIAMOND_DOWN_BOX = 25
+alias MJUI_OVAL_BOX = 26
+alias MJUI_OSHADOW_BOX = 27
+alias MJUI_OVAL_FRAME = 28
+alias MJUI_OFLAT_BOX = 29
+alias MJUI_PLASTIC_UP_BOX = 30
+alias MJUI_PLASTIC_DOWN_BOX = 31
+alias MJUI_PLASTIC_UP_FRAME = 32
+alias MJUI_PLASTIC_DOWN_FRAME = 33
+alias MJUI_PLASTIC_THIN_UP_BOX = 34
+alias MJUI_PLASTIC_THIN_DOWN_BOX = 35
+alias MJUI_PLASTIC_ROUND_UP_BOX = 36
+alias MJUI_PLASTIC_ROUND_DOWN_BOX = 37
+alias MJUI_GTK_UP_BOX = 38
+alias MJUI_GTK_DOWN_BOX = 39
+alias MJUI_GTK_UP_FRAME = 40
+alias MJUI_GTK_DOWN_FRAME = 41
+alias MJUI_GTK_THIN_UP_BOX = 42
+alias MJUI_GTK_THIN_DOWN_BOX = 43
+alias MJUI_GTK_THIN_UP_FRAME = 44
+alias MJUI_GTK_THIN_DOWN_FRAME = 45
+alias MJUI_GTK_ROUND_UP_BOX = 46
+alias MJUI_GTK_ROUND_DOWN_BOX = 47
+alias MJUI_GLEAM_UP_BOX = 48
+alias MJUI_GLEAM_DOWN_BOX = 49
+alias MJUI_GLEAM_UP_FRAME = 50
+alias MJUI_GLEAM_DOWN_FRAME = 51
+alias MJUI_GLEAM_THIN_UP_BOX = 52
+alias MJUI_GLEAM_THIN_DOWN_BOX = 53
+alias MJUI_GLEAM_ROUND_UP_BOX = 54
+alias MJUI_GLEAM_ROUND_DOWN_BOX = 55
+alias MJUI_OXY_UP_BOX = 56
+alias MJUI_OXY_DOWN_BOX = 57
+alias MJUI_OXY_UP_FRAME = 58
+alias MJUI_OXY_DOWN_FRAME = 59
+alias MJUI_OXY_THIN_UP_BOX = 60
+alias MJUI_OXY_THIN_DOWN_BOX = 61
+alias MJUI_OXY_THIN_UP_FRAME = 62
+alias MJUI_OXY_THIN_DOWN_FRAME = 63
+alias MJUI_OXY_ROUND_UP_BOX = 64
+alias MJUI_OXY_ROUND_DOWN_BOX = 65
+alias MJUI_OXY_BUTTON_UP_BOX = 66
+alias MJUI_OXY_BUTTON_DOWN_BOX = 67
+alias MJUI_FREE_BOXTYPE = 68
+alias MJUI_MAX_BOXTYPE = 255
 
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",

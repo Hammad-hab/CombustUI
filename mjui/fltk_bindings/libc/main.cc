@@ -6,7 +6,9 @@
 #include<FL/Fl_JPEG_Image.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Multiline_Input.H>
 #include <FL/fl_draw.H>
 
 
@@ -35,6 +37,10 @@ extern "C" {
 
     int fltk_ready() {
         return Fl::ready();
+    }
+
+    int mjuiEventKey() {
+        return Fl::event_key();
     }
 
     void set_id_button(Button *btn, long int id) {btn->setId(id);}

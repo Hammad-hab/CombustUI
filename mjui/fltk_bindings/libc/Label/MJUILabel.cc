@@ -15,6 +15,14 @@ MJUILabel::MJUILabel(int x, int y, int w, int h, int id, const char* label): Fl_
         this->setId(id);
 }
 
+void MJUILabel::setLabelType(int a) {
+    if (a == 0) this->labeltype(FL_NORMAL_LABEL);
+    else if (a == 1) this->labeltype(FL_SHADOW_LABEL);
+    else if (a == 2) this->labeltype(FL_EMBOSSED_LABEL);
+    else if (a == 3) this->labeltype(FL_MULTI_LABEL);
+    else if (a == 4) this->labeltype(FL_IMAGE_LABEL);
+}
+
 
 MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int8_t* text)
 {
@@ -25,8 +33,9 @@ MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int8_t* text)
 }
 
 
-void mjuiSetTextProperties(MJUILabel *label, int size, Fl_Color color) 
+void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type) 
 {
-    label->labelsize(size);
-    label->labelcolor(color);
+    if (size != -1) label->labelsize(size);
+    if (color != -1) label->labelcolor(color);
+    if (type != -1) label->setLabelType(type);
 }

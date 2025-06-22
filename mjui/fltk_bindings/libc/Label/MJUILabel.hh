@@ -8,10 +8,11 @@ class MJUILabel: public Fl_Box, public BaseWidget
         long int id;
         virtual void setId(long int new_id) override;
         MJUILabel(int x, int y, int w, int h, int id, const char* label);
+        void setLabelType(int a);
 };
 
 MJUILabel *mjuiCreateLabel(int x, int y, int width, int height, int8_t* text);
-void mjuiSetTextProperties(MJUILabel *label, int size, Fl_Color color);
+void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type);
 
 
 #endif

@@ -1,5 +1,6 @@
 #include "MJUIWindow.hh"
 #include<FL/Fl_Box.H>
+
 Fl_Double_Window* mjuiCreateWindow(
     int width,
     int height,
@@ -19,7 +20,7 @@ Fl_Double_Window* mjuiCreateWindow(
 
     if (no_border)
         window->clear_border();
-
+    
     return window;
 }
 
@@ -30,6 +31,14 @@ void mjuiWindowTitleSet(Fl_Double_Window* window, int8_t* new_title_r)
     {
         char* new_window_title = int8ToChar(new_title_r);
         window->label(new_window_title);
+    }
+}
+
+void mjuiWindowPositionSet(Fl_Double_Window* window, int x, int y)
+{
+    if (window != nullptr)
+    {
+        window->position(x, y);
     }
 }
 

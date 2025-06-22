@@ -1,9 +1,9 @@
-from .types import StringBytes
+from .types import StringBytes, FLTK_WIDGET_POINTER
 from collections import Optional
 from memory import Span, UnsafePointer
 import sys
 
-fn rgb_to_i32(r:UInt32, g:UInt32, b:UInt32) -> UInt32:
+fn rgb(r:UInt32, g:UInt32, b:UInt32) -> UInt32:
     """
         Converts rgb values to a singe 256-color pallet integer.
     """
@@ -24,18 +24,18 @@ fn readFromStringBytes(bytes: StringBytes) -> String:
     var i = 0
     while bytes._data[i] != 0:
         var data = bytes._data[i]
-        string += str(data)
+        string += chr(int(data))
         i += 1
     return string
 
 
 fn createIdFrom(id: String) raises -> Int:
-    var strn: String = ""
+    var strn: Int = 0
     for char in id:
        intrepr = ord(char)
-       strn += String(intrepr)
+       strn += intrepr
     
-    return Int(strn)
+    return strn
 
 
 fn filter[listType: CollectionElement](list:List[listType], modifier: fn(element:listType)->Bool) -> List[listType]:
@@ -66,9 +66,12 @@ struct DataStore[dtype: CollectionElement]:
     fn storeAt(mut self, index:Int, data: dtype) -> Int:
         self._store[index] = data
         return index
+
     
-fn convertStringToBytes(str: String) -> StringBytes:
-    var ptr = str.unsafe_cstr_ptr()
-    var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=str.__len__())
+fn convertStringToBytes(owned strn: String) -> StringBytes:
+    var ptr = strn.unsafe_cstr_ptr()
+    var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=strn.__len__())
     return span
-        
+
+
+alias EMPTY = convertStringToBytes("")

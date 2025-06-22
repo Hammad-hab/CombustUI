@@ -15,3 +15,6 @@ mjui/fltk_bindings/deprecated/
 ./*/**/.dylib
 *.png
 app.mojo
+/cairo
+/cairo/*# magic environments
+.magic
