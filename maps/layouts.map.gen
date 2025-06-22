@@ -10,6 +10,22 @@
             "dir": "Int"
         }
     },
+    "mjuiSetFlexMarginGapSettings": {
+        "returns":"c_void", 
+        "arguments": {
+            "l": "FLTK_WIDGET_POINTER",
+            "margin": "Int",
+            "gap": "Int"
+        }
+    }, 
+    "mjuiSetFlex": {
+        "returns": "c_void",
+        "arguments": {
+            "l": "FLTK_WIDGET_POINTER",
+            "w": "FLTK_WIDGET_POINTER",
+            "span": "Int"
+        }
+    },
     "END_WIDGET_APPEND": {
         "returns": "c_void",
         "@cbindto": "end_widget_child_append",

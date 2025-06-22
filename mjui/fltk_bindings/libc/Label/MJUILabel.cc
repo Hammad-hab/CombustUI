@@ -4,6 +4,7 @@
 #include "../BaseWidget.cc"
 #include "./MJUILabel.hh"
 
+
 void MJUILabel::setId(long int new_id) {
     id = new_id;
     

@@ -61,4 +61,19 @@ void mjuiFlexCalculateLayout(MJUI_Flex* l) {
     l->redraw();
 }
 
+void mjuiSetFlexMarginGapSettings(MJUI_Flex* l, int margin, int gap)
+{
+    if (gap != -1) 
+    {
+        l->gap(gap);
+    }
+    if (margin != -1)
+    {
+        l->margin(margin);
+    }
+} 
+
+void mjuiSetFlex(MJUI_Flex* l, Fl_Widget*w,  int span) {
+    l->fixed(w, span);
+}
 
