@@ -61,7 +61,8 @@
     },
 
     "fl_check": {
-        "@redef": "fl_ready",
+        "arguments": {}, 
+        "returns": "Int32",
         "@cbindto": "fltk_ready"
     }, 
 

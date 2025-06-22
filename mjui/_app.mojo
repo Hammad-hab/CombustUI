@@ -7,7 +7,6 @@ from sys.terminate import exit
 from .const import getEventNameFromNum
 
 struct Application:
-    var __dll: DLHandle
     var __event_dict: Dict[Int, EventHandler]
     var __elements: Dict[Int, FLTK_WIDGET_POINTER]
     var __main_window: FLTK_WIDGET_POINTER
@@ -15,7 +14,6 @@ struct Application:
     var disableLogging: Bool
     
     fn __init__(mut self):
-        self.__dll = __dll
         self.__event_dict = Dict[Int, EventHandler]()
         self.__main_window = FLTK_WIDGET_POINTER()
         self.hasMainWindow = False
@@ -58,11 +56,5 @@ struct Application:
                     var handler = self.__event_dict[identifier]
                     if handler.triggerEvent == event_type:
                        handler.trigger()
-                    else:
-                        var error = ('[MJUI]: Couldn\'t find Matching handler for Widget#'+ str[Int](identifier) + " while resolving event " + getEventNameFromNum(event_type))
-                        if not self.disableLogging:
-                            print(error)
                 except err:
-                    var error = ('[MJUI]: Failed to trace event handler function for Widget#'+ str[Int](identifier))
-                    if not self.disableLogging:
-                        print(error)
+                    ...

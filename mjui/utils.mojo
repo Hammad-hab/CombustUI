@@ -68,9 +68,9 @@ struct DataStore[dtype: CollectionElement]:
         return index
 
     
-fn convertStringToBytes(str: String) -> StringBytes:
-    var ptr = str.unsafe_cstr_ptr()
-    var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=str.__len__())
+fn convertStringToBytes(owned strn: String) -> StringBytes:
+    var ptr = strn.unsafe_cstr_ptr()
+    var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=strn.__len__())
     return span
 
 
