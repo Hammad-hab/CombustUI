@@ -3,13 +3,17 @@
 #include <string>
 #include <stdio.h>
 #include <FL/Fl.H>
-#include<FL/Fl_JPEG_Image.H>
-#include <FL/Fl.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Multiline_Input.H>
 #include <FL/fl_draw.H>
+
+#include <FL/Fl_PNG_Image.H>
+#include <FL/Fl_JPEG_Image.H>
+#include <FL/Fl_SVG_Image.H>
+#include <FL/Fl_GIF_Image.H>
+#include <FL/Fl_Anim_GIF_Image.H>
 
 
 

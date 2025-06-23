@@ -36,7 +36,24 @@
         },
         "returns": "Int"
     },
+    "mjuiLoadImage": {
+        "arguments": {
+            "w": "Int",
+            "h": "Int",
+            "type": "Int",
+            "path": "StringBytes"
+        },
+        "returns": "Int32",
+        "@cbindto": "load_img"
+    },
 
+        "mjuiApplyImage": {
+        "returns": "c_void",
+        "arguments": {
+            "widget": "FLTK_WIDGET_POINTER",
+            "img": "Int32"
+        }
+    },
  "mjuiFlexCalculateLayout":
     {
         "arguments": {

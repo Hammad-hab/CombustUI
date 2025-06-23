@@ -1,6 +1,13 @@
 #ifndef MJUILABEL_H
 #include<FL/Fl_Box.H>
 
+#define PNG 0
+#define JPEG 1
+#define SVG 2
+#define BMP 3
+#define GIF 4
+#define ANIM_GIF 5
+
 class MJUILabel: public Fl_Box, public BaseWidget 
 {
     // TODO: Add more custom features

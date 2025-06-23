@@ -25,11 +25,11 @@ void MJUILabel::setLabelType(int a) {
 }
 
 
+
 MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int8_t* text)
 {
     const char* label_text = int8ToChar(text);
     MJUILabel *label = new MJUILabel(x, y, w, h, 1200231, label_text);
-
     return label;
 }
 
@@ -39,4 +39,32 @@ void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type)
     if (size != -1) label->labelsize(size);
     if (color != -1) label->labelcolor(color);
     if (type != -1) label->setLabelType(type);
+}
+
+Fl_Image* load_img(int width, int height, int imgType, int8_t* path) {
+    const char* path_txt = int8ToChar(path);
+    Fl_Image* img;
+    switch (imgType) {
+        case PNG:
+            img = new Fl_PNG_Image(path_txt);
+            img->scale(width, height, 0);
+        break;
+        case JPEG:
+            img = new Fl_JPEG_Image(path_txt);
+            img->scale(width, height, 0);
+        break;
+        case GIF:
+            img = new Fl_GIF_Image(path_txt);
+            img->scale(width, height, 0);
+        case SVG:
+            img = new Fl_SVG_Image(path_txt);
+            img->scale(width, height, 0);
+            return img;
+        break;
+        case ANIM_GIF:
+            img = new Fl_PNG_Image(path_txt);
+            img->scale(width, height, 0);
+        break;
+    }
+    return img;
 }

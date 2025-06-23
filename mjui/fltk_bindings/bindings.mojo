@@ -6,6 +6,8 @@ from ..types import *
 
 alias MJUIWINDOWSETRESIZABLE_DEFINATION= fn(window: FLTK_WIDGET_POINTER, widgit: FLTK_WIDGET_POINTER) -> c_void
 alias MJUICHECKBUTTONGETSTATE_DEFINATION= fn(checkButton: FLTK_WIDGET_POINTER) -> Int
+alias MJUILOADIMAGE_DEFINATION= fn(w: Int, h: Int, type: Int, path: StringBytes) -> Int32
+alias MJUIAPPLYIMAGE_DEFINATION= fn(widget: FLTK_WIDGET_POINTER, img: Int32) -> c_void
 alias MJUIFLEXCALCULATELAYOUT_DEFINATION= fn(layout: FLTK_WIDGET_POINTER) -> c_void
 alias MJUISETFLEXRESIZE_DEFINATION= fn(layout: FLTK_WIDGET_POINTER, direction: Int) -> c_void
 alias FL_READY_DEFINATION= fn() -> Int32
@@ -31,6 +33,7 @@ alias MJUIWINDOWVISIBILITYSTATUS_DEFINATION= fn(window: FLTK_WIDGET_POINTER, con
 alias MJUIEVENTKEY_DEFINATION= fn() -> Int
 alias MJUICREATELAYOUTFLEX_DEFINATION= fn(x: Int, y: Int, w: Int, h: Int, dir: Int) -> FLTK_WIDGET_POINTER
 alias MJUISETFLEXMARGINGAPSETTINGS_DEFINATION= fn(l: FLTK_WIDGET_POINTER, margin: Int, gap: Int) -> c_void
+alias MJUISETMARGINEXPLICIT_DEFINATION= fn(l: FLTK_WIDGET_POINTER, left: Int, top: Int, right: Int, bottom: Int) -> c_void
 alias MJUISETFLEX_DEFINATION= fn(l: FLTK_WIDGET_POINTER, w: FLTK_WIDGET_POINTER, span: Int) -> c_void
 alias END_WIDGET_APPEND_DEFINATION= fn(w: FLTK_WIDGET_POINTER) -> c_void
 alias BEGIN_WIDGET_APPEND_DEFINATION= fn(w: FLTK_WIDGET_POINTER) -> c_void
@@ -38,6 +41,8 @@ alias MJUISETWIDGETID_BUTTON_DEFINATION= fn(widget: FLTK_WIDGET_POINTER, id: Int
 
 var mjuiWindowSetResizable = __dll.get_function[MJUIWINDOWSETRESIZABLE_DEFINATION]("mjuiWindowSetResizable")
 var mjuiCheckButtonGetState = __dll.get_function[MJUICHECKBUTTONGETSTATE_DEFINATION]("mjuiCheckButtonGetState")
+var mjuiLoadImage = __dll.get_function[MJUILOADIMAGE_DEFINATION]("load_img")
+var mjuiApplyImage = __dll.get_function[MJUIAPPLYIMAGE_DEFINATION]("mjuiApplyImage")
 var mjuiFlexCalculateLayout = __dll.get_function[MJUIFLEXCALCULATELAYOUT_DEFINATION]("mjuiFlexCalculateLayout")
 var mjuiSetFlexResize = __dll.get_function[MJUISETFLEXRESIZE_DEFINATION]("mjuiSetFlexResize")
 var fl_ready = __dll.get_function[FL_READY_DEFINATION]("fltk_check")
@@ -63,6 +68,7 @@ var mjuiWindowVisibilityStatus = __dll.get_function[MJUIWINDOWVISIBILITYSTATUS_D
 var mjuiEventKey = __dll.get_function[MJUIEVENTKEY_DEFINATION]("mjuiEventKey")
 var mjuiCreateLayoutFlex = __dll.get_function[MJUICREATELAYOUTFLEX_DEFINATION]("mjuiCreateLayoutFlex")
 var mjuiSetFlexMarginGapSettings = __dll.get_function[MJUISETFLEXMARGINGAPSETTINGS_DEFINATION]("mjuiSetFlexMarginGapSettings")
+var mjuiSetMarginExplicit = __dll.get_function[MJUISETMARGINEXPLICIT_DEFINATION]("mjuiSetMarginExplicit")
 var mjuiSetFlex = __dll.get_function[MJUISETFLEX_DEFINATION]("mjuiSetFlex")
 var END_WIDGET_APPEND = __dll.get_function[END_WIDGET_APPEND_DEFINATION]("end_widget_child_append")
 var BEGIN_WIDGET_APPEND = __dll.get_function[BEGIN_WIDGET_APPEND_DEFINATION]("begin_widget_child_append")

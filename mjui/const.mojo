@@ -149,6 +149,13 @@ alias MJUI_OXY_BUTTON_DOWN_BOX = 67
 alias MJUI_FREE_BOXTYPE = 68
 alias MJUI_MAX_BOXTYPE = 255
 
+alias PNG = 0
+alias JPEG=  1
+alias SVG = 2
+alias BMP = 3
+alias GIF = 4
+alias ANIM_GIF = 5
+
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",
                      "MJUI_DRAG", "MJUI_FOCUS", "MJUI_UNFOCUS", "MJUI_KEYDOWN / MJUI_KEYBOARD",

@@ -73,6 +73,11 @@ void mjuiSetFlexMarginGapSettings(MJUI_Flex* l, int margin, int gap)
     }
 } 
 
+void mjuiSetMarginExplicit(MJUI_Flex* l, int left, int top, int right, int bottom)
+{
+    l->margin(left, top, right, left);
+}
+
 void mjuiSetFlex(MJUI_Flex* l, Fl_Widget*w,  int span) {
     l->fixed(w, span);
 }

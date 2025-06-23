@@ -34,7 +34,7 @@ int64_t listEvents() {
 
 void show_widget(Fl_Widget *widget) { widget->show(); }
 
-
+void mjuiApplyImage(Fl_Widget *w, Fl_Image* img) { w->image(img); }
 
 void hide_widget(Fl_Widget *widget) { widget->hide(); }
 

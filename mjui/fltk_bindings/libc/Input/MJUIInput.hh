@@ -1,4 +1,3 @@
-
 #ifndef MJUIINPUT_H
 #define MJUIINPUT_H
 
