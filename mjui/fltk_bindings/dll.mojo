@@ -1,10 +1,16 @@
 from sys.ffi import DLHandle, UnsafePointer, _OwnedDLHandle, _Global
+from os import getenv
+from sys.terminate import exit
 
 var __dll = init()
 fn init() -> DLHandle:
+    var path = getenv('COMBUSTUI_DLL_PATH')
+    if len(path) <= 0:
+        print('Failed to locate mjui DLL. $COMBUSTUI_DLL_PATH not defined')
+        exit()
     try: 
         print('Successfully loaded DLL')
-        return DLHandle('/Users/hammad/Documents/Hammad/Mojo/CombustUI-Mojo/mjui/fltk_bindings/libc/out/mjui.dylib')
+        return DLHandle(path)
     except:
         return _uninit[DLHandle]()
 

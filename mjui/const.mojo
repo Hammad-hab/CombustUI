@@ -150,11 +150,22 @@ alias MJUI_FREE_BOXTYPE = 68
 alias MJUI_MAX_BOXTYPE = 255
 
 alias PNG = 0
-alias JPEG=  1
+alias JPEG =  1
 alias SVG = 2
 alias BMP = 3
 alias GIF = 4
 alias ANIM_GIF = 5
+
+alias ALIGN_CENTER = 0
+alias ALIGN_TOP = 1
+alias ALIGN_BOTTOM = 2
+alias ALIGN_LEFT = 3
+alias ALIGN_RIGHT = 4
+alias ALIGN_INSIDE = 5
+alias ALIGN_CLIP = 6
+alias ALIGN_WRAP = 7
+alias TEXT_OVER_IMAGE = 8
+alias IMAGE_OVER_TEXT = 9
 
 fn getEventNameFromNum(num: Int) -> String:
     var event_map: List[String] = List[String]("MJUI_NO_EVENT", "MJUI_PUSH", "MJUI_RELEASE", "MJUI_ENTER", "MJUI_LEAVE",

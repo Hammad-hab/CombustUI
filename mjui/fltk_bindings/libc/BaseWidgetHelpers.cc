@@ -15,26 +15,23 @@ int widgetHandle(int id, int event) { enqueueEvent(id, event); return event; }
 
 int64_t listEvents() {
     for (auto x : Events) {
-        if (x.second == 0) continue;
-        Events[x.first] = 0;
+        if (x.second == -2) continue;
+        Events[x.first] = -2;
         uint64_t combined = ((uint64_t)x.first << 32) | x.second;
         return (combined);
     }
-    return 2;
+    return -2;
 };
 
-// uncomment later
-// void load_img(Fl_Widget *widget, const char* file)
-// {
-//     Fl_JPEG_Image *img = new Fl_JPEG_Image(file);
-//     img->scale(widget->w(), widget->h());
-//     widget->image(img);
-// }
 
 
 void show_widget(Fl_Widget *widget) { widget->show(); }
 
 void mjuiApplyImage(Fl_Widget *w, Fl_Image* img) { w->image(img); }
+void mjuiImageScale(Fl_Image* img, int w, int h, int propotional) { 
+    img->scale(w, h, propotional);
+}
+
 
 void hide_widget(Fl_Widget *widget) { widget->hide(); }
 
@@ -55,5 +52,11 @@ void set_widget_color2(Fl_Widget *window, Fl_Color c) { window->color2(c); }
 void mjuiSetWidgetBox(Fl_Widget *widget, Fl_Boxtype x) { widget->box(x); }
 void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label) { widget->label(label); }
 void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget* w) { window->resizable(w); }
+
+void redraw(Fl_Widget* w) {
+    w->redraw();
+    Fl::flush();
+    Fl::check();
+}
 
 #endif

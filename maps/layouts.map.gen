@@ -10,7 +10,7 @@
             "dir": "Int"
         }
     },
-    
+
     "mjuiSetFlexMarginGapSettings": {
         "returns":"c_void", 
         "arguments": {

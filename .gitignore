@@ -12,7 +12,7 @@ mjui/fltk_bindings/libc/deprecated/
 mjui/fltk_bindings/deprecated/
 /.vscode
 .DS_Store
-./*/**/.dylib
+./mjui/fltk_bindings/libc/out/*.dylib
 *.png
 app.mojo
 /cairo

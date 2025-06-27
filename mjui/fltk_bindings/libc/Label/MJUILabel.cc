@@ -16,6 +16,13 @@ MJUILabel::MJUILabel(int x, int y, int w, int h, int id, const char* label): Fl_
         this->setId(id);
 }
 
+void MJUILabel::draw() {
+    fl_color(color());  // set color to parent's background color
+    fl_rectf(x(), y(), w(), h());  // draw rectangle over the widget area
+    Fl_Box::draw();  // first clear background and draw label
+}
+
+
 void MJUILabel::setLabelType(int a) {
     if (a == 0) this->labeltype(FL_NORMAL_LABEL);
     else if (a == 1) this->labeltype(FL_SHADOW_LABEL);
@@ -25,13 +32,22 @@ void MJUILabel::setLabelType(int a) {
 }
 
 
+int MJUILabel::handle(int event) {
+        enqueueEvent(id, event);
 
-MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int8_t* text)
+        return 1; // Pass all other events to base class
+}
+
+
+
+MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int id, int8_t* text)
 {
     const char* label_text = int8ToChar(text);
     MJUILabel *label = new MJUILabel(x, y, w, h, 1200231, label_text);
     return label;
 }
+
+
 
 
 void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type) 
@@ -59,12 +75,48 @@ Fl_Image* load_img(int width, int height, int imgType, int8_t* path) {
         case SVG:
             img = new Fl_SVG_Image(path_txt);
             img->scale(width, height, 0);
-            return img;
         break;
         case ANIM_GIF:
-            img = new Fl_PNG_Image(path_txt);
-            img->scale(width, height, 0);
+            Fl_Anim_GIF_Image* imgr = new Fl_Anim_GIF_Image(path_txt);
+            imgr->scale(width, height, 0);
+            return imgr;
         break;
     }
     return img;
+}
+
+void mjuiTextAlign(MJUILabel *label, int alignment)
+{
+    switch (alignment) {
+        case 0:
+        label->align(FL_ALIGN_CENTER);
+        break;
+        case 1:
+        label->align(FL_ALIGN_TOP);
+        break;
+        case 2:
+        label->align(FL_ALIGN_BOTTOM);
+        break;
+        case 3:
+        label->align(FL_ALIGN_LEFT);
+        break;
+        case 4:
+        label->align(FL_ALIGN_RIGHT);
+        break;
+        case 5:
+        label->align(FL_ALIGN_INSIDE);
+        break;
+        case 6:
+        label->align(FL_ALIGN_CLIP);
+        break;
+        case 7:
+        label->align(FL_ALIGN_WRAP);
+        break;
+        case 8:
+        label->align(FL_ALIGN_TEXT_OVER_IMAGE);
+        break;
+        case 9:
+        label->align(FL_ALIGN_IMAGE_OVER_TEXT);
+        break;
+    }
 }

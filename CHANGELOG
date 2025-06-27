@@ -24,3 +24,6 @@
 - Added placeholders for `mjuiCreateInput`, thereby enhancing UX slightly
 - Bug fix: `readFromStringBytes` returned a concatenated list of ASCII Char codes instead of the actual string value.
 
+- Added Images and GIF Animations
+- Update `mjuiCreateMultiLineInput` to suppot events
+- 

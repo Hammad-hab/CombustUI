@@ -15,5 +15,22 @@ class Input : public Fl_Input, public BaseWidget {
         virtual void draw() override;
 };
 
+class MultiLineInput : public Fl_Multiline_Input, public BaseWidget {
+    public: 
+        long int id;
+        int borderRadius;
+        bool isHovered;
+        Fl_Color placeHolderColor;
+        const char* placeholder;
+        virtual void setId(long int new_id) override;
+        virtual void setBorderRadius(int radius) override;
+        virtual int handle(int event) override;
+        MultiLineInput(int x, int y, int w, int h, long int nid, char* label);
+        virtual void draw() override;
+};
+
 Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r);
+MultiLineInput* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r);
+void mjuiSetInputValue(Fl_Input* input, int8_t* value);
+
 #endif
