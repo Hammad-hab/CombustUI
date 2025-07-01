@@ -69,12 +69,11 @@ struct Application():
             if event != -2:
                 var event_type =  (event & 4294967295)
                 var identifier =  (event >> 32) & 4294967295
-                try:
+                if identifier in self.__event_dict:
                     var handler = self.__event_dict[identifier]
                     if handler.triggerEvent == event_type:
                        handler.trigger()
-                except err:
-                    ...
+
 
             for loop in self.__loop_hooks:
                 loop()

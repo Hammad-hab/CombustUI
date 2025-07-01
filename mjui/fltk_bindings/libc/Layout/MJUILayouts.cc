@@ -1,4 +1,5 @@
 #include "./MJUILayouts.hh"
+#include "./Containers.cc"
 
 
 MJUI_Flex::MJUI_Flex(int X, int Y, int W, int H, int DIR): Fl_Flex(X, Y, W, H, DIR)

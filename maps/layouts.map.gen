@@ -10,7 +10,16 @@
             "dir": "Int"
         }
     },
-
+    "mjuiScrollContainer": {
+        "returns": "FLTK_WIDGET_POINTER",
+        "arguments":
+        {
+            "x": "Int",
+            "y": "Int",
+            "w": "Int",
+            "h": "Int"
+        }
+    },
     "mjuiSetFlexMarginGapSettings": {
         "returns":"c_void", 
         "arguments": {

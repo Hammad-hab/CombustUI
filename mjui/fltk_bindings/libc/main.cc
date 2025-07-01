@@ -35,6 +35,10 @@ extern "C" {
         Fl::run();
     }
 
+    void useScheme(const char* scheme) {
+        Fl::scheme(scheme);
+    }
+
     int fltk_check() {
         return Fl::check();
     }

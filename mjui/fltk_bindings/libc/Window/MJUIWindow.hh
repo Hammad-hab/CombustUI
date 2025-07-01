@@ -5,6 +5,7 @@
 
 #define WINDOW_VISIBLE 0
 #define WINDOW_MINIMIZED 1
+#define WINDOW_ACTIVE 2
 
 Fl_Double_Window *mjuiCreateWindow(int width,
                                    int height,
