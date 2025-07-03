@@ -47,12 +47,12 @@ int mjuiWindowVisibilityStatus(Fl_Double_Window* window, int condition) {
     switch (condition) 
     {
         case WINDOW_VISIBLE:
-            return (window -> shown());
+            return (window->shown());
         break;
 
         case WINDOW_MINIMIZED:
             return (window->shown()&&!window->visible());
-        
+        break;
     }
 
     return -1;

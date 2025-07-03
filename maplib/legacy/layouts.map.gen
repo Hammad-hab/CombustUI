@@ -1,0 +1,65 @@
+{
+    "mjuiCreateLayoutFlex": {
+        "returns": "FLTK_WIDGET_POINTER",
+        "arguments":
+        {
+            "x": "Int",
+            "y": "Int",
+            "w": "Int",
+            "h": "Int",
+            "dir": "Int"
+        }
+    },
+    "mjuiScrollContainer": {
+        "returns": "FLTK_WIDGET_POINTER",
+        "arguments":
+        {
+            "x": "Int",
+            "y": "Int",
+            "w": "Int",
+            "h": "Int"
+        }
+    },
+    "mjuiSetFlexMarginGapSettings": {
+        "returns":"c_void", 
+        "arguments": {
+            "l": "FLTK_WIDGET_POINTER",
+            "margin": "Int",
+            "gap": "Int"
+        }
+    }, 
+    "mjuiSetMarginExplicit": {
+        "returns": "c_void",
+        "arguments": {
+            "l": "FLTK_WIDGET_POINTER",
+            "left": "Int",
+            "top": "Int",
+            "right": "Int",
+            "bottom": "Int"
+        }
+    },
+    "mjuiSetFlex": {
+        "returns": "c_void",
+        "arguments": {
+            "l": "FLTK_WIDGET_POINTER",
+            "w": "FLTK_WIDGET_POINTER",
+            "span": "Int"
+        }
+    },
+    "END_WIDGET_APPEND": {
+        "returns": "c_void",
+        "@cbindto": "end_widget_child_append",
+        "arguments": 
+        {
+            "w": "FLTK_WIDGET_POINTER"
+        }
+    },
+    "BEGIN_WIDGET_APPEND": {
+        "returns": "c_void",
+        "@cbindto": "begin_widget_child_append",
+        "arguments": 
+        {
+            "w": "FLTK_WIDGET_POINTER"
+        }
+    }
+}

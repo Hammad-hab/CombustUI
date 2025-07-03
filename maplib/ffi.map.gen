@@ -1,0 +1,335 @@
+{
+  "mjuiGrabEvent": {
+    "returns": "Int",
+    "arguments": {}
+  },
+  "mjuiShowWidget": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiHideWidget": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiRedraw": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiSetWidgetColor": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "color": "UInt32"
+    }
+  },
+  "mjuiSetWidgetTextColor": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "color": "UInt32"
+    }
+  },
+  "mjuiSetWidgetSelectionColor": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "color": "UInt32"
+    }
+  },
+  "mjuiSetWidgetBox": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "box": "Int"
+    }
+  },
+  "mjuiSetWidgetLabel": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "BEGIN_WIDGET_APPEND": {
+    "returns": "c_void",
+    "arguments": {
+      "group": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "END_WIDGET_APPEND": {
+    "returns": "c_void",
+    "arguments": {
+      "group": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiGetWidgetHeight": {
+    "returns": "Int",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiGetWidgetWidth": {
+    "returns": "Int",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiWindowSetResizable": {
+    "returns": "c_void",
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiApplyImage": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "image": "Int32"
+    }
+  },
+  "mjuiImageScale": {
+    "returns": "c_void",
+    "arguments": {
+      "img": "Int32",
+      "width": "Int",
+      "height": "Int",
+      "proportional": "Int"
+    }
+  },
+  "useScheme": {
+    "returns": "c_void",
+    "arguments": {
+      "scheme": "Int"
+    }
+  },
+  "fl_execute": {
+    "returns": "c_void",
+    "arguments": {}
+  },
+  "fl_check": {
+    "returns": "Int",
+    "arguments": {}
+  },
+  "fl_ready": {
+    "returns": "Int",
+    "arguments": {}
+  },
+  "mjuiEventKey": {
+    "returns": "Int",
+    "arguments": {}
+  },
+  "mjuiCreateButton": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "w": "Int",
+      "h": "Int",
+      "x": "Int",
+      "y": "Int",
+      "id": "Int32",
+      "label_r": "StringBytes"
+    }
+  },
+  "mjuiCreateCheckButton": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "w": "Int",
+      "h": "Int",
+      "x": "Int",
+      "y": "Int",
+      "id": "Int32",
+      "label_r": "StringBytes"
+    }
+  },
+  "mjuiCheckButtonGetState": {
+    "returns": "Int",
+    "arguments": {
+      "checkButton": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiCreateInput": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "w": "Int",
+      "h": "Int",
+      "id": "Int32",
+      "label_r": "StringBytes"
+    }
+  },
+  "mjuiCreateMultilineInput": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "w": "Int",
+      "h": "Int",
+      "id": "Int32",
+      "label_r": "StringBytes"
+    }
+  },
+  "mjuiSetInputValue": {
+    "returns": "c_void",
+    "arguments": {
+      "input": "FLTK_WIDGET_POINTER",
+      "value": "StringBytes"
+    }
+  },
+  "mjuiCreateLabel": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "width": "Int",
+      "height": "Int",
+      "id": "Int",
+      "text": "StringBytes"
+    }
+  },
+  "mjuiSetTextProperties": {
+    "returns": "c_void",
+    "arguments": {
+      "label": "FLTK_WIDGET_POINTER",
+      "size": "Int",
+      "color": "Int",
+      "type": "Int"
+    }
+  },
+  "mjuiTextAlign": {
+    "returns": "c_void",
+    "arguments": {
+      "label": "FLTK_WIDGET_POINTER",
+      "alignment": "Int"
+    }
+  },
+  "mjuiLoadImg": {
+    "returns": "Int32",
+    "arguments": {
+      "width": "Int",
+      "height": "Int",
+      "imgType": "Int",
+      "path": "StringBytes"
+    }
+  },
+  "mjuiScrollContainer": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "w": "Int",
+      "h": "Int"
+    }
+  },
+  "mjuiScrollSetBarBGColor": {
+    "returns": "c_void",
+    "arguments": {
+      "s": "FLTK_WIDGET_POINTER",
+      "c": "UInt32",
+      "sbar": "Int"
+    }
+  },
+  "mjuiScrollSetBarFGColor": {
+    "returns": "c_void",
+    "arguments": {
+      "s": "FLTK_WIDGET_POINTER",
+      "c": "UInt32",
+      "sbar": "Int"
+    }
+  },
+  "mjuiScrollBy": {
+    "returns": "c_void",
+    "arguments": {
+      "s": "FLTK_WIDGET_POINTER",
+      "x": "Int",
+      "y": "Int"
+    }
+  },
+  "mjuiCreateLayoutFlex": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "w": "Int",
+      "h": "Int",
+      "dir": "Int"
+    }
+  },
+  "mjuiSetFlexResize": {
+    "returns": "c_void",
+    "arguments": {
+      "l": "FLTK_WIDGET_POINTER",
+      "r": "Int"
+    }
+  },
+  "mjuiSetFlexMarginGapSettings": {
+    "returns": "c_void",
+    "arguments": {
+      "l": "FLTK_WIDGET_POINTER",
+      "margin": "Int",
+      "gap": "Int"
+    }
+  },
+  "mjuiSetFlex": {
+    "returns": "c_void",
+    "arguments": {
+      "l": "FLTK_WIDGET_POINTER",
+      "w": "FLTK_WIDGET_POINTER",
+      "span": "Int"
+    }
+  },
+  "mjuiSetMarginExplicit": {
+    "returns": "c_void",
+    "arguments": {
+      "l": "FLTK_WIDGET_POINTER",
+      "left": "Int",
+      "top": "Int",
+      "right": "Int",
+      "bottom": "Int"
+    }
+  },
+  "mjuiFlexCalculateLayout": {
+    "returns": "c_void",
+    "arguments": {
+      "l": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiCreateWindow": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "width": "Int",
+      "height": "Int",
+      "resize": "Int",
+      "fullscreen": "Int",
+      "no_border": "Int",
+      "title_r": "StringBytes"
+    }
+  },
+  "mjuiWindowTitleSet": {
+    "returns": "c_void",
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "new_title_r": "StringBytes"
+    }
+  },
+  "mjuiWindowVisibilityStatus": {
+    "returns": "Int",
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "condition": "Int"
+    }
+  },
+  "mjuiWindowPositionSet": {
+    "returns": "c_void",
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "x": "Int",
+      "y": "Int"
+    }
+  }
+}

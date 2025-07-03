@@ -1,0 +1,271 @@
+{
+  "@includes": [
+    "templates.map.gen",
+    "layouts.map.gen"
+  ],
+
+  "@concat_variations": {
+    "target": "mjuiSetWidgetId",
+    "variations": [
+      "_button"
+    ]
+  },
+
+
+  "mjuiSpawnWindow": {
+    "arguments": {
+      "w": "Int32",
+      "h": "Int32",
+      "resize": "Int",
+      "fullscreen": "Int",
+      "no_border": "Int",
+      "label": "StringBytes"
+    },
+    "returns": "FLTK_WIDGET_POINTER",
+    "@cbindto": "mjuiCreateWindow"
+  },
+  "mjuiWindowPositionSet": {
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "x": "Int",
+      "y": "Int"
+    },
+    "returns": "c_void",
+    "@cbindto": "mjuiWindowPositionSet"
+  },
+  "mjuiWindowSetResizable": {
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "widgit": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "c_void"
+  },
+  "mjuiSetWindowTitle": {
+    "@redef": "mjuiSetWidgetLabel"
+  },
+  "mjuiWindowVisibilityStatus": {
+    "arguments": {
+      "window": "FLTK_WIDGET_POINTER",
+      "condition": "Int"
+    },
+    "returns": "Int"
+  },
+
+
+  "mjuiCreateLabel": {
+    "@redef": "@basicIDWidgetPointerFunction",
+    "returns": "FLTK_WIDGET_POINTER"
+  },
+  "mjuiCreateButton": {
+    "@redef": "@basicIDWidgetPointerFunction",
+    "returns": "FLTK_WIDGET_POINTER"
+  },
+  "mjuiCreateCheckButton": {
+    "@redef": "@basicIDWidgetPointerFunction",
+    "returns": "FLTK_WIDGET_POINTER"
+  },
+  "mjuiCreateMultilineInput": {
+    "@redef": "@basicIDWidgetPointerFunction",
+    "returns": "FLTK_WIDGET_POINTER"
+  },
+  "mjuiCreateInput": {
+    "@redef": "@basicIDWidgetPointerFunction",
+    "returns": "FLTK_WIDGET_POINTER"
+  },
+
+
+  "mjuiShowWidget": {
+    "@cbindto": "show_widget",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "c_void"
+  },
+  "mjuiHideWidget": {
+    "@cbindto": "hide_widget",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "c_void"
+  },
+  "mjuiRedraw": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    },
+    "@cbindto": "redraw"
+  },
+
+ 
+  "mjuiSetWidgetLabel": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "title": "StringBytes"
+    },
+    "returns": "c_void"
+  },
+  "mjuiSetWidgetColor": {
+    "@cbindto": "set_widget_color",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "colour": "UInt32"
+    },
+    "returns": "c_void"
+  },
+  "mjuiWidgetTextColor": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "colour": "UInt32"
+    },
+    "returns": "c_void",
+    "@cbindto": "set_text_color"
+  },
+  "mjuiSetSelectionColor": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "colour": "UInt32"
+    },
+    "returns": "c_void",
+    "@cbindto": "set_widget_color2"
+  },
+  "mjuiSetWidgetBox": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "box": "Int"
+    },
+    "returns": "c_void"
+  },
+  "mjuiSetTextProperties": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "size": "Int32",
+      "colour": "UInt32",
+      "type": "Int32"
+    },
+    "returns": "c_void"
+  },
+  "mjuiTextAlign": {
+    "arguments": {
+      "label": "FLTK_WIDGET_POINTER",
+      "alignment": "Int"
+    },
+    "returns": "c_void"
+  },
+
+
+  "mjuiFlexCalculateLayout": {
+    "arguments": {
+      "layout": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "c_void"
+  },
+  "mjuiSetFlexResize": {
+    "arguments": {
+      "layout": "FLTK_WIDGET_POINTER",
+      "direction": "Int"
+    },
+    "returns": "c_void"
+  },
+
+
+  "mjuiLoadImage": {
+    "arguments": {
+      "w": "Int",
+      "h": "Int",
+      "type": "Int",
+      "path": "StringBytes"
+    },
+    "returns": "Int32",
+    "@cbindto": "load_img"
+  },
+  "mjuiApplyImage": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "img": "Int32"
+    }
+  },
+  
+  "useScheme": {
+    "returns": "c_void",
+    "arguments": {
+      "scheme": "StringBytes"
+    }
+  },
+
+  "mjuiScrollSetBarBGColor": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "color": "UInt32",
+      "sbartype": "Int"
+    }
+  },
+
+  "mjuiScrollSetBarFGColor": {
+    "@redef": "mjuiScrollSetBarBGColor"
+  },
+  
+  "mjuiScrollBy": {
+    "returns": "c_void",
+    "arguments": {
+      "s": "FLTK_WIDGET_POINTER",
+      "x": "Int",
+      "y": "Int"
+    }
+  },
+  
+  "mjuiSetWidgetId": {
+    "@cbindto": "set_id",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "id": "Int"
+    },
+    "returns": "c_void"
+  },
+
+
+  "mjuiSetInputValue": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER",
+      "value": "StringBytes"
+    },
+    "returns": "c_void"
+  },
+  
+  "mjuiGrabInput": {
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "StringBytes"
+  },
+
+ 
+  "mjuiCheckButtonGetState": {
+    "arguments": {
+      "checkButton": "FLTK_WIDGET_POINTER"
+    },
+    "returns": "Int"
+  },
+
+
+  "fl_ready": {
+    "arguments": {},
+    "returns": "Int32",
+    "@cbindto": "fltk_ready"
+  },
+  "fl_check": {
+    "arguments": {},
+    "returns": "Int32",
+    "@cbindto": "fltk_check"
+  },
+  "grab_fltk_event": {
+    "arguments": {},
+    "returns": "Int",
+    "@cbindto": "listEvents"
+  },
+  "mjuiEventKey": {
+    "arguments": {},
+    "returns": "Int"
+  }
+}

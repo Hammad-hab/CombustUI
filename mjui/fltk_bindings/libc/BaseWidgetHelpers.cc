@@ -1,59 +1,225 @@
-#include<stdio.h>
-#include<FL/Fl_Widget.H>
-#include<FL/Fl_Group.H>
-#include<FL/Fl_Window.H>
+#ifndef BASEWIDGET_HELPERS
+#define BASEWIDGET_HELPERS
 
-#ifndef UTILS
+#include <stdio.h>
+#include <FL/Fl_Widget.H>
+#include <FL/Fl_Group.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl.H>
 
-#define UTILS
+#include "BaseWidgetHelpers.hh"
 
-void enqueueEvent(int id, int event) { Events[id] = event; }
+/** Example Events store (adjust to your actual global) */
 
-void unqueueEvent(int id) { Events[id] = 0; }
+/** Event Handling */
+void enqueueEvent(int id, int event)
+{
+    Events[id] = event;
+}
 
-int widgetHandle(int id, int event) { enqueueEvent(id, event); return event; }
+void unqueueEvent(int id)
+{
+    Events[id] = 0;
+}
 
-int64_t listEvents() {
-    for (auto x : Events) {
-        if (x.second == 0) continue;
-        Events[x.first] = 0;
-        uint64_t combined = ((uint64_t)x.first << 32) | x.second;
-        return (combined);
+int widgetHandle(int id, int event)
+{
+    enqueueEvent(id, event);
+    return event;
+}
+
+int64_t mjuiGrabEvent()
+{
+    for (auto &x : Events)
+    {
+        if (x.second == -2)
+            continue;
+        int id = x.first;
+        int event = x.second;
+        Events[id] = -2;
+        uint64_t combined = ((uint64_t)id << 32) | (uint32_t)event;
+        return combined;
     }
-    return 2;
-};
+    return -2;
+}
 
-// uncomment later
-// void load_img(Fl_Widget *widget, const char* file)
-// {
-//     Fl_JPEG_Image *img = new Fl_JPEG_Image(file);
-//     img->scale(widget->w(), widget->h());
-//     widget->image(img);
-// }
+/** Widget Show/Hide/Redraw */
+void mjuiShowWidget(Fl_Widget *widget)
+{
+    widget->show();
+}
 
+void mjuiHideWidget(Fl_Widget *widget)
+{
+    widget->hide();
+}
 
-void show_widget(Fl_Widget *widget) { widget->show(); }
+void mjuiRedraw(Fl_Widget *widget)
+{
+    widget->redraw();
+    Fl::flush();
+    Fl::check();
+}
 
+/** Widget Properties */
+void mjuiSetWidgetColor(Fl_Widget *widget, Fl_Color color)
+{
+    widget->color(color);
+}
 
+void mjuiSetWidgetTextColor(Fl_Widget *widget, Fl_Color color)
+{
+    widget->labelcolor(color);
+}
 
-void hide_widget(Fl_Widget *widget) { widget->hide(); }
+void mjuiSetWidgetSelectionColor(Fl_Widget *widget, Fl_Color color)
+{
+    widget->color2(color);
+}
 
-void end_widget_child_append(Fl_Group *widget) { widget->end(); }
+void mjuiSetWidgetBox(Fl_Widget *widget, Fl_Boxtype box)
+{
+    widget->box(box);
+}
 
-void begin_widget_child_append(Fl_Group *widget) { widget->begin(); }
+void mjuiSetWidgetLabel(Fl_Widget *widget, const char *label)
+{
+    widget->label(label);
+}
+
+/** Widget Child Management */
+void BEGIN_WIDGET_APPEND(Fl_Group *group)
+{
+    group->begin();
+}
+
+void END_WIDGET_APPEND(Fl_Group *group)
+{
+    group->end();
+}
 
 /** Dimensions */
-int get_height(Fl_Widget *widget) { return widget->h(); }
+int mjuiGetWidgetHeight(Fl_Widget *widget)
+{
+    return widget->h();
+}
 
-int get_width(Fl_Widget *widget) { return widget->w(); }
+int mjuiGetWidgetWidth(Fl_Widget *widget)
+{
+    return widget->w();
+}
 
-void set_widget_color(Fl_Widget *window, Fl_Color c) { window->color(c); }
+/** Window Specific */
+void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget *widget)
+{
+    window->resizable(widget);
+}
 
-void set_text_color(Fl_Widget *widget, Fl_Color c) { widget->labelcolor(c); }
+/** Image Handling */
+void mjuiApplyImage(Fl_Widget *widget, Fl_Image *image)
+{
+    widget->image(image);
+}
 
-void set_widget_color2(Fl_Widget *window, Fl_Color c) { window->color2(c); }
-void mjuiSetWidgetBox(Fl_Widget *widget, Fl_Boxtype x) { widget->box(x); }
-void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label) { widget->label(label); }
-void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget* w) { window->resizable(w); }
+void mjuiImageScale(Fl_Image *img, int width, int height, int proportional)
+{
+    img->scale(width, height, proportional);
+}
+
+void useScheme(int scheme)
+{
+    switch (scheme)
+    {
+    case 0:
+        Fl::scheme("gtk+");
+        break;
+    case 1:
+        Fl::scheme("gleam");
+        break;
+    case 2:
+        Fl::scheme("plastic");
+        break;
+    }
+}
+
+void fl_execute()
+{
+    Fl::run();
+}
+
+int fl_check()
+{
+    return Fl::check();
+}
+
+int fl_ready()
+{
+    return Fl::ready();
+}
+
+int mjuiEventKey()
+{
+    return Fl::event_key();
+}
 
 #endif
+
+// #include<stdio.h>
+// #include<FL/Fl_Widget.H>
+// #include<FL/Fl_Group.H>
+// #include<FL/Fl_Window.H>
+
+// #ifndef UTILS
+
+// #define UTILS
+
+// void enqueueEvent(int id, int event) { Events[id] = event; }
+
+// void unqueueEvent(int id) { Events[id] = 0; }
+
+// int widgetHandle(int id, int event) { enqueueEvent(id, event); return event; }
+
+// int64_t listEvents() {
+//     for (auto x : Events) {
+//         if (x.second == -2) continue;
+//         Events[x.first] = -2;
+//         uint64_t combined = ((uint64_t)x.first << 32) | x.second;
+//         return (combined);
+//     }
+//     return -2;
+// };
+
+// void show_widget(Fl_Widget *widget) { widget->show(); }
+
+// void mjuiApplyImage(Fl_Widget *w, Fl_Image* img) { w->image(img); }
+// void mjuiImageScale(Fl_Image* img, int w, int h, int propotional) {
+//     img->scale(w, h, propotional);
+// }
+
+// void hide_widget(Fl_Widget *widget) { widget->hide(); }
+
+// void end_widget_child_append(Fl_Group *widget) { widget->end(); }
+
+// void begin_widget_child_append(Fl_Group *widget) { widget->begin(); }
+
+// /** Dimensions */
+// int get_height(Fl_Widget *widget) { return widget->h(); }
+
+// int get_width(Fl_Widget *widget) { return widget->w(); }
+
+// void set_widget_color(Fl_Widget *window, Fl_Color c) { window->color(c); }
+
+// void set_text_color(Fl_Widget *widget, Fl_Color c) { widget->labelcolor(c); }
+
+// void set_widget_color2(Fl_Widget *window, Fl_Color c) { window->color2(c); }
+// void mjuiSetWidgetBox(Fl_Widget *widget, Fl_Boxtype x) { widget->box(x); }
+// void mjuiSetWidgetLabel(Fl_Widget *widget, const char* label) { widget->label(label); }
+// void mjuiWindowSetResizable(Fl_Window *window, Fl_Widget* w) { window->resizable(w); }
+
+// void redraw(Fl_Widget* w) {
+//     w->redraw();
+//     Fl::flush();
+//     Fl::check();
+// }
+
+// #endif

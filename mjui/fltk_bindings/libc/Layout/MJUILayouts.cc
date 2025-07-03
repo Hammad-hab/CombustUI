@@ -1,4 +1,5 @@
 #include "./MJUILayouts.hh"
+#include "./Containers.cc"
 
 
 MJUI_Flex::MJUI_Flex(int X, int Y, int W, int H, int DIR): Fl_Flex(X, Y, W, H, DIR)
@@ -61,4 +62,24 @@ void mjuiFlexCalculateLayout(MJUI_Flex* l) {
     l->redraw();
 }
 
+void mjuiSetFlexMarginGapSettings(MJUI_Flex* l, int margin, int gap)
+{
+    if (gap != -1) 
+    {
+        l->gap(gap);
+    }
+    if (margin != -1)
+    {
+        l->margin(margin);
+    }
+} 
+
+void mjuiSetMarginExplicit(MJUI_Flex* l, int left, int top, int right, int bottom)
+{
+    l->margin(left, top, right, left);
+}
+
+void mjuiSetFlex(MJUI_Flex* l, Fl_Widget*w,  int span) {
+    l->fixed(w, span);
+}
 
