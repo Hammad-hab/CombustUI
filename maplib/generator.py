@@ -57,4 +57,4 @@ if File:
             definations.append(defination_alias)
             
         with open(OutputDir + 'bindings.mojo', 'w') as f:
-            f.write(f'"""Auto generated using generator.py"""\n\n\nfrom .dll import __dll\nfrom ..types import *\n\n{"\n".join(definations)}\n\n{"\n".join(bindings)}')
+            f.write(f'"""Auto generated using maplib"""\n\n\nfrom .dll import __dll\nfrom ..types import *\n\n{"\n".join(definations)}\n\n{"\n".join(bindings)}')

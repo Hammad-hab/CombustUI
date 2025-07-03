@@ -6,11 +6,11 @@ echo "Successfully compiled"
 echo "Generating Bindings..."
 
 rm ./ffi.map.gen
-rm ./maps/ffi.map.gen
-python3 ./maps/experimental/header.py
-mv ./ffi.map.gen ./maps/ffi.map.gen
+rm ./maplib/ffi.map.gen
+python3 ./maplib/experimental/header.py
+mv ./ffi.map.gen ./maplib/ffi.map.gen
 
-cd ./maps
+cd ./maplib
 python3 generator.py ./ffi.map.gen ../mjui/fltk_bindings/
 cmd=`which realpath`
 fnd=`which find`

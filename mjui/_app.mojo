@@ -50,7 +50,7 @@ struct Application():
 
     fn execute(mut self) raises:
         if not self.disableLogging:
-            print('Welcome to CombustUI')
+            print('🔥 Welcome to CombustUI')
             print('Starting Application...')
         while True:
             

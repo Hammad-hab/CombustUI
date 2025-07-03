@@ -1,4 +1,4 @@
-# Version 0.01
+# Version 0.01 Beta
 
 - Added Two Buttons
     - `mjuiCreateButton` (supports border radius)
@@ -24,6 +24,22 @@
 - Added placeholders for `mjuiCreateInput`, thereby enhancing UX slightly
 - Bug fix: `readFromStringBytes` returned a concatenated list of ASCII Char codes instead of the actual string value.
 
+- Update for 25.4
 - Added Images and GIF Animations
 - Update `mjuiCreateMultiLineInput` to suppot events
-- 
+- Add new function `mjuiSetInputValue`
+- Add new functionality for switching fltk schemes using `useScheme`
+- Rename `mjuiSpawnWindow` -> `mjuiCreateWindow`
+- Rename `mjuiSetSelectionColor` -> `mjuiSetWidgetSelectionColor`
+- Rename `grab_fltk_event` -> `mjuiGrabEvent`
+- Implement a new system which auto creates map files (`.map.gen`) based on the header files in  `libc`
+- `convertStringToBytes` is now `@always_inline`
+- Remove create app script
+- Update `README.md`'s example
+- Move all old handwritten `.map.gen` files to `maplib/legacy/`
+- Add new widget `mjuiScrollContainer` which creates a scrollable container
+  - added new functions for the scroll container:
+    - `mjuiScrollSetBarBGColor`
+    - `mjuiScrollSetBarFGColor`
+    - `mjuiScrollScrollBy`
+
