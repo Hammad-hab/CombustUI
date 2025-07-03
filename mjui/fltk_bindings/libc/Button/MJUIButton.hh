@@ -14,8 +14,6 @@ class Button : public Fl_Button, public BaseWidget {
         virtual void draw() override;
 };
 
-Button* mjuiCreateButton(int w, int h, int x, int y, long int id, int8_t* label_r);
-
 
 class MJUI_CheckButton : public Fl_Check_Button, public BaseWidget {
     public: 
@@ -29,8 +27,10 @@ class MJUI_CheckButton : public Fl_Check_Button, public BaseWidget {
         virtual void draw() override;
 };
 
-MJUI_CheckButton* mjuiCreateCheckButton(int w, int h, int x, int y, long int id, int8_t* label_r);
+#define FFI
 
+Button* mjuiCreateButton(int w, int h, int x, int y, long int id, int8_t* label_r);
+MJUI_CheckButton* mjuiCreateCheckButton(int w, int h, int x, int y, long int id, int8_t* label_r);
 int mjuiCheckButtonGetState(MJUI_CheckButton* checkButton);
 
 #endif

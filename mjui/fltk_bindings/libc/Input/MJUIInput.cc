@@ -43,7 +43,7 @@ int Input::handle(int event)
         }
     }
 
-    enqueueEvent(id, event);
+   enqueueEvent(id, event);
     Fl_Input::handle(event);
     return 1;
 }
@@ -93,7 +93,7 @@ int MultiLineInput::handle(int event)
             textcolor(placeHolderColor);
         }
     }
-    enqueueEvent(id, event);
+   enqueueEvent(id, event);
     Fl_Multiline_Input::handle(event);
     return 1;
 }

@@ -1,4 +1,5 @@
 #include<FL/Fl_Scroll.H>
+#include "./Containers.hh"
 
 Fl_Scroll* mjuiScrollContainer(int x, int y, int w, int h) {
     Fl_Scroll* container = new Fl_Scroll(x, y, w, h);
@@ -22,4 +23,11 @@ void mjuiScrollSetBarFGColor(Fl_Scroll* s, Fl_Color c, int sbar) {
         s->scrollbar.color2(c);
         s->hscrollbar.color2(c);
     }
+}
+
+void mjuiScrollBy(Fl_Scroll* s, int x, int y) {
+    int current_x = s->hscrollbar.value();
+    int current_y = s->scrollbar.value();
+
+    s->scroll_to(current_x + x, current_y+y);
 }

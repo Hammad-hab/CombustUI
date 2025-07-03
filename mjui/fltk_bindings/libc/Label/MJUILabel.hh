@@ -20,6 +20,8 @@ class MJUILabel: public Fl_Box, public BaseWidget
         virtual void draw() override;
 };
 
+#define FFI
+
 MJUILabel* mjuiCreateLabel(int x, int y, int width, int height, int id, int8_t* text);
 void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type);
 void mjuiTextAlign(MJUILabel *label, int alignment);

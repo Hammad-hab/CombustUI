@@ -29,6 +29,8 @@ class MultiLineInput : public Fl_Multiline_Input, public BaseWidget {
         virtual void draw() override;
 };
 
+#define FFI
+
 Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t* label_r);
 MultiLineInput* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r);
 void mjuiSetInputValue(Fl_Input* input, int8_t* value);

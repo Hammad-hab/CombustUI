@@ -33,7 +33,7 @@ void MJUILabel::setLabelType(int a) {
 
 
 int MJUILabel::handle(int event) {
-        enqueueEvent(id, event);
+       enqueueEvent(id, event);
 
         return 1; // Pass all other events to base class
 }

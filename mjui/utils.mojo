@@ -37,37 +37,7 @@ fn createIdFrom(id: String) raises -> Int:
     
     return strn
 
-
-fn filter[listType: CollectionElement](list:List[listType], modifier: fn(element:listType)->Bool) -> List[listType]:
-    var new_list = List[listType]()
-    for element in list:
-        var shouldIncludeValue = modifier(element[])
-        if shouldIncludeValue:
-            new_list.append(element[])
-
-    return new_list
-
-@value
-struct DataStore[dtype: CollectionElement]:
-    var _store: List[dtype]
-    var name: Optional[String]
-    fn __init__(mut self):
-        self._store = List[dtype]()
-        self.name = Optional[String]()
-        
-    fn store(mut self, data: dtype) -> Int:
-        self._store.append(data)
-        var index = len(self._store) - 1
-        return index
-
-    fn getAt(mut self, index: Int) -> dtype:
-        return self._store[index]
-
-    fn storeAt(mut self, index:Int, data: dtype) -> Int:
-        self._store[index] = data
-        return index
-
-    
+@always_inline 
 fn convertStringToBytes(owned strn: String) -> StringBytes:
     var ptr = strn.unsafe_cstr_ptr()
     var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=strn.__len__())
@@ -75,3 +45,8 @@ fn convertStringToBytes(owned strn: String) -> StringBytes:
 
 
 alias EMPTY = convertStringToBytes("")
+
+# Visual Schemes
+alias GTK = convertStringToBytes("gtk+")
+alias PLASTIC = convertStringToBytes("plastic")
+alias GLEAM = convertStringToBytes("gleam")

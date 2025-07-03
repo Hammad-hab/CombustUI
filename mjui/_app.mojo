@@ -33,7 +33,6 @@ struct Application():
 
     fn addEventListener(mut self, id: Int, handler: EventHandler):
         self.__event_dict[id] = handler
-        print(id)
 
     fn setElementById(mut self, id: Int, element: FLTK_WIDGET_POINTER):
         self.__elements[id] = element
@@ -50,9 +49,9 @@ struct Application():
         self.__loop_hooks.append(hook)
 
     fn execute(mut self) raises:
-
-        print('Welcome to CombustUI')
-        print('Starting Application...')
+        if not self.disableLogging:
+            print('Welcome to CombustUI')
+            print('Starting Application...')
         while True:
             
 
@@ -73,7 +72,6 @@ struct Application():
                     var handler = self.__event_dict[identifier]
                     if handler.triggerEvent == event_type:
                        handler.trigger()
-
 
             for loop in self.__loop_hooks:
                 loop()

@@ -19,18 +19,18 @@ void Button::setId(long int new_id) {
 int Button::handle(int event) {
         if (event == FL_ENTER) {
             isHovered = true;
-            enqueueEvent(id, event);
+           enqueueEvent(id, event);
             redraw();
             return 1;
         }
 
         if (event == FL_LEAVE) {
             isHovered = false;
-            enqueueEvent(id, event);
+           enqueueEvent(id, event);
             redraw();
             return 1;
         }
-        enqueueEvent(id, event);
+       enqueueEvent(id, event);
 
         return 1; // Pass all other events to base class
 }
@@ -80,18 +80,18 @@ void MJUI_CheckButton::setBorderRadius(int radius) {
 int MJUI_CheckButton::handle(int event) {
     if (event == FL_ENTER) {
         isHovered = true;
-        enqueueEvent(id, event);
+       enqueueEvent(id, event);
         redraw();
         return 1;
     }
 
     if (event == FL_LEAVE) {
         isHovered = false;
-        enqueueEvent(id, event);
+       enqueueEvent(id, event);
         redraw();
         return 1;
     }
-    enqueueEvent(id, event);
+   enqueueEvent(id, event);
 
     return Fl_Check_Button::handle(event); // Pass all other events to base class
 }

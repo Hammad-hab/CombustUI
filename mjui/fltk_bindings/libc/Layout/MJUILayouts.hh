@@ -19,12 +19,12 @@ class MJUI_Flex: public Fl_Flex {
         void setResizeDirection(RESIZE direction);
 };  
 
-
+#define FFI
 
 MJUI_Flex* mjuiCreateLayoutFlex(int x, int y, int w, int h, int dir);
 void mjuiSetFlexResize(MJUI_Flex* l, RESIZE r);
 void mjuiSetFlexMarginGapSettings(MJUI_Flex* l, int margin, int gap);
 void mjuiSetFlex(MJUI_Flex* l, Fl_Widget* w, int span);
 void mjuiSetMarginExplicit(MJUI_Flex* l, int left, int top, int right, int bottom);
-
+void mjuiFlexCalculateLayout(MJUI_Flex* l);
 #endif

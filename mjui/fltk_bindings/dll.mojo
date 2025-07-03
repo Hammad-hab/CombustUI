@@ -12,6 +12,7 @@ fn init() -> DLHandle:
         print('Successfully loaded DLL')
         return DLHandle(path)
     except:
+        print('Failed to load DLL')
         return _uninit[DLHandle]()
 
 @always_inline
