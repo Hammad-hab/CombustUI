@@ -9,7 +9,6 @@ rm ./ffi.map.gen
 rm ./maps/ffi.map.gen
 python3 ./maps/experimental/header.py
 mv ./ffi.map.gen ./maps/ffi.map.gen
-rm ./ffi.map.gen
 
 cd ./maps
 python3 generator.py ./ffi.map.gen ../mjui/fltk_bindings/
