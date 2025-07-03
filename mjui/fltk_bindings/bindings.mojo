@@ -1,4 +1,4 @@
-"""Auto generated using generator.py"""
+"""Auto generated using maplib"""
 
 
 from .dll import __dll

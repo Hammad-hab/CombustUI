@@ -5,7 +5,6 @@ cd ../../../
 echo "Successfully compiled"
 echo "Generating Bindings..."
 
-rm ./ffi.map.gen
 rm ./maplib/ffi.map.gen
 python3 ./maplib/experimental/header.py
 mv ./ffi.map.gen ./maplib/ffi.map.gen

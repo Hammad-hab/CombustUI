@@ -1,17 +1,25 @@
 """
 A tiny script that takes a .map.gen and converts it to ffi bindings
 """
-import json as j
+
+import json as j  # Import JSON module with alias `j`
 import copy
 import sys
 
+# === READ COMMAND LINE ARGUMENTS ===
+# Get input map file (.map.gen) from first argument if exists
 File = sys.argv[1] if sys.argv.__len__() > 0 else None
+# Get output directory from second argument if exists
 OutputDir = sys.argv[2] if sys.argv.__len__() > 0 else None
+
+# === PROCESS THE MAP FILE ===
 if File:
+    # Ensure the provided file ends with `.map.gen` to validate format
     if not File.endswith('map.gen'):
         print('Error: Given file isn\'t an FFI map')
         sys.exit(1)
     
+    # === PARSE THE JSON MAP FILE ===
     with open(File, 'r') as f:
         raw_contents = f.read()
         try:
@@ -20,41 +28,39 @@ if File:
             print('Error: Given file isn\'t a proper FFI map')
             sys.exit(1)
         
-        definations = []
-        bindings = []
-        new_parsed_contents = copy.deepcopy(parsed_contents)
-        for key, value in parsed_contents.items():
-            
-            if key.startswith("@"):
-                if key == '@includes': 
-                    for file in value:
-                        with open(file) as f:
-                            parsed_import = j.loads(f.read())
-                            new_parsed_contents.update(parsed_import)
-                            
-                if key == '@concat_variations': 
-                    kvpair = value
-                    target = kvpair['target']
-                    target_def = parsed_contents[target]
-                    for varation in kvpair['variations']:
-                        if '@cbindto' in target_def.keys():
-                            target_def['@cbindto'] = target_def['@cbindto']+varation
-                        new_parsed_contents[target+varation] = target_def
-                    new_parsed_contents[target] = None
+        # === PREPARE OUTPUT ===
+        definations = []  # to hold alias definitions (function signatures)
+        bindings = []     # to hold actual ffi function binding lines
                     
-        for key, value in new_parsed_contents.items():
-            if key.startswith("@") or not value:
-                continue
-            if '@redef' in value.keys():
-                value = new_parsed_contents[value['@redef']]
-                
+        # === LOOP OVER EACH FUNCTION IN THE MAP ===
+        for key, value in parsed_contents.items():
+
+            # Build the argument list as `name: Type`
             args = [f"{arg_name}: {dtype}" for arg_name, dtype in value['arguments'].items()]
             args_str = ', '.join(args)
+
+            # Generate the function type alias
             defination = f'{key.upper()}_DEFINATION'
-            defination_alias = (f'alias {defination}= fn({args_str}) -> {value['returns']}')
-            function_binding = (f'var {key} = __dll.get_function[{defination}]("{key if '@cbindto' not in value.keys() else value['@cbindto']}")')
+            defination_alias = (
+                f'alias {defination}= fn({args_str}) -> {value["returns"]}'
+            )
+
+            # Generate the binding line, using @cbindto override if present
+            function_binding = (
+                f'var {key} = __dll.get_function[{defination}]('
+                f'"{key if "@cbindto" not in value.keys() else value["@cbindto"]}")'
+            )
+
+            # Append to lists
             bindings.append(function_binding)
             definations.append(defination_alias)
             
+        # === WRITE THE GENERATED BINDINGS TO OUTPUT FILE ===
         with open(OutputDir + 'bindings.mojo', 'w') as f:
-            f.write(f'"""Auto generated using maplib"""\n\n\nfrom .dll import __dll\nfrom ..types import *\n\n{"\n".join(definations)}\n\n{"\n".join(bindings)}')
+            f.write(
+                f'"""Auto generated using maplib"""\n\n\n'
+                f'from .dll import __dll\n'
+                f'from ..types import *\n\n'
+                f'{"\n".join(definations)}\n\n'
+                f'{"\n".join(bindings)}'
+            )
