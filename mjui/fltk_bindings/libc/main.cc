@@ -31,26 +31,6 @@ extern "C" {
     #include "Layout/MJUILayouts.cc"
     #include "BaseWidgetHelpers.cc"
 
-    void fltk_execute() {
-        Fl::run();
-    }
-
-    void useScheme(const char* scheme) {
-        Fl::scheme(scheme);
-    }
-
-    int fltk_check() {
-        return Fl::check();
-    }
-
-    int fltk_ready() {
-        return Fl::ready();
-    }
-
-    int mjuiEventKey() {
-        return Fl::event_key();
-    }
-
     void set_id_button(Button *btn, long int id) {btn->setId(id);}
 
 #ifdef __cplusplus

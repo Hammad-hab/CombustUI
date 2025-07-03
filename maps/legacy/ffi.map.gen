@@ -206,6 +206,15 @@
     "@redef": "mjuiScrollSetBarBGColor"
   },
   
+  "mjuiScrollBy": {
+    "returns": "c_void",
+    "arguments": {
+      "s": "FLTK_WIDGET_POINTER",
+      "x": "Int",
+      "y": "Int"
+    }
+  },
+  
   "mjuiSetWidgetId": {
     "@cbindto": "set_id",
     "arguments": {

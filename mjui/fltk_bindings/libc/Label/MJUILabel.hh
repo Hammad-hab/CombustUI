@@ -25,6 +25,6 @@ class MJUILabel: public Fl_Box, public BaseWidget
 MJUILabel* mjuiCreateLabel(int x, int y, int width, int height, int id, int8_t* text);
 void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type);
 void mjuiTextAlign(MJUILabel *label, int alignment);
-Fl_Image* load_img(int width, int height, int imgType, int8_t* path);
+Fl_Image* mjuiLoadImg(int width, int height, int imgType, int8_t* path);
 
 #endif

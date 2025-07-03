@@ -13,7 +13,7 @@ def get_name_ret_type(function: str):
     
     if ret == 'void':
         ret = 'c_void'
-    elif ret == 'int':
+    elif 'int' in ret:
         ret = 'Int'
     elif "*" in ret:
         if "Fl_Image" in ret:
@@ -31,28 +31,41 @@ def get_args(function: str):
     args = [arg.strip().split(' ') for arg in args]
     mojo_args = {}
     for arg in args:
-        if len(arg) == 3 and arg[0] == 'long' and arg[1] == 'int':
-            mojo_args[arg[-1]] = 'Int32'
-
-        if len(arg) == 2:
-            if arg[0] == 'int':
-                mojo_args[arg[-1]] = 'Int'
+        if len(arg) == 3:
+            if arg[0] == 'long' and arg[1] == 'int':
+                mojo_args[arg[-1]] = 'Int32'
                 continue
-            
-            if arg[0] == 'int8_t*':
+            if arg[0] == 'const' and arg[1] == 'char*':
                 mojo_args[arg[-1]] = 'StringBytes'
                 continue
             
-            if 'int' not in arg[0] and 'Fl_Image' not in arg[0] and '*' in arg[0]: # we have a pointer, and the only pointer in combustui, is FLTK_WIDGET_POINTER
-                mojo_args[arg[-1]] = 'FLTK_WIDGET_POINTER'
+        if len(arg) == 2:
+            if arg[0] == 'Fl_Color':
+                mojo_args[arg[-1].replace("*", '')] = 'UInt32'
                 continue
-            elif 'Fl_Image' in arg:
-                mojo_args[arg[-1]] = 'Int32'
+            
+            if arg[0] == 'RESIZE' or arg[0] == 'Fl_Boxtype':
+                mojo_args[arg[-1].replace("*", '')] = 'Int'
+                continue
+            
+            if arg[0] == 'int':
+                mojo_args[arg[-1].replace("*", '')] = 'Int'
+                continue
+            
+            if 'int8_t' in arg[0]: 
+                mojo_args[arg[-1].replace("*", '')] = 'StringBytes'
+                continue
+            
+            if 'Fl_Image' not in arg[0] and "Fl" in arg[0] or "MJUI" in arg[0]: # we have a pointer, and the only pointer in combustui, is FLTK_WIDGET_POINTER
+                mojo_args[arg[-1].replace("*", '')] = 'FLTK_WIDGET_POINTER'
+                continue
+            elif 'Fl_Image' in arg[0]:
+                mojo_args[arg[-1].replace("*", '')] = 'Int32'
                 continue
     return mojo_args
 
 def generate_function_map(function: str) -> dict:
-    print(function)
+    print('\033[104;97mDECL\033[0m', function)
     name, rettype = get_name_ret_type(function)
     args = get_args(function)
     map = {

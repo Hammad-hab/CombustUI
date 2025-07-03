@@ -1,4 +1,4 @@
-from .fltk_bindings.bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, grab_fltk_event, mjuiWindowVisibilityStatus
+from .fltk_bindings.bindings import FLTK_WIDGET_POINTER, fl_ready, fl_check, mjuiGrabEvent, mjuiWindowVisibilityStatus
 from .EventHandler import EventHandler
 from .fltk_bindings.dll import __dll
 from collections import Dict
@@ -64,7 +64,7 @@ struct Application():
                 _ = fl_check()
 
 
-            var event = grab_fltk_event()
+            var event = mjuiGrabEvent()
             if event != -2:
                 var event_type =  (event & 4294967295)
                 var identifier =  (event >> 32) & 4294967295

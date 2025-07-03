@@ -37,16 +37,15 @@ fn createIdFrom(id: String) raises -> Int:
     
     return strn
 
-@always_inline 
+@always_inline
 fn convertStringToBytes(owned strn: String) -> StringBytes:
     var ptr = strn.unsafe_cstr_ptr()
     var span = Span[Int8, StaticConstantOrigin](ptr=ptr, length=strn.__len__())
     return span
 
-
 alias EMPTY = convertStringToBytes("")
 
 # Visual Schemes
-alias GTK = convertStringToBytes("gtk+")
-alias PLASTIC = convertStringToBytes("plastic")
-alias GLEAM = convertStringToBytes("gleam")
+alias GTK = 0
+alias GLEAM = 1
+alias PLASTIC = 2

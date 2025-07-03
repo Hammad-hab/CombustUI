@@ -57,7 +57,7 @@ void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type)
     if (type != -1) label->setLabelType(type);
 }
 
-Fl_Image* load_img(int width, int height, int imgType, int8_t* path) {
+Fl_Image* mjuiLoadImg(int width, int height, int imgType, int8_t* path) {
     const char* path_txt = int8ToChar(path);
     Fl_Image* img;
     switch (imgType) {
