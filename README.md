@@ -1,7 +1,7 @@
 # CombustUI – Lightweight GUI Bindings for Mojo
 
 <p align="center">
-    <img src="mjui/examples/logo.jpeg" alt="drawing" width="200" style="border-radius: 10px"/>
+    <img src="./logo.jpeg" alt="drawing" width="200" style="border-radius: 10px"/>
 </p>
 
 <br/>
@@ -12,7 +12,7 @@ CombustUI is a GUI library for Mojo, built on top of FLTK (Fast Light Toolkit) f
 To use CombustUI, you first need to have mojo installed on your machine. Once you have mojo set up, run the following commmand to download the app initalization script:
 
 ```sh
-curl https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/create_new_app.sh -o ignite_app.sh && chmod +x ignite_app.sh && sudo mv ./ignite_app.sh /usr/local/bin/ignite_app
+curl https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/dev/create_new_app.sh -o ignite_app.sh && chmod +x ignite_app.sh && sudo mv ./ignite_app.sh /usr/local/bin/ignite_app
 ```
 
 Basically this command downloads the installation script from this github repository, makes it executable and moves it to the `/usr/local/bin` directory to make it accessable directly via cli.
