@@ -6,13 +6,14 @@
 
 #include <cstring>
 #include "string.h"
-
-Input::Input(int x, int y, int w, int h, long int nid, char *label) : Fl_Input(x, y, w, h, "")
+#define NUM_ONLY true
+Input::Input(int x, int y, int w, int h, long int nid, int numericInput, char *label) : Fl_Input(x, y, w, h, "")
 {
     id = nid;
     isHovered = false;
     borderRadius = 2;
     placeholder = label;
+    numOnly = numericInput;
     placeHolderColor = FL_DARK2;
     textcolor(placeHolderColor);
     cursor_color(FL_BLACK);
@@ -43,8 +44,18 @@ int Input::handle(int event)
         }
     }
 
-   enqueueEvent(id, event);
-    Fl_Input::handle(event);
+    
+    enqueueEvent(id, event);
+    if (event == FL_KEYBOARD && numOnly) {
+        int key = Fl::event_key();
+
+        // TODO Add support for numpad numbers
+        if (key >= 48 && key <= 57 || key == FL_BackSpace) {
+            Fl_Input::handle(event);
+        }
+    } else {
+        Fl_Input::handle(event);
+    }
     return 1;
 }
 
@@ -113,12 +124,13 @@ const char *mjuiGrabInput(Input *ptr)
     return ptr->value();
 }
 
-Input *mjuiCreateInput(int x, int y, int w, int h, long int id, int8_t *label_r)
+Input *mjuiCreateInput(int x, int y, int w, int h, long int id, int numOnly, int8_t *label_r)
 {
     char *label = int8ToChar(label_r);
-    Input *in = new Input(x, y, w, h, id, label);
+    Input *in = new Input(x, y, w, h, id, numOnly, label);
     return in;
 }
+
 
 MultiLineInput *mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t *label_r)
 {
