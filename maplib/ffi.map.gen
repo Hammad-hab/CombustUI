@@ -160,6 +160,7 @@
       "w": "Int",
       "h": "Int",
       "id": "Int32",
+      "numOnly": "Int",
       "label_r": "StringBytes"
     }
   },
