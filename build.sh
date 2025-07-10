@@ -22,4 +22,3 @@ if [ -z "$COMBUSTUI_DLL_PATH" ]; then
 fi
 
 echo "Successfully generating bindings..."
-mojo run --disable-warnings app.mojo 
