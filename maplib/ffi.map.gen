@@ -198,7 +198,7 @@
     "arguments": {
       "label": "FLTK_WIDGET_POINTER",
       "size": "Int",
-      "color": "Int",
+      "color": "UInt32",
       "type": "Int"
     }
   },

@@ -50,7 +50,7 @@ MJUILabel* mjuiCreateLabel(int x, int y, int w, int h, int id, int8_t* text)
 
 
 
-void mjuiSetTextProperties(MJUILabel *label, int size, int color, int type) 
+void mjuiSetTextProperties(MJUILabel *label, int size, Fl_Color color, int type) 
 {
     if (size != -1) label->labelsize(size);
     if (color != -1) label->labelcolor(color);
