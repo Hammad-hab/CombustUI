@@ -13,8 +13,12 @@ cd ./maplib
 python3 generator.py ./ffi.map.gen ../mjui/fltk_bindings/
 cmd=`which realpath`
 fnd=`which find`
-export COMBUSTUI_DLL_PATH="/Users/hammad/Documents/Hammad/Mojo/CombustUI-Mojo/mjui/fltk_bindings/libc/out/mjui.dylib"
+
 cd ../
+if [ -z "$COMBUSTUI_DLL_PATH" ]; then
+   echo "export COMBUSTUI_DLL_PATH=\"$(pwd)/mjui/fltk_bindings/libc/out/mjui.dylib\"" >> ~/.zshrc
+   echo "Added COMBUSTUI_DLL_PATH to your ~/.zshrc. Run 'source ~/.zshrc' or open a new terminal to use it."
+fi
 
 echo "Successfully generating bindings..."
-mojo run --disable-warnings app.mojo 
+mojo run --disable-warnings app.mojo zsh
