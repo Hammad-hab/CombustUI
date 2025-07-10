@@ -5,7 +5,8 @@ import shutil
 from pathlib import Path
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
-build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk.sh'
+build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh'
+
 OUT_FILE = 'app.mojo'
 
 def install_linux_dependencies():
@@ -43,8 +44,11 @@ if sys.platform == 'darwin':
 
     # Change directory
     os.chdir(f'./{app_name}')
-    os.rmdir('./scripts')
-    os.rmdir('./examples')
+    try:
+        os.rmdir('./scripts')
+        os.rmdir('./examples')
+    except:
+        print('Failed to remove scripts and examples')
 
     # Setup environment variable
     dll_path = str(Path.cwd() / 'mjui/fltk_bindings/libc/out/mjui.dylib')
@@ -83,11 +87,13 @@ elif sys.platform.startswith('linux'):
 
     # Change directory
     os.chdir(f'./{app_name}')
-    os.rmdir('./scripts')
-    os.rmdir('./examples')
-
+    try:
+        os.rmdir('./scripts')
+        os.rmdir('./examples')
+    except:
+        print('Failed to remove scripts and examples')
     # Setup environment variable in bashrc or zshrc
-    dll_path = str(Path.cwd() / 'mjui/fltk_bindings/libc/out/mjui.dylib')
+    dll_path = str(Path.cwd() / 'mjui/fltk_bindings/libc/out/mjui.so')
     bashrc = os.path.expanduser('~/.bashrc')
     zshrc = os.path.expanduser('~/.zshrc')
 
