@@ -72,10 +72,10 @@ Fl_Image* mjuiLoadImg(int width, int height, int imgType, int8_t* path) {
         case GIF:
             img = new Fl_GIF_Image(path_txt);
             img->scale(width, height, 0);
-        // case SVG:
-        //     img = new Fl_SVG_Image(path_txt);
-        //     img->scale(width, height, 0);
-        // break;
+        case SVG:
+            img = new Fl_SVG_Image(path_txt);
+            img->scale(width, height, 0);
+        break;
         case ANIM_GIF:
             Fl_Anim_GIF_Image* imgr = new Fl_Anim_GIF_Image(path_txt);
             imgr->scale(width, height, 0);

@@ -1,6 +1,12 @@
 cd mjui/fltk_bindings/libc/
 echo "Compiling mjui-fltk bindings..."
-g++ -shared -Wc++11-extensions ./main.cc -o ./out/mjui.dylib -I./ `fltk-config --cxxflags --ldflags --libs --use-cairo` `pkg-config --cflags --libs cairo` -std=c++11 -lfltk_images 
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      g++ -shared -Wc++11-extensions ./main.cc -o ./out/mjui.so -I./ `fltk-config --cxxflags --ldflags --libs --use-cairo` -std=c++11 -lfltk_images -ljpeg
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+      g++ -shared -Wc++11-extensions ./main.cc -o ./out/mjui.dylib -I./ `fltk-config --cxxflags --ldflags --libs --use-cairo` `pkg-config --cflags --libs cairo` -std=c++11 -lfltk_images
+fi 
+
 cd ../../../
 echo "Successfully compiled"
 echo "Generating Bindings..."
@@ -16,9 +22,13 @@ fnd=`which find`
 
 cd ../
 if [ -z "$COMBUSTUI_DLL_PATH" ]; then
-   echo "export COMBUSTUI_DLL_PATH=\"$(pwd)/mjui/fltk_bindings/libc/out/mjui.dylib\"" >> ~/.zshrc
+   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+         echo "export COMBUSTUI_DLL_PATH=\"$(pwd)/mjui/fltk_bindings/libc/out/mjui.so\"" >> ~/.zshrc
+   elif [[ "$OSTYPE" == "darwin"* ]]; then
+         echo "export COMBUSTUI_DLL_PATH=\"$(pwd)/mjui/fltk_bindings/libc/out/mjui.dylib\"" >> ~/.zshrc
+   fi 
    echo "Added COMBUSTUI_DLL_PATH to your ~/.zshrc. Run 'source ~/.zshrc' or open a new terminal to use it."
 fi
 
 echo "Successfully generating bindings..."
-mojo run --disable-warnings app.mojo zsh
+mojo run --disable-warnings app.mojo
