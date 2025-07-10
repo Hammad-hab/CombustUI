@@ -6,13 +6,13 @@ from pathlib import Path
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
 build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk.sh'
-
+OUT_FILE = 'app.mojo'
 
 def install_linux_dependencies():
     # Try to detect package manager
-    subprocess.run(['curl', build_fltk, '-o', './build_fltk.sh'])
+    subprocess.run(['curl', build_fltk, '-o', './build_fltk1.4.sh'])
     os.chmod("./build_fltk.sh", "+x")
-    process = subprocess.run(['./build_fltk.sh'])
+    process = subprocess.run(['./build_fltk1.4.sh'])
     if process.returncode != 0:
         raise SystemError(f'build_fltk failed with error code {process.returncode}')
 
@@ -60,7 +60,7 @@ if sys.platform == 'darwin':
         for file in Path('.').glob(pattern):
             file.unlink(missing_ok=True)
 
-    subprocess.run(['curl', get_started, '-o', 'app.🔥'])
+    subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell   
     os.system('magic shell')
 
@@ -107,7 +107,7 @@ elif sys.platform.startswith('linux'):
         for file in Path('.').glob(pattern):
             file.unlink(missing_ok=True)
 
-    subprocess.run(['curl', get_started, '-o', 'app.🔥'])
+    subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell
     os.system('magic shell')
 
