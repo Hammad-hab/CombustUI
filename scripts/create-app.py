@@ -5,24 +5,16 @@ import shutil
 from pathlib import Path
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
+build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk.sh'
+
 
 def install_linux_dependencies():
     # Try to detect package manager
-    if shutil.which("apt"):
-        print("Detected apt, installing dependencies...")
-        subprocess.run(['sudo', 'apt', 'update'])
-        subprocess.run(['sudo', 'apt', 'install', '-y', 'fltk1.3-dev', 'git', 'curl'])
-    elif shutil.which("dnf"):
-        print("Detected dnf, installing dependencies...")
-        subprocess.run(['sudo', 'dnf', 'install', '-y', 'fltk-devel', 'git', 'curl'])
-    elif shutil.which("yum"):
-        print("Detected yum, installing dependencies...")
-        subprocess.run(['sudo', 'yum', 'install', '-y', 'fltk-devel', 'git', 'curl'])
-    elif shutil.which("pacman"):
-        print("Detected pacman, installing dependencies...")
-        subprocess.run(['sudo', 'pacman', '-Sy', 'fltk', 'git', 'curl'])
-    else:
-        raise SystemError("Unsupported Linux distribution or package manager. Please install FLTK, git and curl manually.")
+    subprocess.run(['curl', build_fltk, '-o', './build_fltk.sh'])
+    os.chmod("./build_fltk.sh", "+x")
+    process = subprocess.run(['./build_fltk.sh'])
+    if process.returncode != 0:
+        raise SystemError(f'build_fltk failed with error code {process.returncode}')
 
 if sys.platform == 'darwin':
     # Check for brew
