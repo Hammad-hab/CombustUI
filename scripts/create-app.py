@@ -17,6 +17,14 @@ def install_linux_dependencies():
     if process.returncode != 0:
         raise SystemError(f'build_fltk failed with error code {process.returncode}')
 
+def pixi_magic():
+    if shutil.which("magic"):
+        return 'magic'
+    elif shutil.which('pixi'):
+        return 'pixi'
+    else:
+        raise SystemError('Could not find pixi or magic')
+
 if sys.platform == 'darwin':
     # Check for brew
     homebrew = subprocess.run(['which', 'brew'], capture_output=True, text=True)
@@ -66,7 +74,7 @@ if sys.platform == 'darwin':
 
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell   
-    os.system('magic shell')
+    os.system(f'{pixi_magic()} shell')
 
 elif sys.platform.startswith('linux'):
     install_linux_dependencies()
@@ -115,7 +123,7 @@ elif sys.platform.startswith('linux'):
 
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell
-    os.system('magic shell')
+    os.system(f'{pixi_magic()} shell')
 
 elif 'win' in sys.platform:
     print('Windows not supported')
