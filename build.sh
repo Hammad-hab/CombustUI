@@ -2,7 +2,7 @@ cd mjui/fltk_bindings/libc/
 echo "Compiling mjui-fltk bindings..."
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-      g++ -shared -Wc++11-extensions ./main.cc -o ./out/mjui.so -I./ `fltk-config --cxxflags --ldflags --libs --use-cairo` -std=c++11 -lfltk_images -ljpeg
+      g++ -shared -fPIC -Wc++11-extensions ./main.cc -o ./out/mjui.so -I./ `fltk-config --cxxflags --ldflags --libs` -std=c++11 -lfltk_images -ljpeg
 elif [[ "$OSTYPE" == "darwin"* ]]; then
       g++ -shared -Wc++11-extensions ./main.cc -o ./out/mjui.dylib -I./ `fltk-config --cxxflags --ldflags --libs --use-cairo` `pkg-config --cflags --libs cairo` -std=c++11 -lfltk_images
 fi 

@@ -1,3 +1,6 @@
+"""
+    Default Get Started template which comes with every app
+"""
 from mjui._app import Application
 from mjui.fltk_bindings.bindings import *
 from mjui.utils import rgb, convertStringToBytes, GTK
