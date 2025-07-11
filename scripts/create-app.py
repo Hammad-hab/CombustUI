@@ -3,6 +3,7 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
+import stat
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
 build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh'
@@ -11,8 +12,9 @@ OUT_FILE = 'app.mojo'
 
 def install_linux_dependencies():
     # Try to detect package manager
-    subprocess.run(['curl', build_fltk, '-o', './build_fltk1.4.sh'])
-    os.chmod("./build_fltk.sh", "+x")
+    subprocess.run(['curl', '-L', build_fltk, '-o', './build_fltk1.4.sh'], check=True)
+    st = os.stat('./build_fltk1.4.sh')
+    os.chmod("./build_fltk1.4.sh", 0o755)
     process = subprocess.run(['./build_fltk1.4.sh'])
     if process.returncode != 0:
         raise SystemError(f'build_fltk failed with error code {process.returncode}')
@@ -53,8 +55,8 @@ if sys.platform == 'darwin':
     # Change directory
     os.chdir(f'./{app_name}')
     try:
-        os.rmdir('./scripts')
-        os.rmdir('./examples')
+        shutil.rmtree('./scripts', ignore_errors=True)
+        shutil.rmtree('./examples', ignore_errors=True)
     except:
         print('Failed to remove scripts and examples')
 
@@ -74,7 +76,7 @@ if sys.platform == 'darwin':
 
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell   
-    os.system(f'{pixi_magic()} shell')
+    print(f"Run: source ~/.zshrc before running pixi shell | magic shell")
 
 elif sys.platform.startswith('linux'):
     install_linux_dependencies()
@@ -123,7 +125,7 @@ elif sys.platform.startswith('linux'):
 
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell
-    os.system(f'{pixi_magic()} shell')
+    print(f"Run: source ~/.zshrc before running pixi shell | magic shell")
 
 elif 'win' in sys.platform:
     print('Windows not supported')
