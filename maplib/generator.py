@@ -55,12 +55,14 @@ if File:
             bindings.append(function_binding)
             definations.append(defination_alias)
             
-        # === WRITE THE GENERATED BINDINGS TO OUTPUT FILE ===
+        joined_definitions = "\n".join(definations)
+        joined_bindings = "\n".join(bindings)
+
         with open(OutputDir + 'bindings.mojo', 'w') as f:
             f.write(
                 f'"""Auto generated using maplib"""\n\n\n'
                 f'from .dll import __dll\n'
                 f'from ..types import *\n\n'
-                f'{"\n".join(definations)}\n\n'
-                f'{"\n".join(bindings)}'
+                f'{joined_definitions}\n\n'
+                f'{joined_bindings}'
             )

@@ -51,7 +51,7 @@ fn redraw_gif() raises:
 
 fn main() raises:
     useScheme(GTK)
-    
+  
     var window = mjuiCreateWindow(1000, 600, 1, 0, 0, convertStringToBytes("App"))
     mjuiSetWidgetColor(window, rgb(255, 181, 181)) 
     var c = mjuiScrollContainer(0, 0, 1000, 600)
@@ -77,7 +77,7 @@ fn main() raises:
     mjuiSetWidgetSelectionColor(button, rgb(255, 84, 84))
     mjuiSetWidgetBox(input1, MJUI_FLAT_BOX)
     mjuiSetWidgetBox(input2, MJUI_FLAT_BOX) 
-    
+  
     mjuiSetFlex(l2, input1, 50)
     mjuiSetFlex(l2, button, 50)
 
@@ -85,7 +85,7 @@ fn main() raises:
     END_WIDGET_APPEND(l2) # ending flex 2
 
     var l3 = mjuiCreateLayoutFlex(0, 0, 500, 500, 0)
-    
+  
     mjuiSetFlexMarginGapSettings(l3, 100, 100)
 
     var label = "Duck"
@@ -107,7 +107,7 @@ fn main() raises:
 
     __app.addEventListener(24232, printerHandler)
     __app.setElementById(200, input2)
-    
+  
     mjuiShowWidget(window)
     mjuiFlexCalculateLayout(l)
     END_WIDGET_APPEND(c)
