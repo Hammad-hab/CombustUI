@@ -1,4 +1,3 @@
-# This script is for linux systems only!
 
 set -e
 
@@ -32,8 +31,8 @@ wget https://github.com/fltk/fltk/releases/download/release-1.4.3/fltk-1.4.3-sou
 tar -xvzf fltk-1.4.3-source.tar.gz
 
 cd fltk-1.4.3
-export CFLAGS = '-fPIC'
-export CXXFLAGS = '-fPIC'
+export CFLAGS='-fPIC'
+export CXXFLAGS='-fPIC'
 ./configure
 make
 sudo make install

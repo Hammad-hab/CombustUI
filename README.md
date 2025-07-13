@@ -117,3 +117,10 @@ fn main() raises:
 ```
 
 For now, the API is functional but as soon as the basics are completed, a struct-trait-based API will be introduced.
+
+## OS Support
+
+* [X] MacOS
+* [X] Debian
+* [ ] Arch
+* [ ] RHEL
