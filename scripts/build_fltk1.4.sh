@@ -32,7 +32,7 @@ wget https://github.com/fltk/fltk/releases/download/release-1.4.3/fltk-1.4.3-sou
 tar -xvzf fltk-1.4.3-source.tar.gz
 
 cd fltk-1.4.3
-./configure -fPIC
+./configure
 make
 sudo make install
 

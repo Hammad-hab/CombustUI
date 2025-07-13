@@ -15,7 +15,7 @@ def install_linux_dependencies():
     subprocess.run(['curl', '-L', build_fltk, '-o', './build_fltk1.4.sh'], check=True)
     st = os.stat('./build_fltk1.4.sh')
     os.chmod("./build_fltk1.4.sh", 0o755)
-    process = subprocess.run(['./build_fltk1.4.sh'])
+    process = subprocess.run(['./build_fltk1.4.sh'], shell=True, check=True)
     if process.returncode != 0:
         raise SystemError(f'build_fltk failed with error code {process.returncode}')
 
