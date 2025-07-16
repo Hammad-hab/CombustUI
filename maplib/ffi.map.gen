@@ -182,6 +182,12 @@
       "value": "StringBytes"
     }
   },
+  "mjuiGrabInput": {
+    "returns": "StringBytes",
+    "arguments": {
+      "ptr": "FLTK_WIDGET_POINTER"
+    }
+  },
   "mjuiCreateLabel": {
     "returns": "FLTK_WIDGET_POINTER",
     "arguments": {

@@ -567,6 +567,7 @@
                 <li><a href="#mjuicreateinput">mjuiCreateInput</a></li>
                 <li><a href="#mjuicreatemultilineinput">mjuiCreateMultilineInput</a></li>
                 <li><a href="#mjuisetinputvalue">mjuiSetInputValue</a></li>
+                <li><a href="#mjuigrabinput">mjuiGrabInput</a></li>
               </ul>
             </li>
             <li><a href="#label--image-widgets">Label & Image Widgets</a>
@@ -1054,6 +1055,15 @@ mjuiApplyImage(my_label, img)
       <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">mjuiSetInputValue(input, convertStringToBytes("Hello"))
 </code></pre>
+
+ <h4 id="mjuigrabinput"><code class="language-python">mjuiGrabInput(input) -> StringBytes</code></h4>
+      <p>Gets the current <code>value</code> (text) of an FLTK <code>Fl_Input</code> widget.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <pre><code class="language-python">var bytes = mjuiGrabInput(input)
+var str = readFromStringBytes(bytes) # This is necessary since grab input returns bytes
+</code></pre>
+
+
       <h3 id="label--image-widgets">Label & Image Widgets</h3>
       <h4 id="mjuicreatelabel"><code class="language-python">mjuiCreateLabel(x, y, width, height, id, text)</code></h4>
       <p>Creates a new custom FLTK <code>MJUILabel</code> widget at <code>(x, y)</code> with specified <code>width</code>, <code>height</code>, <code>id</code>, and <code>text</code>.</p>
