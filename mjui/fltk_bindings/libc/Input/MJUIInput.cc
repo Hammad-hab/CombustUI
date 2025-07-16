@@ -6,7 +6,7 @@
 
 #include <cstring>
 #include "string.h"
-#define NUM_ONLY true
+
 Input::Input(int x, int y, int w, int h, long int nid, int numericInput, char *label) : Fl_Input(x, y, w, h, "")
 {
     id = nid;
