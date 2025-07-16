@@ -25,6 +25,7 @@
       --example-bg-light: #f4f4f8;
       --example-border-light: #ff7f00; /* Orange for example border */
       --anchor-color-light: #ff7f00; /* Orange for anchors */
+      --link-color: #ff7f00;
 
       /* Orange theme colors */
       --primary-color: #ff7f00; /* Medium Orange */
@@ -64,6 +65,10 @@
     body.dark-mode {
       background: var(--bg-dark);
       color: var(--text-dark);
+    }
+
+    body.dark-mode {
+      --link-color: #ffa500;
     }
 
     header {
@@ -146,14 +151,14 @@
       margin-bottom: 0.3em;
     }
     nav a {
-      color: var(--nav-text-light);
+      color: var(--link-color);
       text-decoration: none;
       font-size: 1rem;
       transition: color 0.2s;
     }
 
     body.dark-mode nav a {
-      color: var(--nav-text-dark);
+      color: var(--link-color);
     }
 
     nav a:hover {
@@ -446,8 +451,12 @@
       const themeSwitch = document.getElementById('theme-switch');
       const currentTheme = localStorage.getItem('theme');
 
-      if (currentTheme) {
-        document.body.classList.add(currentTheme);
+      if (currentTheme === 'dark-mode') {
+        document.body.classList.add('dark-mode');
+        themeSwitch.checked = true;
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeSwitch.checked = false;
       }
 
       themeSwitch.addEventListener('change', () => {
@@ -456,20 +465,15 @@
           localStorage.setItem('theme', 'dark-mode');
         } else {
           document.body.classList.remove('dark-mode');
-          localStorage.setItem('theme', 'light-mode');
+          localStorage.removeItem('theme');
         }
       });
-
-      // Set initial state of the switch
-      if (document.body.classList.contains('dark-mode')) {
-        themeSwitch.checked = true;
-      }
     });
   </script>
 </head>
 <body>
   <header>
-    <img src="./images/logo.png"/>
+    <img src="./images/logo.png" alt="CombustUI-Mojo Logo" onerror="this.style.display='none'" />
     <p>Comprehensive documentation for all public functions, constants, and FFI bindings in CombustUI-Mojo.</p>
     <div class="theme-switch-wrapper">
       <span>Light</span>
@@ -484,6 +488,8 @@
     <nav>
       <h2>Table of Contents</h2>
       <ul>
+        <li><a href="EXAMPLES.html">Examples</a></li>
+        <li><a href="API_REFERENCE.html" class="nav-active">API Reference</a></li>
         <li><a href="#application-mojo">Application (Mojo)</a>
           <ul>
             <li><a href="#addEventListener">addEventListener</a></li>
@@ -603,79 +609,79 @@
       <h2 id="application-mojo">Application (Mojo)</h2>
       <h4 id="addEventListener"><code class="language-python">addEventListener(id: Int, handler: EventHandler)</code></h4>
       <p>Registers an event handler for a widget identified by its <code>id</code>. This function allows you to associate a specific <code>EventHandler</code> instance with a UI widget, ensuring that when an event (like a click, keypress, or mouse movement) occurs on that widget, the appropriate handler logic is executed. The <code>handler</code> will only be triggered if the event type defined within the <code>EventHandler</code> matches the actual event that occurred.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">app.addEventListener(1, handler)
 </code></pre>
       <h4 id="setElementById"><code class="language-python">setElementById(id: Int, element: FLTK_WIDGET_POINTER)</code></h4>
       <p>Associates a raw FLTK widget pointer (<code>FLTK_WIDGET_POINTER</code>) with a unique integer <code>id</code>. This mapping is crucial for managing UI elements dynamically. By assigning a simple integer ID, you can easily retrieve, update, or manipulate specific widgets throughout your application without needing to hold onto the raw FLTK pointer directly.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">app.setElementById(22, label)
 </code></pre>
       <h4 id="getElementById"><code class="language-python">getElementById(id: Int) -&gt; FLTK_WIDGET_POINTER</code></h4>
       <p>Retrieves the <code>FLTK_WIDGET_POINTER</code> associated with a given integer <code>id</code>. This function acts as a lookup mechanism, allowing your Mojo code to get a reference to an underlying FLTK widget based on the ID previously set with <code>setElementById</code>. This is fundamental for performing operations on specific UI components.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">var label = app.getElementById(22)
 </code></pre>
       <h4 id="markWindowPTRAsMain"><code class="language-python">markWindowPTRAsMain(ptr: FLTK_WIDGET_POINTER)</code></h4>
       <p>Designates a specific FLTK window pointer (<code>ptr</code>) as the main application window. This is important for the application's lifecycle management. The internal event loop will monitor this designated window for close events, and once it detects that this main window has been closed by the user, the application will gracefully terminate.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">app.markWindowPTRAsMain(window)
 </code></pre>
       <h4 id="attachLoopHook"><code class="language-python">attachLoopHook(hook: fn() raises)</code></h4>
       <p>Attaches a callable function (<code>hook</code>) to the application's main event loop. This mechanism allows you to inject custom logic that needs to be executed continuously on every iteration of the event loop. This is useful for tasks such as updating game states, performing animations, background processing, or any other operations that require regular execution while the UI is active.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">app.attachLoopHook(my_hook)
 </code></pre>
       <h4 id="execute"><code class="language-python">execute()</code></h4>
       <p>Starts the main FLTK event loop. Calling this function initiates the continuous polling for and processing of UI events. It enters an infinite loop, constantly checking for user interactions (mouse clicks, keypresses, window events), dispatching them to any registered <code>EventHandler</code>s, and executing any attached loop hooks. The application will remain responsive and active until the designated main window is closed or an explicit exit signal is received, at which point the loop terminates.</p>
-      <p>Defined in: <span class="file-link">mjui/_app.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/_app.mojo</span></p>
       <pre><code class="language-python">app.execute()
 </code></pre>
       <h2 id="eventhandler-mojo">EventHandler (Mojo)</h2>
       <h4 id="set"><code class="language-python">set(trigger: Int, handler: Handler)</code></h4>
       <p>Sets both the trigger event type (<code>trigger</code>) and the handler function (<code>handler</code>) for this <code>EventHandler</code>. This function provides a convenient way to configure an event handler, specifying precisely which type of event it should respond to and what action it should take when that event occurs.</p>
-      <p>Defined in: <span class="file-link">mjui/EventHandler.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/EventHandler.mojo</span></p>
       <pre><code class="language-python">handler.set(MJUI_KEYDOWN, my_handler)
 </code></pre>
       <h4 id="attachHandler"><code class="language-python">attachHandler(handler: Handler)</code></h4>
       <p>Sets the handler function (<code>handler</code>) that will be executed when the associated event is triggered. This allows you to define the specific code block or logic that should run in response to an event, separating the event detection from the action to be performed.</p>
-      <p>Defined in: <span class="file-link">mjui/EventHandler.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/EventHandler.mojo</span></p>
       <pre><code class="language-python">handler.attachHandler(my_handler)
 </code></pre>
       <h4 id="attachTrigger"><code class="language-python">attachTrigger(trigger: Int)</code></h4>
       <p>Sets the integer <code>trigger</code> event type that this <code>EventHandler</code> will respond to. By setting the trigger, you define which specific UI event (e.g., a button click, a key press) will cause this event handler to become active and execute its attached function.</p>
-      <p>Defined in: <span class="file-link">mjui/EventHandler.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/EventHandler.mojo</span></p>
       <pre><code class="language-python">handler.attachTrigger(MJUI_KEYDOWN)
 </code></pre>
       <h4 id="trigger"><code class="language-python">trigger()</code></h4>
       <p>Executes the currently attached handler function. This function is typically called internally by the event loop when an event matching the `trigger` is detected for the associated widget. You can also call it manually to programmatically invoke the handler's logic.</p>
-      <p>Defined in: <span class="file-link">mjui/EventHandler.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/EventHandler.mojo</span></p>
       <pre><code class="language-python">handler.trigger()
 </code></pre>
       <h2 id="utility-functions-mojo">Utility Functions (Mojo)</h2>
       <h4 id="rgb"><code class="language-python">rgb(r: UInt32, g: UInt32, b: UInt32) -&gt; UInt32</code></h4>
       <p>Converts individual red, green, and blue color components (each ranging from 0-255) into a single 32-bit unsigned integer. This packed integer format is the standard color representation used by FLTK (Fast Light Toolkit) and is essential when setting widget colors or drawing custom graphics.</p>
-      <p>Defined in: <span class="file-link">mjui/utils.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></p>
       <pre><code class="language-python">var color = rgb(255, 128, 0)
 </code></pre>
       <h4 id="str_to_int8"><code class="language-python">str_to_int8(str: String) -&gt; List[Int8]</code></h4>
       <p>Converts a Mojo <code>String</code> into a <code>List</code> of <code>Int8</code> (ASCII character codes). This utility is vital for interoperability with C++ FFI (Foreign Function Interface) functions, which often expect string data to be provided as a null-terminated byte array. This function correctly transforms Mojo strings into this compatible format.</p>
-      <p>Defined in: <span class="file-link">mjui/utils.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></p>
       <pre><code class="language-python">var ascii_codes = str_to_int8("Hello")
 </code></pre>
       <h4 id="readFromStringBytes"><code class="language-python">readFromStringBytes(bytes: StringBytes) -&gt; String</code></h4>
       <p>Converts a <code>StringBytes</code> span (a low-level byte array representation, typically received from C++ FFI functions) back into a human-readable Mojo <code>String</code>. The function intelligently reads the byte array until it encounters a null terminator, ensuring that only the relevant string data is converted.</p>
-      <p>Defined in: <span class="file-link">mjui/utils.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></p>
       <pre><code class="language-python">var s = readFromStringBytes(bytes)
 </code></pre>
       <h4 id="createIdFrom"><code class="language-python">createIdFrom(id: String) -&gt; Int</code></h4>
       <p>Generates a simple integer ID from a given <code>String</code>. This is achieved by summing the ASCII character codes of the input string. While this method provides a quick and convenient way to get a unique identifier for widgets, it is important to note that it is not collision-proof for all possible string inputs and should be used where strict uniqueness guarantees are not paramount.</p>
-      <p>Defined in: <span class="file-link">mjui/utils.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></p>
       <pre><code class="language-python">var widget_id = createIdFrom("button1")
 </code></pre>
       <h4 id="convertStringToBytes"><code class="language-python">convertStringToBytes(strn: String) -&gt; StringBytes</code></h4>
       <p>Converts a Mojo <code>String</code> into a <code>StringBytes</code> span. This low-level byte representation is specifically designed for efficient and safe passing of string data to C++ FFI functions. It ensures that the string data is correctly formatted for consumption by the underlying C++ libraries.</p>
-      <p>Defined in: <span class="file-link">mjui/utils.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></p>
       <pre><code class="language-python">var bytes = convertStringToBytes("Label")
 </code></pre>
       <h2 id="constants-mojo">Constants (Mojo)</h2>
@@ -686,34 +692,34 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>MJUI_NO_EVENT</td><td>0</td><td>Represents the absence of an event. This value is used when no specific UI interaction or system event has occurred.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PUSH</td><td>1</td><td>Indicates a mouse button or a similar input device button has been pressed down. This event is commonly used for clickable widgets like buttons.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_RELEASE</td><td>2</td><td>Signifies that a mouse button or a similar input device button has been released after being pressed. It often follows a <code>MJUI_PUSH</code> event.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ENTER</td><td>3</td><td>Occurs when the mouse cursor enters the bounding box of a widget. Useful for hover effects or changing widget appearance upon mouse entry.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_LEAVE</td><td>4</td><td>Triggers when the mouse cursor leaves the bounding box of a widget. Typically used to revert changes made during an <code>MJUI_ENTER</code> event.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DRAG</td><td>5</td><td>Generated when the mouse cursor is moved while a mouse button is held down. Essential for drag-and-drop functionalities or drawing applications.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_FOCUS</td><td>6</td><td>Indicates that a widget has gained input focus, meaning it is ready to receive keyboard input. This happens when a user clicks on an input field or tabs to it.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_UNFOCUS</td><td>7</td><td>Occurs when a widget loses input focus, typically when another widget gains focus or the user clicks outside the widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_KEYDOWN / MJUI_KEYBOARD</td><td>8</td><td>Fired when a keyboard key is pressed down. This event can be used to capture user input from the keyboard.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_KEYUP</td><td>9</td><td>Generated when a keyboard key is released after being pressed. This complements <code>MJUI_KEYDOWN</code> for full key press detection.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CLOSE</td><td>10</td><td>Signifies that a widget or window is being closed. This is particularly important for window management to perform cleanup operations.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_MOVE</td><td>11</td><td>Indicates that a widget has been moved on the screen, typically by user interaction or programmatic changes to its position.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SHORTCUT</td><td>12</td><td>Triggered when a keyboard shortcut is activated. This allows for quick access to specific application functionalities.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DEACTIVATE</td><td>13</td><td>Occurs when a widget becomes inactive or disabled, meaning it can no longer receive input or interact with the user.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ACTIVATE</td><td>14</td><td>Fired when a widget becomes active or re-enabled, allowing it to receive user input and interactions again.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_HIDE</td><td>15</td><td>Indicates that a widget has been hidden from view. The widget still exists but is not rendered on the screen.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SHOW</td><td>16</td><td>Occurs when a previously hidden widget becomes visible again.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PASTE</td><td>17</td><td>Generated when content is pasted into an input field or a widget that supports paste operations.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SELECTIONCLEAR</td><td>18</td><td>Fired when any current text selection within a widget is cleared.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_MOUSEWHEEL</td><td>19</td><td>Triggered when the mouse scroll wheel is used. This is commonly used for scrolling content within a scrollable area or zooming.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DND_ENTER</td><td>20</td><td>Indicates that a drag-and-drop operation has entered the bounding box of a widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DND_DRAG</td><td>21</td><td>Occurs when a drag-and-drop operation is actively being dragged over a widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DND_LEAVE</td><td>22</td><td>Fired when a drag-and-drop operation leaves the bounding box of a widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DND_RELEASE</td><td>23</td><td>Triggered when a drag-and-drop operation is released over a widget, signaling a potential drop.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SCREEN_CONFIGURATION_CHANGED</td><td>24</td><td>Occurs when the screen configuration (e.g., resolution, display settings) changes.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_FULLSCREEN</td><td>25</td><td>Indicates that a window has entered or exited fullscreen mode.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ZOOM_GESTURE</td><td>26</td><td>Generated by a zoom gesture, typically on touch-enabled devices.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ZOOM_EVENT</td><td>27</td><td>A generic zoom event, which can be triggered by various input methods.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_NO_EVENT</td><td>0</td><td>Represents the absence of an event. This value is used when no specific UI interaction or system event has occurred.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PUSH</td><td>1</td><td>Indicates a mouse button or a similar input device button has been pressed down. This event is commonly used for clickable widgets like buttons.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_RELEASE</td><td>2</td><td>Signifies that a mouse button or a similar input device button has been released after being pressed. It often follows a <code>MJUI_PUSH</code> event.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ENTER</td><td>3</td><td>Occurs when the mouse cursor enters the bounding box of a widget. Useful for hover effects or changing widget appearance upon mouse entry.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LEAVE</td><td>4</td><td>Triggers when the mouse cursor leaves the bounding box of a widget. Typically used to revert changes made during an <code>MJUI_ENTER</code> event.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DRAG</td><td>5</td><td>Generated when the mouse cursor is moved while a mouse button is held down. Essential for drag-and-drop functionalities or drawing applications.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_FOCUS</td><td>6</td><td>Indicates that a widget has gained input focus, meaning it is ready to receive keyboard input. This happens when a user clicks on an input field or tabs to it.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_UNFOCUS</td><td>7</td><td>Occurs when a widget loses input focus, typically when another widget gains focus or the user clicks outside the widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_KEYDOWN / MJUI_KEYBOARD</td><td>8</td><td>Fired when a keyboard key is pressed down. <strong>Note:</strong> <code>MJUI_KEYDOWN</code> and <code>MJUI_KEYBOARD</code> are aliases for the same event type (value 8).</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_KEYUP</td><td>9</td><td>Generated when a keyboard key is released after being pressed. This complements <code>MJUI_KEYDOWN</code> for full key press detection.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CLOSE</td><td>10</td><td>Signifies that a widget or window is being closed. This is particularly important for window management to perform cleanup operations.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_MOVE</td><td>11</td><td>Indicates that a widget has been moved on the screen, typically by user interaction or programmatic changes to its position.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SHORTCUT</td><td>12</td><td>Triggered when a keyboard shortcut is activated. This allows for quick access to specific application functionalities.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DEACTIVATE</td><td>13</td><td>Occurs when a widget becomes inactive or disabled, meaning it can no longer receive input or interact with the user.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ACTIVATE</td><td>14</td><td>Fired when a widget becomes active or re-enabled, allowing it to receive user input and interactions again.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_HIDE</td><td>15</td><td>Indicates that a widget has been hidden from view. The widget still exists but is not rendered on the screen.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SHOW</td><td>16</td><td>Occurs when a previously hidden widget becomes visible again.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PASTE</td><td>17</td><td>Generated when content is pasted into an input field or a widget that supports paste operations.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SELECTIONCLEAR</td><td>18</td><td>Fired when any current text selection within a widget is cleared.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_MOUSEWHEEL</td><td>19</td><td>Triggered when the mouse scroll wheel is used. This is commonly used for scrolling content within a scrollable area or zooming.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DND_ENTER</td><td>20</td><td>Indicates that a drag-and-drop operation has entered the bounding box of a widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DND_DRAG</td><td>21</td><td>Occurs when a drag-and-drop operation is actively being dragged over a widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DND_LEAVE</td><td>22</td><td>Fired when a drag-and-drop operation leaves the bounding box of a widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DND_RELEASE</td><td>23</td><td>Triggered when a drag-and-drop operation is released over a widget, signaling a potential drop.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SCREEN_CONFIGURATION_CHANGED</td><td>24</td><td>Occurs when the screen configuration (e.g., resolution, display settings) changes.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_FULLSCREEN</td><td>25</td><td>Indicates that a window has entered or exited fullscreen mode.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ZOOM_GESTURE</td><td>26</td><td>Generated by a zoom gesture, typically on touch-enabled devices.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ZOOM_EVENT</td><td>27</td><td>A generic zoom event, which can be triggered by various input methods.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <pre><code class="language-python">handler.attachTrigger(MJUI_PUSH)
@@ -725,27 +731,27 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>MJUI_CURSOR_DEFAULT</td><td>0</td><td>The default cursor, typically an arrow.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_ARROW</td><td>35</td><td>A standard arrow cursor, used for general pointing and clicking.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_CROSS</td><td>66</td><td>A crosshair cursor, often used for drawing or selecting precise points.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_WAIT</td><td>76</td><td>An hourglass or spinning circle cursor, indicating that the application is busy and the user should wait.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_INSERT</td><td>77</td><td>A text insertion cursor (I-beam), used for text input fields.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_HAND</td><td>31</td><td>A hand cursor, typically used to indicate a clickable or draggable element.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_HELP</td><td>47</td><td>A cursor with a question mark, indicating that help is available for the element under the cursor.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_MOVE</td><td>27</td><td>A four-directional arrow cursor, used to indicate that an element can be moved in any direction.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NS</td><td>78</td><td>A vertical double-headed arrow, used for resizing elements vertically (North-South).</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_WE</td><td>79</td><td>A horizontal double-headed arrow, used for resizing elements horizontally (West-East).</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NWSE</td><td>80</td><td>A diagonal double-headed arrow (North-West to South-East), used for diagonal resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NESW</td><td>81</td><td>A diagonal double-headed arrow (North-East to South-West), used for diagonal resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_N</td><td>70</td><td>An arrow pointing North (up), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NE</td><td>69</td><td>An arrow pointing North-East (up-right), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_E</td><td>49</td><td>An arrow pointing East (right), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_SE</td><td>8</td><td>An arrow pointing South-East (down-right), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_S</td><td>9</td><td>An arrow pointing South (down), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_SW</td><td>7</td><td>An arrow pointing South-West (down-left), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_W</td><td>36</td><td>An arrow pointing West (left), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NW</td><td>68</td><td>An arrow pointing North-West (up-left), used for resizing.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_CURSOR_NONE</td><td>255</td><td>An invisible cursor, used when no cursor should be displayed.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_DEFAULT</td><td>0</td><td>The default cursor, typically an arrow.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_ARROW</td><td>35</td><td>A standard arrow cursor, used for general pointing and clicking.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_CROSS</td><td>66</td><td>A crosshair cursor, often used for drawing or selecting precise points.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_WAIT</td><td>76</td><td>An hourglass or spinning circle cursor, indicating that the application is busy and the user should wait.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_INSERT</td><td>77</td><td>A text insertion cursor (I-beam), used for text input fields.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_HAND</td><td>31</td><td>A hand cursor, typically used to indicate a clickable or draggable element.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_HELP</td><td>47</td><td>A cursor with a question mark, indicating that help is available for the element under the cursor.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_MOVE</td><td>27</td><td>A four-directional arrow cursor, used to indicate that an element can be moved in any direction.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NS</td><td>78</td><td>A vertical double-headed arrow, used for resizing elements vertically (North-South).</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_WE</td><td>79</td><td>A horizontal double-headed arrow, used for resizing elements horizontally (West-East).</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NWSE</td><td>80</td><td>A diagonal double-headed arrow (North-West to South-East), used for diagonal resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NESW</td><td>81</td><td>A diagonal double-headed arrow (North-East to South-West), used for diagonal resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_N</td><td>70</td><td>An arrow pointing North (up), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NE</td><td>69</td><td>An arrow pointing North-East (up-right), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_E</td><td>49</td><td>An arrow pointing East (right), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_SE</td><td>8</td><td>An arrow pointing South-East (down-right), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_S</td><td>9</td><td>An arrow pointing South (down), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_SW</td><td>7</td><td>An arrow pointing South-West (down-left), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_W</td><td>36</td><td>An arrow pointing West (left), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NW</td><td>68</td><td>An arrow pointing North-West (up-left), used for resizing.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_CURSOR_NONE</td><td>255</td><td>An invisible cursor, used when no cursor should be displayed.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="layout-flags">Layout Flags</h3>
@@ -755,11 +761,11 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>MJUI_MJUIEX_HORIZONTAL</td><td>1</td><td>Specifies that a flex layout container should arrange its child widgets horizontally, from left to right.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_MJUIEX_VERTICAL</td><td>0</td><td>Specifies that a flex layout container should arrange its child widgets vertically, from top to bottom.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>RESIZE_XY</td><td>100</td><td>Indicates that a widget or layout should be resizable in both horizontal (X) and vertical (Y) directions.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>RESIZE_XONLY</td><td>110</td><td>Indicates that a widget or layout should only be resizable in the horizontal (X) direction.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>RESIZE_YONLY</td><td>111</td><td>Indicates that a widget or layout should only be resizable in the vertical (Y) direction.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_MJUIEX_HORIZONTAL</td><td>1</td><td>Specifies that a flex layout container should arrange its child widgets horizontally, from left to right.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_MJUIEX_VERTICAL</td><td>0</td><td>Specifies that a flex layout container should arrange its child widgets vertically, from top to bottom.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>RESIZE_XY</td><td>100</td><td>Indicates that a widget or layout should be resizable in both horizontal (X) and vertical (Y) directions.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>RESIZE_XONLY</td><td>110</td><td>Indicates that a widget or layout should only be resizable in the horizontal (X) direction.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>RESIZE_YONLY</td><td>111</td><td>Indicates that a widget or layout should only be resizable in the vertical (Y) direction.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="box-types">Box Types</h3>
@@ -769,77 +775,77 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>MJUI_FLAT_BOX</td><td>1</td><td>A simple, flat box with no 3D appearance, often used for clean, modern interfaces.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_UP_BOX</td><td>2</td><td>A box type that appears raised or extruding from the surface, creating a 3D button-like effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DOWN_BOX</td><td>3</td><td>A box type that appears sunken or recessed into the surface, often used to indicate a pressed state or an input field.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_UP_FRAME</td><td>4</td><td>A raised frame border, similar to <code>MJUI_UP_BOX</code> but typically without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DOWN_FRAME</td><td>5</td><td>A sunken frame border, similar to <code>MJUI_DOWN_BOX</code> but typically without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_THIN_UP_BOX</td><td>6</td><td>A thinner version of <code>MJUI_UP_BOX</code>, providing a subtle raised effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_THIN_DOWN_BOX</td><td>7</td><td>A thinner version of <code>MJUI_DOWN_BOX</code>, providing a subtle sunken effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_THIN_UP_FRAME</td><td>8</td><td>A thinner version of <code>MJUI_UP_FRAME</code>.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_THIN_DOWN_FRAME</td><td>9</td><td>A thinner version of <code>MJUI_DOWN_FRAME</code>.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ENGRAVED_BOX</td><td>10</td><td>A box with an engraved appearance, making the content seem carved into the surface.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_EMBOSSED_BOX</td><td>11</td><td>A box with an embossed appearance, making the content seem raised from the surface.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ENGRAVED_FRAME</td><td>12</td><td>An engraved frame, similar to <code>MJUI_ENGRAVED_BOX</code> but typically without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_EMBOSSED_FRAME</td><td>13</td><td>An embossed frame, similar to <code>MJUI_EMBOSSED_BOX</code> but typically without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_BORDER_BOX</td><td>14</td><td>A box with a simple border around its perimeter.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SHADOW_BOX</td><td>15</td><td>A box with a shadow effect, giving it a lifted appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_BORDER_FRAME</td><td>16</td><td>A simple border frame without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_SHADOW_FRAME</td><td>17</td><td>A frame with a shadow effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ROUNDED_BOX</td><td>18</td><td>A box with rounded corners, providing a softer aesthetic.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_RSHADOW_BOX</td><td>19</td><td>A rounded box with a shadow effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ROUNDED_FRAME</td><td>20</td><td>A rounded frame without a filled background.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_RFLAT_BOX</td><td>21</td><td>A rounded, flat box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ROUND_UP_BOX</td><td>22</td><td>A rounded box with a raised appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_ROUND_DOWN_BOX</td><td>23</td><td>A rounded box with a sunken appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DIAMOND_UP_BOX</td><td>24</td><td>A diamond-shaped box with a raised appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_DIAMOND_DOWN_BOX</td><td>25</td><td>A diamond-shaped box with a sunken appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OVAL_BOX</td><td>26</td><td>An oval-shaped box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OSHADOW_BOX</td><td>27</td><td>An oval-shaped box with a shadow effect.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OVAL_FRAME</td><td>28</td><td>An oval-shaped frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OFLAT_BOX</td><td>29</td><td>An oval, flat box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_UP_BOX</td><td>30</td><td>A box with a plastic-like raised appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_DOWN_BOX</td><td>31</td><td>A box with a plastic-like sunken appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_UP_FRAME</td><td>32</td><td>A plastic-like raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_DOWN_FRAME</td><td>33</td><td>A plastic-like sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_THIN_UP_BOX</td><td>34</td><td>A thin plastic-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_THIN_DOWN_BOX</td><td>35</td><td>A thin plastic-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_THIN_UP_FRAME</td><td>36</td><td>A thin plastic-like raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_THIN_DOWN_FRAME</td><td>37</td><td>A thin plastic-like sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_ROUND_UP_BOX</td><td>38</td><td>A rounded plastic-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_PLASTIC_ROUND_DOWN_BOX</td><td>39</td><td>A rounded plastic-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_UP_BOX</td><td>40</td><td>A box style resembling the GTK+ toolkit's raised elements.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_DOWN_BOX</td><td>41</td><td>A box style resembling the GTK+ toolkit's sunken elements.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_UP_FRAME</td><td>42</td><td>A GTK+ style raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_DOWN_FRAME</td><td>43</td><td>A GTK+ style sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_THIN_UP_BOX</td><td>44</td><td>A thin GTK+ style raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_THIN_DOWN_BOX</td><td>45</td><td>A thin GTK+ style sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_THIN_UP_FRAME</td><td>46</td><td>A thin GTK+ style raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_THIN_DOWN_FRAME</td><td>47</td><td>A thin GTK+ style sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_ROUND_UP_BOX</td><td>48</td><td>A rounded GTK+ style raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GTK_ROUND_DOWN_BOX</td><td>49</td><td>A rounded GTK+ style sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_UP_BOX</td><td>50</td><td>A box with a gleam-like raised appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_DOWN_BOX</td><td>51</td><td>A box with a gleam-like sunken appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_UP_FRAME</td><td>52</td><td>A gleam-like raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_DOWN_FRAME</td><td>53</td><td>A gleam-like sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_THIN_UP_BOX</td><td>54</td><td>A thin gleam-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_THIN_DOWN_BOX</td><td>55</td><td>A thin gleam-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_ROUND_UP_BOX</td><td>56</td><td>A rounded gleam-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_GLEAM_ROUND_DOWN_BOX</td><td>57</td><td>A rounded gleam-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_UP_BOX</td><td>58</td><td>A box with an Oxygen-like (KDE Plasma) raised appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_DOWN_BOX</td><td>59</td><td>A box with an Oxygen-like (KDE Plasma) sunken appearance.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_UP_FRAME</td><td>60</td><td>An Oxygen-like raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_DOWN_FRAME</td><td>61</td><td>An Oxygen-like sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_THIN_UP_BOX</td><td>62</td><td>A thin Oxygen-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_THIN_DOWN_BOX</td><td>63</td><td>A thin Oxygen-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_THIN_UP_FRAME</td><td>64</td><td>A thin Oxygen-like raised frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_THIN_DOWN_FRAME</td><td>65</td><td>A thin Oxygen-like sunken frame.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_ROUND_UP_BOX</td><td>66</td><td>A rounded Oxygen-like raised box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_ROUND_DOWN_BOX</td><td>67</td><td>A rounded Oxygen-like sunken box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_BUTTON_UP_BOX</td><td>68</td><td>An Oxygen-like raised button box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_OXY_BUTTON_DOWN_BOX</td><td>69</td><td>An Oxygen-like sunken button box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_FREE_BOXTYPE</td><td>70</td><td>A free box type, which can be customized.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_MAX_BOXTYPE</td><td>255</td><td>Represents the maximum value for box type constants.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_FLAT_BOX</td><td>1</td><td>A simple, flat box with no 3D appearance, often used for clean, modern interfaces.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_UP_BOX</td><td>2</td><td>A box type that appears raised or extruding from the surface, creating a 3D button-like effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DOWN_BOX</td><td>3</td><td>A box type that appears sunken or recessed into the surface, often used to indicate a pressed state or an input field.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_UP_FRAME</td><td>4</td><td>A raised frame border, similar to <code>MJUI_UP_BOX</code> but typically without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DOWN_FRAME</td><td>5</td><td>A sunken frame border, similar to <code>MJUI_DOWN_BOX</code> but typically without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_THIN_UP_BOX</td><td>6</td><td>A thinner version of <code>MJUI_UP_BOX</code>, providing a subtle raised effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_THIN_DOWN_BOX</td><td>7</td><td>A thinner version of <code>MJUI_DOWN_BOX</code>, providing a subtle sunken effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_THIN_UP_FRAME</td><td>8</td><td>A thinner version of <code>MJUI_UP_FRAME</code>.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_THIN_DOWN_FRAME</td><td>9</td><td>A thinner version of <code>MJUI_DOWN_FRAME</code>.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ENGRAVED_BOX</td><td>10</td><td>A box with an engraved appearance, making the content seem carved into the surface.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_EMBOSSED_BOX</td><td>11</td><td>A box with an embossed appearance, making the content seem raised from the surface.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ENGRAVED_FRAME</td><td>12</td><td>An engraved frame, similar to <code>MJUI_ENGRAVED_BOX</code> but typically without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_EMBOSSED_FRAME</td><td>13</td><td>An embossed frame, similar to <code>MJUI_EMBOSSED_BOX</code> but typically without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_BORDER_BOX</td><td>14</td><td>A box with a simple border around its perimeter.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SHADOW_BOX</td><td>15</td><td>A box with a shadow effect, giving it a lifted appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_BORDER_FRAME</td><td>16</td><td>A simple border frame without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_SHADOW_FRAME</td><td>17</td><td>A frame with a shadow effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ROUNDED_BOX</td><td>18</td><td>A box with rounded corners, providing a softer aesthetic.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_RSHADOW_BOX</td><td>19</td><td>A rounded box with a shadow effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ROUNDED_FRAME</td><td>20</td><td>A rounded frame without a filled background.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_RFLAT_BOX</td><td>21</td><td>A rounded, flat box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ROUND_UP_BOX</td><td>22</td><td>A rounded box with a raised appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_ROUND_DOWN_BOX</td><td>23</td><td>A rounded box with a sunken appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DIAMOND_UP_BOX</td><td>24</td><td>A diamond-shaped box with a raised appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_DIAMOND_DOWN_BOX</td><td>25</td><td>A diamond-shaped box with a sunken appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OVAL_BOX</td><td>26</td><td>An oval-shaped box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OSHADOW_BOX</td><td>27</td><td>An oval-shaped box with a shadow effect.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OVAL_FRAME</td><td>28</td><td>An oval-shaped frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OFLAT_BOX</td><td>29</td><td>An oval, flat box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_UP_BOX</td><td>30</td><td>A box with a plastic-like raised appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_DOWN_BOX</td><td>31</td><td>A box with a plastic-like sunken appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_UP_FRAME</td><td>32</td><td>A plastic-like raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_DOWN_FRAME</td><td>33</td><td>A plastic-like sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_THIN_UP_BOX</td><td>34</td><td>A thin plastic-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_THIN_DOWN_BOX</td><td>35</td><td>A thin plastic-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_THIN_UP_FRAME</td><td>36</td><td>A thin plastic-like raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_THIN_DOWN_FRAME</td><td>37</td><td>A thin plastic-like sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_ROUND_UP_BOX</td><td>38</td><td>A rounded plastic-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_PLASTIC_ROUND_DOWN_BOX</td><td>39</td><td>A rounded plastic-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_UP_BOX</td><td>40</td><td>A box style resembling the GTK+ toolkit's raised elements.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_DOWN_BOX</td><td>41</td><td>A box style resembling the GTK+ toolkit's sunken elements.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_UP_FRAME</td><td>42</td><td>A GTK+ style raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_DOWN_FRAME</td><td>43</td><td>A GTK+ style sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_THIN_UP_BOX</td><td>44</td><td>A thin GTK+ style raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_THIN_DOWN_BOX</td><td>45</td><td>A thin GTK+ style sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_THIN_UP_FRAME</td><td>46</td><td>A thin GTK+ style raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_THIN_DOWN_FRAME</td><td>47</td><td>A thin GTK+ style sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_ROUND_UP_BOX</td><td>48</td><td>A rounded GTK+ style raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GTK_ROUND_DOWN_BOX</td><td>49</td><td>A rounded GTK+ style sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_UP_BOX</td><td>50</td><td>A box with a gleam-like raised appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_DOWN_BOX</td><td>51</td><td>A box with a gleam-like sunken appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_UP_FRAME</td><td>52</td><td>A gleam-like raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_DOWN_FRAME</td><td>53</td><td>A gleam-like sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_THIN_UP_BOX</td><td>54</td><td>A thin gleam-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_THIN_DOWN_BOX</td><td>55</td><td>A thin gleam-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_ROUND_UP_BOX</td><td>56</td><td>A rounded gleam-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_GLEAM_ROUND_DOWN_BOX</td><td>57</td><td>A rounded gleam-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_UP_BOX</td><td>58</td><td>A box with an Oxygen-like (KDE Plasma) raised appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_DOWN_BOX</td><td>59</td><td>A box with an Oxygen-like (KDE Plasma) sunken appearance.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_UP_FRAME</td><td>60</td><td>An Oxygen-like raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_DOWN_FRAME</td><td>61</td><td>An Oxygen-like sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_THIN_UP_BOX</td><td>62</td><td>A thin Oxygen-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_THIN_DOWN_BOX</td><td>63</td><td>A thin Oxygen-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_THIN_UP_FRAME</td><td>64</td><td>A thin Oxygen-like raised frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_THIN_DOWN_FRAME</td><td>65</td><td>A thin Oxygen-like sunken frame.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_ROUND_UP_BOX</td><td>66</td><td>A rounded Oxygen-like raised box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_ROUND_DOWN_BOX</td><td>67</td><td>A rounded Oxygen-like sunken box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_BUTTON_UP_BOX</td><td>68</td><td>An Oxygen-like raised button box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_OXY_BUTTON_DOWN_BOX</td><td>69</td><td>An Oxygen-like sunken button box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_FREE_BOXTYPE</td><td>70</td><td>A free box type, which can be customized.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_MAX_BOXTYPE</td><td>255</td><td>Represents the maximum value for box type constants.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="label-types">Label Types</h3>
@@ -849,11 +855,11 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>MJUI_LABEL_TYPE_NORMAL</td><td>0</td><td>Standard text rendering.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_LABEL_TYPE_SHADOW</td><td>1</td><td>Renders text with a shadow effect, adding depth.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_LABEL_TYPE_EMBOSSED</td><td>2</td><td>Renders text with an embossed effect, making it appear raised.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_LABEL_TYPE_MULTI</td><td>3</td><td>Enables multi-line text rendering, allowing text to wrap within the widget's bounds.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>MJUI_LABEL_TYPE_IMAGE</td><td>4</td><td>Specifies that the label should display an image instead of text.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LABEL_TYPE_NORMAL</td><td>0</td><td>Standard text rendering.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LABEL_TYPE_SHADOW</td><td>1</td><td>Renders text with a shadow effect, adding depth.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LABEL_TYPE_EMBOSSED</td><td>2</td><td>Renders text with an embossed effect, making it appear raised.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LABEL_TYPE_MULTI</td><td>3</td><td>Enables multi-line text rendering, allowing text to wrap within the widget's bounds.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>MJUI_LABEL_TYPE_IMAGE</td><td>4</td><td>Specifies that the label should display an image instead of text.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="image-types">Image Types</h3>
@@ -863,12 +869,12 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>PNG</td><td>0</td><td>Specifies the Portable Network Graphics (PNG) image format, known for lossless compression and support for transparency.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>JPEG</td><td>1</td><td>Specifies the Joint Photographic Experts Group (JPEG) image format, commonly used for photographs due to its lossy compression.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>SVG</td><td>2</td><td>Specifies the Scalable Vector Graphics (SVG) format, an XML-based vector image format for two-dimensional graphics with support for interactivity and animation.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>BMP</td><td>3</td><td>Specifies the Bitmap (BMP) image format, a raster graphics image file format used to store bitmap digital images.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>GIF</td><td>4</td><td>Specifies the Graphics Interchange Format (GIF), known for its support of both static and animated images with a limited color palette.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ANIM_GIF</td><td>5</td><td>Specifically denotes an animated GIF image format, allowing for multiple frames to be displayed in sequence.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>PNG</td><td>0</td><td>Specifies the Portable Network Graphics (PNG) image format, known for lossless compression and support for transparency.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>JPEG</td><td>1</td><td>Specifies the Joint Photographic Experts Group (JPEG) image format, commonly used for photographs due to its lossy compression.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>SVG</td><td>2</td><td>Specifies the Scalable Vector Graphics (SVG) format, an XML-based vector image format for two-dimensional graphics with support for interactivity and animation.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>BMP</td><td>3</td><td>Specifies the Bitmap (BMP) image format, a raster graphics image file format used to store bitmap digital images.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>GIF</td><td>4</td><td>Specifies the Graphics Interchange Format (GIF), known for its support of both static and animated images with a limited color palette.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ANIM_GIF</td><td>5</td><td>Specifically denotes an animated GIF image format, allowing for multiple frames to be displayed in sequence.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="alignment">Alignment</h3>
@@ -878,237 +884,282 @@
           <tr><th>Name</th><th>Value</th><th>Description</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>ALIGN_CENTER</td><td>0</td><td>Aligns content to the center of the widget's bounding box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_TOP</td><td>1</td><td>Aligns content to the top of the widget's bounding box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_BOTTOM</td><td>2</td><td>Aligns content to the bottom of the widget's bounding box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_LEFT</td><td>3</td><td>Aligns content to the left of the widget's bounding box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_RIGHT</td><td>4</td><td>Aligns content to the right of the widget's bounding box.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_INSIDE</td><td>5</td><td>Aligns content within the widget's interior, respecting padding.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_CLIP</td><td>6</td><td>Clips content that extends beyond the widget's boundaries.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>ALIGN_WRAP</td><td>7</td><td>Wraps text content to multiple lines if it exceeds the widget's width.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>TEXT_OVER_IMAGE</td><td>8</td><td>Displays text content over an image within the same widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
-          <tr><td>IMAGE_OVER_TEXT</td><td>9</td><td>Displays an image over text content within the same widget.</td><td><span class="file-link">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_CENTER</td><td>0</td><td>Aligns content to the center of the widget's bounding box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_TOP</td><td>1</td><td>Aligns content to the top of the widget's bounding box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_BOTTOM</td><td>2</td><td>Aligns content to the bottom of the widget's bounding box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_LEFT</td><td>3</td><td>Aligns content to the left of the widget's bounding box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_RIGHT</td><td>4</td><td>Aligns content to the right of the widget's bounding box.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_INSIDE</td><td>5</td><td>Aligns content within the widget's interior, respecting padding.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_CLIP</td><td>6</td><td>Clips content that extends beyond the widget's boundaries.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>ALIGN_WRAP</td><td>7</td><td>Wraps text content to multiple lines if it exceeds the widget's width.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>TEXT_OVER_IMAGE</td><td>8</td><td>Displays text content over an image within the same widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
+          <tr><td>IMAGE_OVER_TEXT</td><td>9</td><td>Displays an image over text content within the same widget.</td><td><span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></td></tr>
         </tbody>
       </table>
       <h3 id="visual-schemes">Visual Schemes</h3>
+      <small>See <a href="#usescheme">useScheme</a></small>
       <p>Visual style schemes for the UI.</p>
       <table>
         <thead>
           <tr><th>Name</th><th>Value</th><th>Defined In</th></tr>
         </thead>
         <tbody>
-          <tr><td>GTK</td><td>0</td><td><span class="file-link">mjui/utils.mojo</span></td></tr>
-          <tr><td>GLEAM</td><td>1</td><td><span class="file-link">mjui/utils.mojo</span></td></tr>
-          <tr><td>PLASTIC</td><td>2</td><td><span class="file-link">mjui/utils.mojo</span></td></tr>
+          <tr><td>GTK</td><td>0</td><td><span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></td></tr>
+          <tr><td>GLEAM</td><td>1</td><td><span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></td></tr>
+          <tr><td>PLASTIC</td><td>2</td><td><span class="file-link" title="Source file (not a link)">mjui/utils.mojo</span></td></tr>
         </tbody>
       </table>
       <pre><code class="language-python">useScheme(GTK)
 </code></pre>
+
       <h3 id="getEventNameFromNum"><code class="language-python">getEventNameFromNum(num: Int) -&gt; String</code></h3>
       <p>Returns the string name corresponding to an integer event type number. This utility function is helpful for debugging and logging event information.</p>
-      <p>Defined in: <span class="file-link">mjui/const.mojo</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/const.mojo</span></p>
       <pre><code class="language-python">var name = getEventNameFromNum(1)  # "MJUI_PUSH"
 </code></pre>
       <h2 id="ffi-bindings-mojoc">FFI Bindings (Mojo/C++)</h2>
       <h3 id="widget-management">Widget Management</h3>
       <h4 id="mjuigrabevent"><code class="language-python">mjuiGrabEvent() -&gt; int64_t</code></h4>
-      <p>Retrieves the next event from the event queue. The returned <code>int64_t</code> combines the widget ID and event type.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Retrieves the next event from the event queue. The returned <code>int64_t</code> combines the widget ID and event type. Returns -2 if no event is available.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">var event = mjuiGrabEvent()
 </code></pre>
       <h4 id="mjuishowwidget"><code class="language-python">mjuiShowWidget(widget)</code></h4>
       <p>Makes the given FLTK <code>widget</code> visible.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiShowWidget(my_button)
 </code></pre>
       <h4 id="mjuihidewidget"><code class="language-python">mjuiHideWidget(widget)</code></h4>
       <p>Hides the given FLTK <code>widget</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiHideWidget(my_label)
 </code></pre>
       <h4 id="mjuiredraw"><code class="language-python">mjuiRedraw(widget)</code></h4>
       <p>Forces the given FLTK <code>widget</code> to redraw itself immediately, updating its appearance on the screen.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiRedraw(my_input)
 </code></pre>
       <h4 id="mjuisetwidgetcolor"><code class="language-python">mjuiSetWidgetColor(widget, color)</code></h4>
       <p>Sets the background color of the specified FLTK <code>widget</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiSetWidgetColor(my_button, rgb(255, 0, 0))
 </code></pre>
       <h4 id="mjuisetwidgettextcolor"><code class="language-python">mjuiSetWidgetTextColor(widget, color)</code></h4>
       <p>Sets the color of the text label for the specified FLTK <code>widget</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiSetWidgetTextColor(my_label, rgb(0, 0, 0))
 </code></pre>
       <h4 id="mjuisetwidgetselectioncolor"><code class="language-python">mjuiSetWidgetSelectionColor(widget, color)</code></h4>
       <p>Sets the selection color for the FLTK <code>widget</code>, typically used for highlighting selected text in input fields or selected items in lists.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiSetWidgetSelectionColor(my_input, rgb(0, 128, 255))
 </code></pre>
       <h4 id="mjuisetwidgetbox"><code class="language-python">mjuiSetWidgetBox(widget, box)</code></h4>
       <p>Applies a specific box type (<code>Fl_Boxtype</code>) to the FLTK <code>widget</code>, defining its border and background style.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiSetWidgetBox(my_button, MJUI_FLAT_BOX)
 </code></pre>
       <h4 id="mjuisetwidgetlabel"><code class="language-python">mjuiSetWidgetLabel(widget, label)</code></h4>
       <p>Sets the text <code>label</code> for the specified FLTK <code>widget</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiSetWidgetLabel(my_label, convertStringToBytes("New Label"))
 </code></pre>
       <h4 id="begin_widget_append"><code class="language-python">BEGIN_WIDGET_APPEND(group)</code></h4>
       <p>Marks the beginning of adding child widgets to an FLTK <code>group</code> widget.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">BEGIN_WIDGET_APPEND(my_layout)
 // Add widgets here
 END_WIDGET_APPEND(my_layout)
 </code></pre>
       <h4 id="end_widget_append"><code class="language-python">END_WIDGET_APPEND(group)</code></h4>
       <p>Marks the end of adding child widgets to an FLTK <code>group</code> widget.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">END_WIDGET_APPEND(my_layout)
 </code></pre>
       <h4 id="mjuigetwidgetheight"><code class="language-python">mjuiGetWidgetHeight(widget)</code></h4>
       <p>Returns the current height of the specified FLTK <code>widget</code> in pixels.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">var h = mjuiGetWidgetHeight(my_button)
 </code></pre>
       <h4 id="mjuigetwidgetwidth"><code class="language-python">mjuiGetWidgetWidth(widget)</code></h4>
       <p>Returns the current width of the specified FLTK <code>widget</code> in pixels.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">var w = mjuiGetWidgetWidth(my_label)
 </code></pre>
       <h4 id="mjuiwindowsetresizable"><code class="language-python">mjuiWindowSetResizable(window, widget)</code></h4>
       <p>Makes a specific <code>widget</code> within an <code>Fl_Window</code> resizable, allowing it to adapt to window resizing.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiWindowSetResizable(my_window, my_layout)
 </code></pre>
       <h4 id="mjuiapplyimage"><code class="language-python">mjuiApplyImage(widget, image)</code></h4>
       <p>Applies an <code>Fl_Image</code> to an FLTK <code>widget</code>, typically used for buttons, labels, or custom drawing areas.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">var img = mjuiLoadImg(100, 100, PNG, convertStringToBytes("logo.png"))
 mjuiApplyImage(my_label, img)
 </code></pre>
       <h4 id="mjuiimagescale"><code class="language-python">mjuiImageScale(img, width, height, proportional)</code></h4>
       <p>Scales an <code>Fl_Image</code> to the desired <code>width</code> and <code>height</code>. If <code>proportional</code> is <code>1</code>, the image will be scaled maintaining its aspect ratio.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
       <pre><code class="language-python">mjuiImageScale(img, 200, 200, 1)
 </code></pre>
       <h3 id="window-management">Window Management</h3>
       <h4 id="mjuicreatewindow"><code class="language-python">mjuiCreateWindow(width, height, resize, fullscreen, no_border, title_r)</code></h4>
       <p>Creates a new FLTK <code>Fl_Double_Window</code> with specified <code>width</code>, <code>height</code>, and options for <code>resize</code>ability, <code>fullscreen</code> mode, <code>no_border</code>, and a <code>title</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
       <pre><code class="language-python">var window = mjuiCreateWindow(800, 600, 1, 0, 0, convertStringToBytes("My App"))
 </code></pre>
       <h4 id="mjuiwindowtitleset"><code class="language-python">mjuiWindowTitleSet(window, new_title_r)</code></h4>
       <p>Sets the title of the given <code>Fl_Double_Window</code> to <code>new_title_r</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
       <pre><code class="language-python">mjuiWindowTitleSet(window, convertStringToBytes("New Title"))
 </code></pre>
       <h4 id="mjuiwindowvisibilitystatus"><code class="language-python">mjuiWindowVisibilityStatus(window, condition)</code></h4>
       <p>Returns the visibility status of the <code>window</code>. <code>condition</code> can be <code>WINDOW_VISIBLE</code> (0) or <code>WINDOW_MINIMIZED</code> (1). Returns 1 if true, 0 if false, -1 if condition is invalid.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
       <pre><code class="language-python">var is_visible = mjuiWindowVisibilityStatus(window, 0)  # 0 = WINDOW_VISIBLE
 </code></pre>
       <h4 id="mjuiwindowpositionset"><code class="language-python">mjuiWindowPositionSet(window, x, y)</code></h4>
       <p>Sets the top-left position of the <code>Fl_Double_Window</code> on the screen to <code>(x, y)</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Window/MJUIWindow.cc</span></p>
       <pre><code class="language-python">mjuiWindowPositionSet(window, 100, 100)
 </code></pre>
       <h3 id="button--input-widgets">Button & Input Widgets</h3>
       <h4 id="mjuicreatebutton"><code class="language-python">mjuiCreateButton(w, h, x, y, id, label_r)</code></h4>
       <p>Creates a new custom FLTK <code>Button</code> widget at <code>(x, y)</code> with specified <code>width</code>, <code>height</code>, <code>id</code>, and a <code>label</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
       <pre><code class="language-python">var button = mjuiCreateButton(100, 30, 10, 10, 1, convertStringToBytes("Click Me"))
 </code></pre>
       <h4 id="mjuicreatecheckbutton"><code class="language-python">mjuiCreateCheckButton(w, h, x, y, id, label_r)</code></h4>
       <p>Creates a new custom FLTK <code>MJUI_CheckButton</code> widget at <code>(x, y)</code> with specified <code>width</code>, <code>height</code>, <code>id</code>, and a <code>label</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
       <pre><code class="language-python">var check = mjuiCreateCheckButton(100, 30, 10, 50, 2, convertStringToBytes("Check Me"))
 </code></pre>
       <h4 id="mjuicheckbuttongetstate"><code class="language-python">mjuiCheckButtonGetState(checkButton)</code></h4>
       <p>Returns the current state of a <code>MJUI_CheckButton</code> (1 if checked, 0 if unchecked).</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Button/MJUIButton.cc</span></p>
       <pre><code class="language-python">var state = mjuiCheckButtonGetState(check)
 </code></pre>
       <h4 id="mjuicreateinput"><code class="language-python">mjuiCreateInput(x, y, w, h, id, numOnly, label_r)</code></h4>
       <p>Creates a single-line <code>Input</code> field. <code>numOnly</code> (1 for numeric only, 0 for any text) and <code>label</code> (placeholder) are configurable.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">var input = mjuiCreateInput(10, 90, 200, 30, 3, 0, convertStringToBytes("Enter text..."))
 </code></pre>
       <h4 id="mjuicreatemultilineinput"><code class="language-python">mjuiCreateMultilineInput(x, y, w, h, id, label_r)</code></h4>
       <p>Creates a multiline <code>MultiLineInput</code> field with a placeholder <code>label</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">var multi = mjuiCreateMultilineInput(10, 130, 200, 60, 4, convertStringToBytes("Multiline..."))
 </code></pre>
       <h4 id="mjuisetinputvalue"><code class="language-python">mjuiSetInputValue(input, value)</code></h4>
       <p>Sets the current <code>value</code> (text) of an FLTK <code>Fl_Input</code> widget.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">mjuiSetInputValue(input, convertStringToBytes("Hello"))
 </code></pre>
       <h3 id="label--image-widgets">Label & Image Widgets</h3>
       <h4 id="mjuicreatelabel"><code class="language-python">mjuiCreateLabel(x, y, width, height, id, text)</code></h4>
       <p>Creates a new custom FLTK <code>MJUILabel</code> widget at <code>(x, y)</code> with specified <code>width</code>, <code>height</code>, <code>id</code>, and <code>text</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
       <pre><code class="language-python">var label = mjuiCreateLabel(10, 10, 200, 30, 5, convertStringToBytes("Hello World"))
 </code></pre>
       <h4 id="mjuisettextproperties"><code class="language-python">mjuiSetTextProperties(label, size, color, type)</code></h4>
       <p>Sets the font <code>size</code>, <code>color</code>, and <code>type</code> (<code>MJUI_LABEL_TYPE_NORMAL</code>, etc.) of the text for an <code>MJUILabel</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
       <pre><code class="language-python">mjuiSetTextProperties(label, 14, rgb(0, 0, 0), MJUI_LABEL_TYPE_NORMAL)
 </code></pre>
       <h4 id="mjuitextalign"><code class="language-python">mjuiTextAlign(label, alignment)</code></h4>
       <p>Sets the text <code>alignment</code> within an <code>MJUILabel</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
       <pre><code class="language-python">mjuiTextAlign(label, ALIGN_CENTER)
 </code></pre>
       <h4 id="mjuiloadimg"><code class="language-python">mjuiLoadImg(width, height, imgType, path)</code></h4>
       <p>Loads an image from the specified <code>path</code> with desired <code>width</code>, <code>height</code>, and <code>imgType</code> (e.g., <code>PNG</code>, <code>JPEG</code>, <code>SVG</code>, <code>GIF</code>, <code>ANIM_GIF</code>). Returns an <code>Fl_Image</code> pointer.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Label/MJUILabel.cc</span></p>
       <pre><code class="language-python">var img = mjuiLoadImg(100, 100, PNG, convertStringToBytes("logo.png"))
 </code></pre>
       <h3 id="layouts--containers">Layouts & Containers</h3>
       <h4 id="mjuicreatelayoutflex"><code class="language-python">mjuiCreateLayoutFlex(x, y, w, h, dir)</code></h4>
       <p>Creates a new FLTK <code>MJUI_Flex</code> layout container at <code>(x, y)</code> with specified <code>width</code>, <code>height</code>, and layout <code>dir</code>ection (<code>MJUI_MJUIEX_HORIZONTAL</code> or <code>MJUI_MJUIEX_VERTICAL</code>).</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">var layout = mjuiCreateLayoutFlex(0, 0, 800, 600, MJUI_MJUIEX_VERTICAL)
 </code></pre>
       <h4 id="mjuisetflexresize"><code class="language-python">mjuiSetFlexResize(l, r)</code></h4>
       <p>Sets the resize <code>direction</code> for a <code>MJUI_Flex</code> layout. <code>r</code> is <code>RESIZE_XY</code>, <code>RESIZE_XONLY</code>, or <code>RESIZE_YONLY</code>.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">mjuiSetFlexResize(layout, RESIZE_XY)
 </code></pre>
       <h4 id="mjuisetflexmargingapsettings"><code class="language-python">mjuiSetFlexMarginGapSettings(l, margin, gap)</code></h4>
       <p>Sets the <code>margin</code> (spacing around the layout) and <code>gap</code> (spacing between child widgets) for a <code>MJUI_Flex</code> layout. Pass -1 for either to keep current value.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">mjuiSetFlexMarginGapSettings(layout, 10, 5)
 </code></pre>
       <h4 id="mjuisetflex"><code class="language-python">mjuiSetFlex(l, w, span)</code></h4>
       <p>Sets the flex <code>span</code> for a specific <code>widget</code> within a <code>MJUI_Flex</code> layout. The <code>span</code> determines how much space the widget occupies relative to other flex items.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">mjuiSetFlex(layout, my_button, 2)
 </code></pre>
       <h4 id="mjuisetmarginexplicit"><code class="language-python">mjuiSetMarginExplicit(l, left, top, right, bottom)</code></h4>
       <p>Sets explicit <code>left</code>, <code>top</code>, <code>right</code>, and <code>bottom</code> margins for a <code>MJUI_Flex</code> layout.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">mjuiSetMarginExplicit(layout, 5, 5, 5, 5)
 </code></pre>
       <h4 id="mjuiflexcalculatelayout"><code class="language-python">mjuiFlexCalculateLayout(l)</code></h4>
       <p>Forces the <code>MJUI_Flex</code> layout to recalculate and apply its child widget positions and sizes based on its current properties.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/MJUILayouts.cc</span></p>
       <pre><code class="language-python">mjuiFlexCalculateLayout(layout)
 </code></pre>
       <h4 id="mjuiscrollcontainer"><code class="language-python">mjuiScrollContainer(x, y, w, h)</code></h4>
       <p>Creates a new <code>Fl_Scroll</code> container widget at <code>(x, y)</code> with specified <code>width</code> and <code>height</code>, enabling scrollability for its children.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
       <pre><code class="language-python">var scroll = mjuiScrollContainer(0, 0, 400, 300)
 </code></pre>
       <h4 id="mjuiscrollsetbarbgcolor"><code class="language-python">mjuiScrollSetBarBGColor(s, c, sbar)</code></h4>
       <p>Sets the background <code>color</code> of the scroll bar for an <code>Fl_Scroll</code> container. <code>sbar</code> selects which scroll bar: 0 for vertical, 1 for horizontal, 2 for both.</p>
-      <p>Defined in: <span class="file-link">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
       <pre><code class="language-python">mjuiScrollSetBarBGColor(scroll, rgb(220, 220, 220), 0)
+</code></pre>
+      <h4 id="mjuiscrollsetbarfgcolor"><code class="language-python">mjuiScrollSetBarFGColor(s, c, sbar)</code></h4>
+      <p>Sets the foreground color of the scroll bar for an <code>Fl_Scroll</code> container. <code>sbar</code> selects which scroll bar: 0 for vertical, 1 for horizontal, 2 for both.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
+      <pre><code class="language-python">mjuiScrollSetBarFGColor(scroll, rgb(100, 100, 100), 0)
+</code></pre>
+      <h4 id="mjuiscrollby"><code class="language-python">mjuiScrollBy(s, x, y)</code></h4>
+      <p>Scrolls the <code>Fl_Scroll</code> container by <code>x</code> pixels horizontally and <code>y</code> pixels vertically from its current position.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Layout/Containers.cc</span></p>
+      <pre><code class="language-python">mjuiScrollBy(scroll, 0, 50)  # Scrolls down by 50 pixels
+</code></pre>
+      <h3 id="event-loop--utility">Event Loop & Utility</h3>
+      <h4 id="mjuigrabevent"><code class="language-python">mjuiGrabEvent() -&gt; int64_t</code></h4>
+      <p>Retrieves the next event from the event queue. The returned <code>int64_t</code> combines the widget ID and event type. Returns -2 if no event is available.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <pre><code class="language-python">var event = mjuiGrabEvent()
+</code></pre>
+      <h4 id="fl_check"><code class="language-python">fl_check() -&gt; Int</code></h4>
+      <p>Processes any pending FLTK events and returns 1 if there are still events to process, 0 otherwise. Used to keep the UI responsive without blocking.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <pre><code class="language-python">while fl_check():
+    # Do background work
+</code></pre>
+      <h4 id="fl_ready"><code class="language-python">fl_ready() -&gt; Int</code></h4>
+      <p>Checks if there are any FLTK events ready to be processed. Returns 1 if events are ready, 0 otherwise.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <pre><code class="language-python">if fl_ready() == 1:
+    fl_check()
+</code></pre>
+      <h4 id="mjuieventkey"><code class="language-python">mjuiEventKey() -&gt; Int</code></h4>
+      <p>Returns the integer key code of the most recent keyboard event. Useful for custom key handling in event-driven code.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <pre><code class="language-python">var key = mjuiEventKey()
+</code></pre>
+      <h4 id="usescheme"><code class="language-python">useScheme(scheme: Int)</code></h4>
+      <p>Sets the global FLTK visual scheme. <code>scheme</code> can be <code>GTK</code> (0), <code>GLEAM</code> (1), or <code>PLASTIC</code> (2).</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/BaseWidgetHelpers.cc</span></p>
+      <pre><code class="language-python">useScheme(GTK)
+useScheme(GLEAM)
+useScheme(PLASTIC)
 </code></pre>
     </main>
   </div>
+  <footer>
+    CombustUI-Mojo &copy; 2024. All rights reserved. | <a href="https://github.com/your-repo" style="color:inherit;text-decoration:underline;">GitHub</a>
+  </footer>
 </body>
 </html>
