@@ -1,4 +1,5 @@
 {
+  "?": "Auto-generated using maplib",
   "mjuiGrabEvent": {
     "returns": "Int",
     "arguments": {}

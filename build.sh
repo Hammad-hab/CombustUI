@@ -1,3 +1,5 @@
+set -e
+
 cd mjui/fltk_bindings/libc/
 echo "Compiling mjui-fltk bindings..."
 

@@ -122,7 +122,9 @@ files = glob.glob('*/**/*.hh', recursive=True)
 res = subprocess.run(['ls'] + files, capture_output=True)
 header_files = (res.stdout).decode('utf-8').splitlines()
 
-ffi_map = {}
+ffi_map = {
+    '?': 'Auto-generated using maplib'
+}
 
 # Build the entire FFI map by iterating through each header
 for file in header_files:

@@ -3,7 +3,6 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
-import stat
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
 build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh'
