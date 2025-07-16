@@ -3,7 +3,6 @@ A tiny script that takes a .map.gen and converts it to ffi bindings
 """
 
 import json as j  # Import JSON module with alias `j`
-import copy
 import sys
 
 # === READ COMMAND LINE ARGUMENTS ===
@@ -34,7 +33,8 @@ if File:
                     
         # === LOOP OVER EACH FUNCTION IN THE MAP ===
         for key, value in parsed_contents.items():
-
+            if key == '?':
+                continue
             # Build the argument list as `name: Type`
             args = [f"{arg_name}: {dtype}" for arg_name, dtype in value['arguments'].items()]
             args_str = ', '.join(args)

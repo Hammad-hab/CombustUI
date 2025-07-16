@@ -3,7 +3,6 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
-import stat
 
 get_started = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo'
 build_fltk = 'https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh'
@@ -13,7 +12,6 @@ OUT_FILE = 'app.mojo'
 def install_linux_dependencies():
     # Try to detect package manager
     subprocess.run(['curl', '-L', build_fltk, '-o', './build_fltk1.4.sh'], check=True)
-    st = os.stat('./build_fltk1.4.sh')
     os.chmod("./build_fltk1.4.sh", 0o755)
     process = subprocess.run(['./build_fltk1.4.sh'], shell=True, check=True)
     if process.returncode != 0:
@@ -29,13 +27,20 @@ def pixi_magic():
 
 if sys.platform == 'darwin':
     # Check for brew
-    homebrew = subprocess.run(['which', 'brew'], capture_output=True, text=True)
-    if homebrew.returncode != 0:
-        raise SystemError('Homebrew not installed. Install Homebrew and try again')
+    hasFLTK = False
+    with open('~/.zshrc', 'r') as rc:
+        if 'COMBUSTUI_DLL_PATH' in rc.read():
+            print('FLTK is already installed, moving on...')
+            hasFLTK=True
+    
+    if not hasFLTK:    
+        homebrew = subprocess.run(['which', 'brew'], capture_output=True, text=True)
+        if homebrew.returncode != 0:
+            raise SystemError('Homebrew not installed. Install Homebrew and try again')
 
-    # Install FLTK (always try, brew is idempotent)
-    print("Installing FLTK...")
-    subprocess.run(['brew', 'install', 'fltk'])
+        # Install FLTK (always try, brew is idempotent)
+        print("Installing FLTK...")
+        subprocess.run(['brew', 'install', 'fltk'])
 
     # Clone repo
     subprocess.run(['git', 'clone', 'https://github.com/Hammad-hab/CombustUI.git'])
@@ -79,7 +84,23 @@ if sys.platform == 'darwin':
     print(f"Run: source ~/.zshrc before running pixi shell | magic shell")
 
 elif sys.platform.startswith('linux'):
-    install_linux_dependencies()
+    hasFLTK = False
+    dll_path = str(Path.cwd() / 'mjui/fltk_bindings/libc/out/mjui.so')
+    bashrc = os.path.expanduser('~/.bashrc')
+    zshrc = os.path.expanduser('~/.zshrc')
+
+    if os.path.exists(zshrc):
+        rc_file = zshrc
+    else:
+        rc_file = bashrc
+        
+    with open(rc_file, 'r') as rc:
+        if 'COMBUSTUI_DLL_PATH' in rc.read():
+            print('FLTK is already installed, moving on...')
+            hasFLTK=True
+
+    if not hasFLTK:
+        install_linux_dependencies()
     # Clone repo
     subprocess.run(['git', 'clone', 'https://github.com/Hammad-hab/CombustUI.git'])
     user = subprocess.run(['git', 'config', 'user.name'], capture_output=True, text=True)
@@ -102,21 +123,14 @@ elif sys.platform.startswith('linux'):
         os.rmdir('./examples')
     except:
         print('Failed to remove scripts and examples')
-    # Setup environment variable in bashrc or zshrc
-    dll_path = str(Path.cwd() / 'mjui/fltk_bindings/libc/out/mjui.so')
-    bashrc = os.path.expanduser('~/.bashrc')
-    zshrc = os.path.expanduser('~/.zshrc')
 
-    if os.path.exists(zshrc):
-        rc_file = zshrc
+    if not hasFLTK:
+        print('Editing environment variables...')
+        with open(rc_file, 'a') as f:
+            f.write(f'\nexport COMBUSTUI_DLL_PATH="{dll_path}"\n')
+        print(f"Added COMBUSTUI_DLL_PATH to {rc_file}.")
     else:
-        rc_file = bashrc
-
-    print('Editing environment variables...')
-    with open(rc_file, 'a') as f:
-        f.write(f'\nexport COMBUSTUI_DLL_PATH="{dll_path}"\n')
-    print(f"Added COMBUSTUI_DLL_PATH to {rc_file}.")
-    os.system(f'source {rc_file}')
+        print('Env vars are already set, skipping....')
 
     # Clean up files
     for pattern in ('*.png', '*.jpeg', '*.md', 'CHANGELOG', 'LICENSE'):

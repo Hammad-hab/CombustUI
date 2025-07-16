@@ -19,4 +19,5 @@ app.mojo
 /cairo/*# magic environments
 .magic
 *.png
+!logo.png
 *.gif

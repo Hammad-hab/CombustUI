@@ -1,0 +1,538 @@
+<!-- Auto generated using CMBDoc -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CombustUI-Mojo Examples</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <style>
+    :root {
+      --bg-light: #f9f9fb;
+      --text-light: #222;
+      --header-bg-light: #22223b;
+      --header-text-light: #fff;
+      --nav-bg-light: #fff;
+      --nav-text-light: #22223b;
+      --nav-link-hover-light: #d64500;
+      --main-bg-light: #fff;
+      --border-light: #e0e0ef;
+      --heading-color-light: #22223b;
+      --subheading-color-light: #4a4e69;
+      --code-bg-light: #f4f4f8;
+      --code-text-light: #22223b;
+      --table-bg-light: #fafaff;
+      --table-even-row-light: #f7f7fa;
+      --example-bg-light: #f4f4f8;
+      --example-border-light: #ff7f00; /* Orange for example border */
+      --anchor-color-light: #ff7f00; /* Orange for anchors */
+      --link-color: #ff7f00;
+
+      /* Orange theme colors */
+      --primary-color: #ff7f00; /* Medium Orange */
+      --secondary-color: #ffa500; /* Darker Orange for accents */
+      --tertiary-color: #ffcc99; /* Lighter Orange */
+
+      /* Dark mode colors */
+      --bg-dark: #282c34;
+      --text-dark: #abb2bf;
+      --header-bg-dark: #21252b;
+      --header-text-dark: #e0e0e0;
+      --nav-bg-dark: #3a404b;
+      --nav-text-dark: #abb2bf;
+      --nav-link-hover-dark: #ff7f00;
+      --main-bg-dark: #323842;
+      --border-dark: #444a54;
+      --heading-color-dark: #e0e0e0;
+      --subheading-color-dark: #c0c5cd;
+      --code-bg-dark: #21252b;
+      --code-text-dark: #abb2bf;
+      --table-bg-dark: #3a404b;
+      --table-even-row-dark: #323842;
+      --example-bg-dark: #3a404b;
+      --example-border-dark: #ff7f00;
+      --anchor-color-dark: #ff7f00;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode {
+      --link-color: #ffa500;
+    }
+
+    header {
+      background: var(--primary-color); /* Header remains orange */
+      color: var(--header-text-light);
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+      transition: color 0.3s; /* Only transition text color */
+    }
+
+    body.dark-mode header {
+      color: var(--header-text-dark);
+      /* Background color is intentionally not changed for dark mode */
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0.5rem 0 0 0;
+      font-size: 1.1rem;
+      color: var(--header-text-light);
+    }
+
+    body.dark-mode header p {
+      color: var(--header-text-dark);
+    }
+
+    .container {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem 1rem;
+      gap: 2rem;
+    }
+    nav {
+      min-width: 270px;
+      max-width: 320px;
+      background: var(--nav-bg-light);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 1.5rem 1rem 1.5rem 1.5rem;
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem); /* Set max height to enable scrolling */
+      overflow-y: auto;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode nav {
+      background: var(--nav-bg-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    nav h2 {
+      font-size: 1.2rem;
+      margin-top: 0;
+      color: var(--subheading-color-light);
+      margin-bottom: 1rem;
+    }
+
+    body.dark-mode nav h2 {
+      color: var(--subheading-color-dark);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul ul {
+      margin-left: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    nav li {
+      margin-bottom: 0.3em;
+    }
+    nav a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    body.dark-mode nav a {
+      color: var(--link-color);
+    }
+
+    nav a:hover {
+      color: var(--nav-link-hover-light);
+      text-decoration: underline;
+    }
+
+    body.dark-mode nav a:hover {
+      color: var(--nav-link-hover-dark);
+    }
+
+    main {
+      flex: 1;
+      background: var(--main-bg-light);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 2rem 2.5rem 2rem 2.5rem;
+      min-width: 0;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    body.dark-mode main {
+      background: var(--main-bg-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      color: var(--heading-color-light);
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 0.2em;
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+      font-size: 2rem;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode h2 {
+      color: var(--heading-color-dark);
+      border-color: var(--border-dark);
+    }
+
+    h3 {
+      color: var(--subheading-color-light);
+      margin-top: 2em;
+      margin-bottom: 0.8em;
+      font-size: 1.3rem;
+      border-left: 4px solid var(--primary-color); /* Orange accent */
+      padding-left: 0.5em;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode h3 {
+      color: var(--subheading-color-dark);
+      border-color: var(--primary-color);
+    }
+
+    h4 {
+      color: var(--subheading-color-light);
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      font-size: 1.1rem;
+      margin-left: 0.5em;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    body.dark-mode h4 {
+      color: var(--subheading-color-dark);
+    }
+
+    h4 code {
+      background: var(--code-bg-light);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode h4 code {
+      background: var(--code-bg-dark);
+      color: var(--code-text-dark);
+    }
+
+    .anchor {
+      color: var(--anchor-color-light);
+      text-decoration: none;
+      margin-left: 0.3em;
+      font-size: 0.9em;
+      vertical-align: middle;
+      transition: color 0.3s;
+    }
+
+    body.dark-mode .anchor {
+      color: var(--anchor-color-dark);
+    }
+
+    code, pre {
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      font-size: 1em;
+      background: var(--code-bg-light);
+      color: var(--code-text-light);
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode code, body.dark-mode pre {
+      background: var(--code-bg-dark);
+      color: var(--code-text-dark);
+    }
+
+    pre {
+      padding: 1em;
+      margin: 1em 0;
+      overflow-x: auto;
+      border: 1px solid var(--border-light);
+      background: var(--code-bg-light);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    body.dark-mode pre {
+      border: 1px solid var(--border-dark);
+      background: var(--code-bg-dark);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 1.5em 0;
+      background: var(--table-bg-light);
+      transition: background 0.3s;
+    }
+
+    body.dark-mode table {
+      background: var(--table-bg-dark);
+    }
+
+    th, td {
+      border: 1px solid var(--border-light);
+      padding: 0.5em 0.8em;
+      text-align: left;
+      transition: border-color 0.3s;
+    }
+
+    body.dark-mode th, body.dark-mode td {
+      border-color: var(--border-dark);
+    }
+
+    th {
+      background: var(--code-bg-light);
+      color: var(--subheading-color-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode th {
+      background: var(--code-bg-dark);
+      color: var(--subheading-color-dark);
+    }
+
+    tr:nth-child(even) {
+      background: var(--table-even-row-light);
+      transition: background 0.3s;
+    }
+
+    body.dark-mode tr:nth-child(even) {
+      background: var(--table-even-row-dark);
+    }
+
+    .example {
+      background: var(--example-bg-light);
+      border-left: 4px solid var(--example-border-light);
+      padding: 0.7em 1em;
+      margin: 1em 0;
+      font-size: 0.98em;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode .example {
+      background: var(--example-bg-dark);
+      border-color: var(--example-border-dark);
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: var(--header-text-light);
+      text-align: center;
+      padding: 1.5em 0 1em 0;
+      margin-top: 3em;
+      font-size: 1em;
+      border-top: 1px solid var(--border-light);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode footer {
+      background: var(--secondary-color);
+      color: var(--header-text-dark);
+      border-color: var(--border-dark);
+    }
+
+    .theme-switch-wrapper {
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #fff;
+    }
+
+    body.dark-mode .theme-switch-wrapper {
+      color: #e0e0e0;
+    }
+
+    .theme-switch {
+      display: inline-block;
+      height: 28px;
+      position: relative;
+      width: 50px;
+    }
+
+    .theme-switch input {
+      display: none;
+    }
+
+    .slider {
+      background-color: #D3D3D3; /* Lighter grey for the switch background in light mode */
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      background-color: #fff; /* Pure white for the slider circle */
+      bottom: 4px;
+      content: "";
+      height: 20px;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: 20px;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--primary-color); /* Orange when checked */
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    input:checked + .slider {
+      background-color: var(--header-bg-dark); /* Dark background when checked (dark mode) */
+    }
+
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      nav { position: static; max-width: 100%; margin-bottom: 2em; }
+      main { padding: 1.2rem 0.7rem; }
+      .theme-switch-wrapper {
+        position: static;
+        margin-top: 1rem;
+        justify-content: center;
+      }
+    }
+
+    /* Styles for the current navigation link */
+    .nav-active {
+        font-weight: bold;
+        color: var(--nav-link-hover-light) !important;
+    }
+    body.dark-mode .nav-active {
+        color: var(--nav-link-hover-dark) !important;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeSwitch = document.getElementById('theme-switch');
+      const currentTheme = localStorage.getItem('theme');
+
+      if (currentTheme === 'dark-mode') {
+        document.body.classList.add('dark-mode');
+        themeSwitch.checked = true;
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeSwitch.checked = false;
+      }
+
+      themeSwitch.addEventListener('change', () => {
+        if (themeSwitch.checked) {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark-mode');
+        } else {
+          document.body.classList.remove('dark-mode');
+          localStorage.removeItem('theme');
+        }
+      });
+
+      fetch('examples.json')
+        .then(response => response.json())
+        .then(examples => {
+          const examplesNav = document.getElementById('examples-nav');
+          const examplesContent = document.getElementById('examples-content');
+
+          examples.forEach(example => {
+            // Create navigation link
+            const navItem = document.createElement('li');
+            const navLink = document.createElement('a');
+            const id = example.Name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-*|-*$/g, '');
+            navLink.href = `#${id}`;
+            navLink.textContent = example.Name;
+            navItem.appendChild(navLink);
+            examplesNav.appendChild(navItem);
+
+            // Create content section
+            const section = document.createElement('h2');
+            section.id = id;
+            section.textContent = example.Name;
+            examplesContent.appendChild(section);
+
+            const description = document.createElement('p');
+            description.textContent = example.Description;
+            examplesContent.appendChild(description);
+
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+            code.classList.add('language-python');
+            code.textContent = example.Code.join('\n');
+            pre.appendChild(code);
+            examplesContent.appendChild(pre);
+          });
+          hljs.highlightAll(); // Re-highlight code blocks after dynamic content is added
+        })
+        .catch(error => console.error('Error loading examples:', error));
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <img src="./images/logo.png" alt="CombustUI-Mojo Logo" onerror="this.style.display='none'" />
+    <p>Explore various UI examples built with CombustUI-Mojo.</p>
+    <div class="theme-switch-wrapper">
+      <span>Light</span>
+      <label class="theme-switch" for="theme-switch">
+        <input type="checkbox" id="theme-switch" />
+        <div class="slider round"></div>
+      </label>
+      <span>Dark</span>
+    </div>
+  </header>
+  <div class="container">
+    <nav>
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="API_REFERENCE.html">API Reference</a></li>
+        <li><a href="examples.html" class="nav-active">Examples</a>
+          <ul id="examples-nav">
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <main id="examples-content">
+    </main>
+  </div>
+  <footer>
+    CombustUI-Mojo &copy; 2024. All rights reserved. | <a href="https://github.com/your-repo" style="color:inherit;text-decoration:underline;">GitHub</a>
+  </footer>
+</body>
+</html> 

@@ -1,7 +1,5 @@
-# CombustUI – Lightweight GUI Bindings for Mojo
-
 <p align="center">
-    <img src="./logo.jpeg" alt="drawing" width="200" style="border-radius: 10px"/>
+    <img src="docs/images/logo.png" alt="drawing" width="500" style="border-radius: 10px"/>
 </p>
 
 <br/>

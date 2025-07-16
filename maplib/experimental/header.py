@@ -11,21 +11,31 @@ from time import time
 # Extracts the function name and return type from a function declaration line
 def get_name_ret_type(function: str):
     namepret = function.split(" ")  # split the line by spaces
-    argstart = namepret[1].index('(')  # find '(' to separate name from parameters
-    ret = namepret[0].strip()  # first part is the return type
+    argst = 1
+    if len(namepret) > 2 and namepret[0] == 'const' and namepret[1] == 'char' or namepret[1] == 'char*':
+        argst = 2
+
+    argstart = namepret[argst].index('(')  # find '(' to separate name from parameters
     
+    if argst > 1:
+        ret = namepret[0].strip() + " " + namepret[1].strip()  # first part is the return type
+    else:
+        ret = namepret[0].strip()
+        
     # Map C return types to your target types
     if ret == 'void':
         ret = 'c_void'
     elif 'int' in ret:
         ret = 'Int'
+    elif 'const char*' in ret or "char*" in ret:
+        ret = "StringBytes"
     elif "*" in ret:
         if "Fl_Image" in ret:
             ret = 'Int32'
         else:
             ret = 'FLTK_WIDGET_POINTER'
     
-    return namepret[1][:argstart], ret  # return (function_name, return_type)
+    return namepret[argst][:argstart], ret  # return (function_name, return_type)
 
 # Parses the arguments inside a function declaration and maps them to mojo types
 def get_args(function: str):
@@ -60,12 +70,12 @@ def get_args(function: str):
                 mojo_args[arg[-1].replace("*", '')] = 'Int'
                 continue
             
-            if 'int8_t' in arg[0]: 
+            if 'int8_t' in arg[0] : 
                 mojo_args[arg[-1].replace("*", '')] = 'StringBytes'
                 continue
             
             # Handle pointer or widget types
-            if 'Fl_Image' not in arg[0] and ("Fl" in arg[0] or "MJUI" in arg[0]):
+            if 'Fl_Image' not in arg[0] and ("Fl" in arg[0] or "MJUI" in arg[0] or '*' in arg[1]):
                 mojo_args[arg[-1].replace("*", '')] = 'FLTK_WIDGET_POINTER'
                 continue
             elif 'Fl_Image' in arg[0]:
@@ -112,7 +122,9 @@ files = glob.glob('*/**/*.hh', recursive=True)
 res = subprocess.run(['ls'] + files, capture_output=True)
 header_files = (res.stdout).decode('utf-8').splitlines()
 
-ffi_map = {}
+ffi_map = {
+    '?': 'Auto-generated using maplib'
+}
 
 # Build the entire FFI map by iterating through each header
 for file in header_files:
