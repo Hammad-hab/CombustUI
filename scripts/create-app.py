@@ -13,7 +13,6 @@ OUT_FILE = 'app.mojo'
 def install_linux_dependencies():
     # Try to detect package manager
     subprocess.run(['curl', '-L', build_fltk, '-o', './build_fltk1.4.sh'], check=True)
-    st = os.stat('./build_fltk1.4.sh')
     os.chmod("./build_fltk1.4.sh", 0o755)
     process = subprocess.run(['./build_fltk1.4.sh'], shell=True, check=True)
     if process.returncode != 0:
@@ -29,13 +28,20 @@ def pixi_magic():
 
 if sys.platform == 'darwin':
     # Check for brew
-    homebrew = subprocess.run(['which', 'brew'], capture_output=True, text=True)
-    if homebrew.returncode != 0:
-        raise SystemError('Homebrew not installed. Install Homebrew and try again')
+    hasFLTK = False
+    with open('~/.zshrc', 'r') as rc:
+        if 'COMBUSTUI_DLL_PATH' in rc.read():
+            print('FLTK is already installed, moving on...')
+            hasFLTK=True
+    
+    if not hasFLTK:    
+        homebrew = subprocess.run(['which', 'brew'], capture_output=True, text=True)
+        if homebrew.returncode != 0:
+            raise SystemError('Homebrew not installed. Install Homebrew and try again')
 
-    # Install FLTK (always try, brew is idempotent)
-    print("Installing FLTK...")
-    subprocess.run(['brew', 'install', 'fltk'])
+        # Install FLTK (always try, brew is idempotent)
+        print("Installing FLTK...")
+        subprocess.run(['brew', 'install', 'fltk'])
 
     # Clone repo
     subprocess.run(['git', 'clone', 'https://github.com/Hammad-hab/CombustUI.git'])
