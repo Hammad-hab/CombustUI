@@ -43,3 +43,10 @@
     - `mjuiScrollSetBarFGColor`
     - `mjuiScrollScrollBy`
 
+- Added `/scripts`
+- Added `build_fltk1.4.sh` for installing and building FLTK1.4 on Linux systems
+- Added a better, zero-dependency `create-app.py` which gets a user up and running immediately (OS Support listed in `README.md`)
+- Added a `get_started.mojo` template which is used in new apps
+- Added `/docs`
+- Added `API_REFERENCE.html`
+- Added `EXAMPLES.html`
