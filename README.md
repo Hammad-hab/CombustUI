@@ -122,4 +122,4 @@ For now, the API is functional but as soon as the basics are completed, a struct
 * [X] Debian
 * [ ] Arch
 * [ ] RHEL
-  * [ ] CentOS
+  * [X] CentOS
