@@ -82,6 +82,8 @@ if sys.platform == 'darwin':
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell   
     print(f"Run: source ~/.zshrc before running pixi shell | magic shell")
+    print(f'Run ./build.sh to build and run your app after starting magic shell')
+    
 
 elif sys.platform.startswith('linux'):
     hasFLTK = False
@@ -140,6 +142,8 @@ elif sys.platform.startswith('linux'):
     subprocess.run(['curl', get_started, '-o', OUT_FILE])
     # Start shell
     print(f"Run: source ~/.zshrc before running pixi shell | magic shell")
+    print(f'Run ./build.sh to build and run your app after starting magic shell')
+    
 
 elif 'win' in sys.platform:
     print('Windows not supported')
