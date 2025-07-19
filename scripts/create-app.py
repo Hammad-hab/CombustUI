@@ -28,7 +28,7 @@ def pixi_magic():
 if sys.platform == 'darwin':
     # Check for brew
     hasFLTK = False
-    with open('~/.zshrc', 'r') as rc:
+    with open(os.expanduser('~/.zshrc'), 'r') as rc:
         if 'COMBUSTUI_DLL_PATH' in rc.read():
             print('FLTK is already installed, moving on...')
             hasFLTK=True
