@@ -33,4 +33,4 @@ if [ -z "$COMBUSTUI_DLL_PATH" ]; then
 fi
 
 echo "Successfully generating bindings..."
-mojo run --disable-warnings app.mojo
+mojo run --disable-warnings app.mojo # TODO Remove --disable-warnings and properly upgrade to 25.4
