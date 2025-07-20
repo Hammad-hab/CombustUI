@@ -8,6 +8,8 @@
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Multiline_Input.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Choice.H>
+
 
 #include <FL/Fl_PNG_Image.H>
 #include <FL/Fl_JPEG_Image.H>
@@ -30,8 +32,6 @@ extern "C" {
     #include "Input/MJUIInput.cc"
     #include "Layout/MJUILayouts.cc"
     #include "BaseWidgetHelpers.cc"
-
-    void set_id_button(Button *btn, long int id) {btn->setId(id);}
 
 #ifdef __cplusplus
 }

@@ -7,7 +7,7 @@
 #include <cstring>
 #include "string.h"
 
-Input::Input(int x, int y, int w, int h, long int nid, int numericInput, char *label) : Fl_Input(x, y, w, h, "")
+MJUI_Input::MJUI_Input(int x, int y, int w, int h, long int nid, int numericInput, char *label) : Fl_Input(x, y, w, h, "")
 {
     id = nid;
     isHovered = false;
@@ -20,12 +20,12 @@ Input::Input(int x, int y, int w, int h, long int nid, int numericInput, char *l
     value(placeholder);
 };
 
-void Input::setId(long int new_id)
+void MJUI_Input::setId(long int new_id)
 {
     id = new_id;
 }
 
-int Input::handle(int event)
+int MJUI_Input::handle(int event)
 {
     if (event == FL_FOCUS)
     {
@@ -44,32 +44,35 @@ int Input::handle(int event)
         }
     }
 
-    
     enqueueEvent(id, event);
-    if (event == FL_KEYBOARD && numOnly) {
+    if (event == FL_KEYBOARD && numOnly)
+    {
         int key = Fl::event_key();
 
         // TODO Add support for numpad numbers
-        if (key >= 48 && key <= 57 || key == FL_BackSpace) {
+        if (key >= 48 && key <= 57 || key == FL_BackSpace)
+        {
             Fl_Input::handle(event);
         }
-    } else {
+    }
+    else
+    {
         Fl_Input::handle(event);
     }
     return 1;
 }
 
-void Input::setBorderRadius(int radius)
+void MJUI_Input::setBorderRadius(int radius)
 {
     this->borderRadius = radius;
 }
 
-void Input::draw()
-{   
+void MJUI_Input::draw()
+{
     Fl_Input::draw();
 }
 
-MultiLineInput::MultiLineInput(int x, int y, int w, int h, long int nid, char *label) : Fl_Multiline_Input(x, y, w, h, "")
+MJUI_MultiLineInput::MJUI_MultiLineInput(int x, int y, int w, int h, long int nid, char *label) : Fl_Multiline_Input(x, y, w, h, "")
 {
     id = nid;
     isHovered = false;
@@ -81,12 +84,12 @@ MultiLineInput::MultiLineInput(int x, int y, int w, int h, long int nid, char *l
     value(placeholder);
 };
 
-void MultiLineInput::setId(long int new_id)
+void MJUI_MultiLineInput::setId(long int new_id)
 {
     id = new_id;
 }
 
-int MultiLineInput::handle(int event)
+int MJUI_MultiLineInput::handle(int event)
 {
     if (event == FL_FOCUS)
     {
@@ -104,43 +107,59 @@ int MultiLineInput::handle(int event)
             textcolor(placeHolderColor);
         }
     }
-   enqueueEvent(id, event);
+    enqueueEvent(id, event);
     Fl_Multiline_Input::handle(event);
     return 1;
 }
 
-void MultiLineInput::setBorderRadius(int radius)
+void MJUI_MultiLineInput::setBorderRadius(int radius)
 {
     this->borderRadius = radius;
 }
 
-void MultiLineInput::draw()
+void MJUI_MultiLineInput::draw()
 {
     Fl_Multiline_Input::draw();
 }
 
-const char *mjuiGrabInput(Input *ptr)
+const char *mjuiGrabInput(Fl_Input_ *ptr)
 {
     return ptr->value();
 }
 
-Input *mjuiCreateInput(int x, int y, int w, int h, long int id, int numOnly, int8_t *label_r)
+int mjuiGrabChoice(Fl_Choice *ptr)
+{
+    return ptr->value();
+}
+
+MJUI_Input *mjuiCreateInput(int x, int y, int w, int h, long int id, int numOnly, int8_t *label_r)
 {
     char *label = int8ToChar(label_r);
-    Input *in = new Input(x, y, w, h, id, numOnly, label);
+    MJUI_Input *in = new MJUI_Input(x, y, w, h, id, numOnly, label);
     return in;
 }
 
-
-MultiLineInput *mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t *label_r)
+MJUI_MultiLineInput *mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t *label_r)
 {
     char *label = int8ToChar(label_r);
-    MultiLineInput *in = new MultiLineInput(x, y, w, h, id, label);
+    MJUI_MultiLineInput *in = new MJUI_MultiLineInput(x, y, w, h, id, label);
     return in;
 }
 
-void mjuiSetInputValue(Fl_Input *input, int8_t *value)
+Fl_Choice *mjuiCreateChoice(int x, int y, int w, int h)
+{
+    Fl_Choice *choice = new Fl_Choice(x, y, w, h, "");
+    return choice;
+}
+
+void mjuiSetInputValue(MJUI_Input *input, int8_t *value)
 {
     char *vlu = int8ToChar(value);
     input->value(vlu);
+}
+
+void mjuiAddOptionToChoice(Fl_Choice* input, int8_t* choice)
+{
+     char *vlu = int8ToChar(choice);
+    input->add(vlu);
 }

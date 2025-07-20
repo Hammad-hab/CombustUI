@@ -569,6 +569,7 @@
                 <li><a href="#mjuicreatemultilineinput">mjuiCreateMultilineInput</a></li>
                 <li><a href="#mjuisetinputvalue">mjuiSetInputValue</a></li>
                 <li><a href="#mjuigrabinput">mjuiGrabInput</a></li>
+                <li><a href="#mjuigrabchoice">mjuiGrabChoice</a></li>
               </ul>
             </li>
             <li><a href="#label--image-widgets">Label & Image Widgets</a>
@@ -1046,6 +1047,11 @@ mjuiApplyImage(my_label, img)
       <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">var input = mjuiCreateInput(10, 90, 200, 30, 3, 0, convertStringToBytes("Enter text..."))
 </code></pre>
+<h4 id="mjuicreatechoice"><code class="language-python">mjuiCreateChoice(x, y, w, h)</code></h4>
+      <p>Creates a select dropdown. Options can be added using <code>mjuiAddOptionToChoice</code></p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <pre><code class="language-python">var input = mjuiCreateInput(10, 90, 200, 30, 3, 0, convertStringToBytes("Enter text..."))
+</code></pre>
       <h4 id="mjuicreatemultilineinput"><code class="language-python">mjuiCreateMultilineInput(x, y, w, h, id, label_r)</code></h4>
       <p>Creates a multiline <code>MultiLineInput</code> field with a placeholder <code>label</code>.</p>
       <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
@@ -1061,6 +1067,13 @@ mjuiApplyImage(my_label, img)
       <p>Gets the current <code>value</code> (text) of an FLTK <code>Fl_Input</code> widget.</p>
       <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
       <pre><code class="language-python">var bytes = mjuiGrabInput(input)
+var str = readFromStringBytes(bytes) # This is necessary since grab input returns bytes
+</code></pre>
+
+<h4 id="mjuigrabchoice"><code class="language-python">mjuiGrabChoice(input) -> Int</code></h4>
+      <p>Gets the current <code>index</code> (text) of the selected option in FLTK <code>Fl_Choice</code> widget.</p>
+      <p>Defined in: <span class="file-link" title="Source file (not a link)">mjui/fltk_bindings/libc/Input/MJUIInput.cc</span></p>
+      <pre><code class="language-python">var bytes = mjuiGrabChoice(input)
 var str = readFromStringBytes(bytes) # This is necessary since grab input returns bytes
 </code></pre>
 

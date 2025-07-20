@@ -128,10 +128,10 @@
   "mjuiCreateButton": {
     "returns": "FLTK_WIDGET_POINTER",
     "arguments": {
-      "w": "Int",
-      "h": "Int",
       "x": "Int",
       "y": "Int",
+      "w": "Int",
+      "h": "Int",
       "id": "Int32",
       "label_r": "StringBytes"
     }
@@ -139,10 +139,10 @@
   "mjuiCreateCheckButton": {
     "returns": "FLTK_WIDGET_POINTER",
     "arguments": {
-      "w": "Int",
-      "h": "Int",
       "x": "Int",
       "y": "Int",
+      "w": "Int",
+      "h": "Int",
       "id": "Int32",
       "label_r": "StringBytes"
     }
@@ -176,6 +176,15 @@
       "label_r": "StringBytes"
     }
   },
+  "mjuiCreateChoice": {
+    "returns": "FLTK_WIDGET_POINTER",
+    "arguments": {
+      "x": "Int",
+      "y": "Int",
+      "w": "Int",
+      "h": "Int"
+    }
+  },
   "mjuiSetInputValue": {
     "returns": "c_void",
     "arguments": {
@@ -187,6 +196,19 @@
     "returns": "StringBytes",
     "arguments": {
       "ptr": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiGrabChoice": {
+    "returns": "Int",
+    "arguments": {
+      "ptr": "FLTK_WIDGET_POINTER"
+    }
+  },
+  "mjuiAddOptionToChoice": {
+    "returns": "c_void",
+    "arguments": {
+      "input": "FLTK_WIDGET_POINTER",
+      "choice": "StringBytes"
     }
   },
   "mjuiCreateLabel": {
