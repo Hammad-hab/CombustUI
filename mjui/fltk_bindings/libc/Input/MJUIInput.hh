@@ -1,7 +1,7 @@
 #ifndef MJUIINPUT_H
 #define MJUIINPUT_H
 
-class Input : public Fl_Input, public BaseWidget {
+class MJUI_Input : public Fl_Input, public BaseWidget {
     public: 
         long int id;
         int borderRadius;
@@ -12,11 +12,11 @@ class Input : public Fl_Input, public BaseWidget {
         virtual void setId(long int new_id) override;
         virtual void setBorderRadius(int radius) override;
         virtual int handle(int event) override;
-        Input(int x, int y, int w, int h, long int nid, int numericInput, char* label);
+        MJUI_Input(int x, int y, int w, int h, long int nid, int numericInput, char* label);
         virtual void draw() override;
 };
 
-class MultiLineInput : public Fl_Multiline_Input, public BaseWidget {
+class MJUI_MultiLineInput : public Fl_Multiline_Input, public BaseWidget {
     public: 
         long int id;
         int borderRadius;
@@ -26,14 +26,18 @@ class MultiLineInput : public Fl_Multiline_Input, public BaseWidget {
         virtual void setId(long int new_id) override;
         virtual void setBorderRadius(int radius) override;
         virtual int handle(int event) override;
-        MultiLineInput(int x, int y, int w, int h, long int nid, char* label);
+        MJUI_MultiLineInput(int x, int y, int w, int h, long int nid, char* label);
         virtual void draw() override;
 };
 
 #define FFI
 
-Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int numOnly, int8_t* label_r);
-MultiLineInput* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r);
-void mjuiSetInputValue(Fl_Input* input, int8_t* value);
-const char* mjuiGrabInput(Input *ptr);
+MJUI_Input* mjuiCreateInput(int x, int y, int w, int h, long int id, int numOnly, int8_t* label_r);
+MJUI_MultiLineInput* mjuiCreateMultilineInput(int x, int y, int w, int h, long int id, int8_t* label_r);
+Fl_Choice* mjuiCreateChoice(int x, int y, int w, int h);
+void mjuiSetInputValue(MJUI_Input* input, int8_t* value);
+const char* mjuiGrabInput(Fl_Input_ *ptr);
+int mjuiGrabChoice(Fl_Choice *ptr);
+void mjuiAddOptionToChoice(Fl_Choice* input, int8_t* choice);
+
 #endif

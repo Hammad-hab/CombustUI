@@ -3,7 +3,7 @@
 #include "./MJUIButton.hh"
 #include "string.h"
 
-Button::Button(int x, int y, int w, int h, long int nid, char* label): Fl_Button(x, y, w, h, label) {
+MJUI_Button::MJUI_Button(int x, int y, int w, int h, long int nid, char* label): Fl_Button(x, y, w, h, label) {
     id=nid;
     isHovered = false;
     borderRadius = 2;
@@ -12,11 +12,11 @@ Button::Button(int x, int y, int w, int h, long int nid, char* label): Fl_Button
 };
 
 
-void Button::setId(long int new_id) {
+void MJUI_Button::setId(long int new_id) {
     id = new_id;
 }
 
-int Button::handle(int event) {
+int MJUI_Button::handle(int event) {
         if (event == FL_ENTER) {
             isHovered = true;
            enqueueEvent(id, event);
@@ -35,7 +35,7 @@ int Button::handle(int event) {
         return 1; // Pass all other events to base class
 }
 
-void Button::draw()
+void MJUI_Button::draw()
 {
     const char* button_label = label();
     if (this->isHovered)
@@ -48,16 +48,16 @@ void Button::draw()
     fl_draw(button_label, x(), y(), w(), h(), FL_ALIGN_CENTER);
 }
 
-void Button::setBorderRadius(int radius)
+void MJUI_Button::setBorderRadius(int radius)
 {
     this->borderRadius = radius;
 }
 
 
-Button* mjuiCreateButton(int x, int y, int w, int h, long int id, int8_t* label_r)
+MJUI_Button* mjuiCreateButton(int x, int y, int w, int h, long int id, int8_t* label_r)
 {
     char* label = int8ToChar(label_r);
-    Button* btn = new Button(x, y, w, h, id, label);
+    MJUI_Button* btn = new MJUI_Button(x, y, w, h, id, label);
     btn->box(FL_FLAT_BOX);
     return btn;
 }
