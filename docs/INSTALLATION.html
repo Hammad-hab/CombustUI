@@ -1,0 +1,120 @@
+<!-- Auto generated using CMBDoc -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CombustUI-Mojo Installation</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitch = document.getElementById('theme-switch');
+            const currentTheme = localStorage.getItem('theme');
+
+            if (currentTheme === 'dark-mode') {
+                document.body.classList.add('dark-mode');
+                themeSwitch.checked = true;
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeSwitch.checked = false;
+            }
+
+            themeSwitch.addEventListener('change', () => {
+                if (themeSwitch.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.removeItem('theme');
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <img src="./images/logo.png" alt="CombustUI-Mojo Logo" />
+        <p>Installation instructions for CombustUI-Mojo.</p>
+        <div class="theme-switch-wrapper">
+            <span>Light</span>
+            <label class="theme-switch" for="theme-switch">
+                <input type="checkbox" id="theme-switch" />
+                <div class="slider round"></div>
+            </label>
+            <span>Dark</span>
+        </div>
+    </header>
+    <div class="container">
+        <nav>
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="EXAMPLES.html">Examples</a></li>
+                <li><a href="API_REFERENCE.html">API Reference</a></li>
+                <li><a href="INSTALLATION.html" class="nav-active">Installation</a></li>
+            </ul>
+        </nav>
+        <main>
+            <!-- Installation content will be inserted here -->
+            <h2>Installation Guide</h2>
+            <p>This section will provide detailed instructions on how to install CombustUI-Mojo.</p>
+            <h3>Prerequisites</h3>
+            <p>Before installing CombustUI-Mojo, ensure you have the following:</p>
+            <ul>
+                <li>Mojo SDK installed</li>
+                <li>Pixi or Magic</li>
+                <li>Python 3.8+</li>
+                <li>FLTK libraries (automatically installed, but if fails, manual installation is required)</li>
+            </ul>
+            <h3>Install Pixi</h3>
+            Pixi is a package manager and virtual environment manager for Mojo (as well as other languages). You can
+            install Pixi on MacOS, Linus, or Windows Subsystem for Linux (WSL) by running the following command in your
+            terminal:
+
+
+            <pre class="language-bash">curl -fsSL https://pixi.sh/install.sh | sh</pre>
+            Notes: Some instruction will be printed in your terminal. Read them carefully and run the source command or
+            restart your terminal as instructed.
+
+            Now, the pixi binary is installed in the directory ~/.pixi/bin.
+            <br>
+            <a href="https://mojo-lang.com/miji/start/pixi.html" style="color:orange">Source</a>
+            <h3>Install CombustUI-Mojo using create-app.py</h3>
+            <p>To install CombustUI and it's respective dependencies, you can utilise the create-app python script located <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/create-app.py" style="color:orange" download>here</a></p>
+            <p>To use the script, you can run the following command in your terminal:</p>
+            <pre class="language-bash">python3 create-app.py</pre>
+            Before starting the installation, ensure that your OS is supported by create-app. Following are the supported OS/Distros
+            <ul>
+                <li>MacOS</li>
+                <li>
+                    GNU/Linux
+                    <ul>
+                        <li>Debian</li>
+                        <li>RHEL</li>
+                        <li>CentOS</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>On MacOS, the app creation will be slightly faster since FLTK1.4 is downloaded from homebrew and is not compiled from source (something that is done on GNU/Linux systems, see <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh"  style="color:orange">buildfltk1.4.sh</a>).
+            </p>
+            <p>
+                If you happen to get an error stating that homebrew is missing, you can install homebrew using:
+                <pre class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+            </p>
+
+        </main>
+    </div>
+    <footer>
+        CombustUI-Mojo &copy; 2024. All rights reserved. | <a href="https://github.com/your-repo"
+            style="color:inherit;text-decoration:underline;">GitHub</a>
+    </footer>
+</body>
+
+</html>
