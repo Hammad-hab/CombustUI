@@ -21,3 +21,4 @@ app.mojo
 *.png
 !logo.png
 *.gif
+!create_app.gif
