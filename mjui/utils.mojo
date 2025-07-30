@@ -38,6 +38,15 @@ fn createIdFrom(id: String) raises -> Int:
     
     return strn
 
+fn extract32f64(int: Int64) -> Tuple[Int, Int]:
+    """
+        Extracts two Int32s from an Int64
+    """
+    var i32 = int & 0xFFFFFFFF
+    var i32shift = (int >> 32 ) & 0xFFFFFFFF
+
+    return (Int(i32), Int(i32shift))
+
 @always_inline
 fn convertStringToBytes(owned strn: String) -> StringBytes:
     var ptr = strn.unsafe_cstr_ptr()
