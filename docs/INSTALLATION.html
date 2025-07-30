@@ -74,7 +74,7 @@
             </ul>
             <h3>Install Pixi</h3>
             Pixi is a package manager and virtual environment manager for Mojo (as well as other languages). You can
-            install Pixi on MacOS, Linus, or Windows Subsystem for Linux (WSL) by running the following command in your
+            install Pixi on MacOS, Linux, or Windows Subsystem for Linux (WSL) by running the following command in your
             terminal:
 
 
@@ -85,8 +85,8 @@
             Now, the pixi binary is installed in the directory ~/.pixi/bin.
             <br>
             <a href="https://mojo-lang.com/miji/start/pixi.html" style="color:orange">Source</a>
-            <h3>Install CombustUI-Mojo using create-app.py</h3>
-            <p>To install CombustUI and it's respective dependencies, you can utilise the create-app python script located <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/create-app.py" style="color:orange" download>here</a></p>
+            <h3>Install CombustUI Using create-app.py</h3>
+            <p>To install CombustUI and its respective dependencies, you can utilise the create-app python script located <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/create-app.py" style="color:orange" download>here</a></p>
             <p>To use the script, you can run the following command in your terminal:</p>
             <pre class="language-bash">python3 create-app.py</pre>
             Before starting the installation, ensure that your OS is supported by create-app. Following are the supported OS/Distros
@@ -103,13 +103,86 @@
             </ul>
 
             <p>On MacOS, the app creation will be slightly faster since FLTK1.4 is downloaded from homebrew and is not compiled from source (something that is done on GNU/Linux systems, see <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh"  style="color:orange">buildfltk1.4.sh</a>).
+            <blockquote>
+                Make sure to run <code class="language-bash">source ~/.zshrc</code> or <code class="language-bash">source ~/.bashrc</code> before running pixi shell and starting your project.
+            </blockquote>
             </p>
+
+            <h3>Running Your First CombustUI App</h3>
+            <p>
+                After creating an app using <code>create-app.py</code>, you will see a directory named after your app.
+                Once you enter this directory you will find a number of files. Amongst these files, the main file is <code>app.mojo</code>, containing the <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/get_started.mojo" style="color:orange">basic get started template</a>.
+            </p>
+            <p>
+                Everything in <code>app.mojo</code> is the actual code of the app. Then, there is a <code>./build.sh</code> script which must be executed to run the app.
+                Keep in mind that you must enter the pixi/magic environment using <code>pixi shell</code> before running <code>./build.sh </code> to execute the app.
+            </p> 
+
+
+            <figure>
+                <img src="sample.gif" width="850px"/>
+                <figcaption>Running CombustUI</figcaption>
+            </figure>
+
+
+            <h3>Troubleshooting</h3>
+            <h4 style="border-left: 5px solid red; padding-left: 5px;">Error: Homebrew not installed. Install Homebrew and try again</h4>
             <p>
                 If you happen to get an error stating that homebrew is missing, you can install homebrew using:
                 <pre class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
             </p>
 
-        </main>
+            <h4 style="border-left: 5px solid red; padding-left: 5px;">Error: No such file or directory ~/.zshrc (OR ~/.bashrc)</h4>
+            <p>
+                This error suggests that the shell rc file doesn't exist on your computer. It can simply be resolved by creating the file:
+                <br/>
+                <br/>
+                <small>MacOS:</small>
+                <pre class="language-bash">touch ~/.zshrc</pre>
+                <small>Linux:</small>
+                <pre class="language-bash">touch ~/.bashrc</pre>
+            </p>
+             <h4 style="border-left: 5px solid red; padding-left: 5px;">Error: build_fltk failed with error</h4>
+             <p>
+                <code>build_fltk1.4.sh</code> is a small script used for downloading, building and installing FLTK1.4 on linux systems.
+                Should it fail, you can try one of the following solutions:
+                <ul>
+                    <li>
+                        Download <code>build_fltk1.4.sh</code> from <a href="https://raw.githubusercontent.com/Hammad-hab/CombustUI/refs/heads/main/scripts/build_fltk1.4.sh" style="color:orange">here</a> and run it manually
+                    </li>
+                    <li>
+                        If your distro is unsupported, you can manually build fltk1.4:
+                        <ul>
+                            <li>Download FLTK1.4 source from <a href="https://github.com/fltk/fltk/releases/download/release-1.4.3/fltk-1.4.3-source.tar.gz" style="color:orange">here</a></li>
+                            <li>
+                                Install the required libraries (names may differ based on package manager): 
+                                <ul>
+                                <li>wget</li>
+                                <li>build-essential</li>
+                                <li>cmake</li>
+                                <li>libx11-dev</li>
+                                <li>libxft-dev</li>
+                                <li>libxinerama-dev</li>
+                                <li>libgl1-mesa-dev</li>
+                                <li>libglu1-mesa-dev</li>
+                                <li>libjpeg-dev</li>
+                                </ul>
+                            </li>
+                            <li> 
+                                Extract the <code>.tar.gz</code> and enter the directory to run:
+                                <pre class="language-bash">
+export CFLAGS='-fPIC'
+export CXXFLAGS='-fPIC'
+./configure
+make
+sudo make install</pre>
+                            </li>
+                        </ul>
+                        After the installation completes, FLTK1.4 will be successfully installed on your system.
+                    </li>
+                </ul>
+             </p>
+        </main> 
     </div>
     <footer>
         CombustUI-Mojo &copy; 2024. All rights reserved. | <a href="https://github.com/your-repo"
