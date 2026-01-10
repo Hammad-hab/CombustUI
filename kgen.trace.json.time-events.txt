@@ -1,0 +1,12 @@
+Thread   Start(us)  B/E     Dur(us)  Name/Detail
+------  ----------  ---  ----------  ------------------------------
+   259     1840905  BEG        2287  LowerSemanticCF
+   259     1843193  END        2287  LowerSemanticCF
+   259     1843194  BEG       19955  CheckLifetimes
+   259     1844120  BEG           8  (A) SymbolTableAnalysis
+   259     1844129  END           8  (A) SymbolTableAnalysis
+   259     1863149  END       19955  CheckLifetimes
+   259     1863151  BEG        1293  AnnotateKernels
+   259     1864444  END        1293  AnnotateKernels
+   259     1864445  BEG         268  VerifyKernels
+   259     1864713  END         268  VerifyKernels

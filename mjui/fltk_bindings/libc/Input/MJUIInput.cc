@@ -20,11 +20,6 @@ MJUI_Input::MJUI_Input(int x, int y, int w, int h, long int nid, int numericInpu
     value(placeholder);
 };
 
-void MJUI_Input::setId(long int new_id)
-{
-    id = new_id;
-}
-
 int MJUI_Input::handle(int event)
 {
     if (event == FL_FOCUS)
@@ -62,11 +57,6 @@ int MJUI_Input::handle(int event)
     return 1;
 }
 
-void MJUI_Input::setBorderRadius(int radius)
-{
-    this->borderRadius = radius;
-}
-
 void MJUI_Input::draw()
 {
     Fl_Input::draw();
@@ -83,11 +73,6 @@ MJUI_MultiLineInput::MJUI_MultiLineInput(int x, int y, int w, int h, long int ni
     cursor_color(FL_BLACK);
     value(placeholder);
 };
-
-void MJUI_MultiLineInput::setId(long int new_id)
-{
-    id = new_id;
-}
 
 int MJUI_MultiLineInput::handle(int event)
 {
@@ -110,11 +95,6 @@ int MJUI_MultiLineInput::handle(int event)
     enqueueEvent(id, event);
     Fl_Multiline_Input::handle(event);
     return 1;
-}
-
-void MJUI_MultiLineInput::setBorderRadius(int radius)
-{
-    this->borderRadius = radius;
 }
 
 void MJUI_MultiLineInput::draw()
@@ -162,4 +142,12 @@ void mjuiAddOptionToChoice(Fl_Choice* input, int8_t* choice)
 {
      char *vlu = int8ToChar(choice);
     input->add(vlu);
+}
+
+void mjuiSetInputPosition(MJUI_Input* input, int pos) {
+    input->insert_position(pos);
+}
+
+int mjuiGetInputPosition(MJUI_Input* input) {
+    return input->insert_position();
 }

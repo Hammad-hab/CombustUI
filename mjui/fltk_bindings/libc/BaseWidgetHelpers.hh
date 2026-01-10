@@ -32,7 +32,7 @@ void mjuiWindowSetResizable(Fl_Window* window, Fl_Widget* widget);
 
 void mjuiApplyImage(Fl_Widget* widget, Fl_Image* image);
 void mjuiImageScale(Fl_Image* img, int width, int height, int proportional);
-
+void mjuiTakeFocus(Fl_Widget *widget);
 void useScheme(int scheme);
 
 void fl_execute();

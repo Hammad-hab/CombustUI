@@ -5,7 +5,7 @@
 MJUI_Flex::MJUI_Flex(int X, int Y, int W, int H, int DIR): Fl_Flex(X, Y, W, H, DIR)
 {
     // ...
-    this->resize_direction = RESIZE_XONLY;
+    this->resize_direction = DIR;
 }
 
 void MJUI_Flex::resize(int X, int Y, int W, int H)

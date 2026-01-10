@@ -8,13 +8,12 @@
 #define GIF 4
 #define ANIM_GIF 5
 
-class MJUILabel: public Fl_Box, public BaseWidget 
+class MJUILabel: public Fl_Box
 {
     // TODO: Add more custom features
     public:
         long int id;
-        virtual void setId(long int new_id) override;
-        MJUILabel(int x, int y, int w, int h, int id, const char* label);
+        MJUILabel(int x, int y, int w, int h, int nid, const char* label);
         void setLabelType(int a);
         virtual int handle(int event) override;
         virtual void draw() override;

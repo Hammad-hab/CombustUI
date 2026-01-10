@@ -1,5 +1,4 @@
 #include "../BaseWidgetHelpers.cc"
-#include "../BaseWidget.cc"
 #include "./MJUIButton.hh"
 #include "string.h"
 
@@ -12,9 +11,6 @@ MJUI_Button::MJUI_Button(int x, int y, int w, int h, long int nid, char* label):
 };
 
 
-void MJUI_Button::setId(long int new_id) {
-    id = new_id;
-}
 
 int MJUI_Button::handle(int event) {
         if (event == FL_ENTER) {
@@ -48,10 +44,6 @@ void MJUI_Button::draw()
     fl_draw(button_label, x(), y(), w(), h(), FL_ALIGN_CENTER);
 }
 
-void MJUI_Button::setBorderRadius(int radius)
-{
-    this->borderRadius = radius;
-}
 
 
 MJUI_Button* mjuiCreateButton(int x, int y, int w, int h, long int id, int8_t* label_r)
@@ -69,13 +61,6 @@ MJUI_CheckButton::MJUI_CheckButton(int x, int y, int w, int h, long int id, char
     borderRadius = 2;
 }
 
-void MJUI_CheckButton::setId(long int new_id) {
-    id = new_id;
-}
-
-void MJUI_CheckButton::setBorderRadius(int radius) {
-    this->borderRadius = radius;
-}
 
 int MJUI_CheckButton::handle(int event) {
     if (event == FL_ENTER) {

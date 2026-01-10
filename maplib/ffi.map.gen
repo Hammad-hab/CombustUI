@@ -103,6 +103,12 @@
       "proportional": "Int"
     }
   },
+  "mjuiTakeFocus": {
+    "returns": "c_void",
+    "arguments": {
+      "widget": "FLTK_WIDGET_POINTER"
+    }
+  },
   "useScheme": {
     "returns": "c_void",
     "arguments": {
@@ -209,6 +215,19 @@
     "arguments": {
       "input": "FLTK_WIDGET_POINTER",
       "choice": "StringBytes"
+    }
+  },
+  "mjuiSetInputPosition": {
+    "returns": "c_void",
+    "arguments": {
+      "input": "FLTK_WIDGET_POINTER",
+      "pos": "Int"
+    }
+  },
+  "mjuiGetInputPosition": {
+    "returns": "Int",
+    "arguments": {
+      "input": "FLTK_WIDGET_POINTER"
     }
   },
   "mjuiCreateLabel": {

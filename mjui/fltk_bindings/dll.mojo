@@ -1,8 +1,7 @@
-from sys.ffi import DLHandle, UnsafePointer, _OwnedDLHandle, _Global
+from sys.ffi import UnsafePointer, _OwnedDLHandle, _Global, DLHandle
 from os import getenv
 from sys.terminate import exit
 
-var __dll = init()
 fn init() -> DLHandle:
     var path = getenv('COMBUSTUI_DLL_PATH')
     if len(path) <= 0:

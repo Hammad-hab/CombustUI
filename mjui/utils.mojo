@@ -59,3 +59,5 @@ alias EMPTY = convertStringToBytes("")
 alias GTK = 0
 alias GLEAM = 1
 alias PLASTIC = 2
+alias b = convertStringToBytes
+alias id = createIdFrom

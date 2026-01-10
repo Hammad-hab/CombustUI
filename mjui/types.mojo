@@ -1,4 +1,5 @@
-from sys.ffi import DLHandle, UnsafePointer, c_char
+from sys.ffi import DLHandle, c_char
+from memory import UnsafePointer
 from collections import Dict
 from memory import Span
 

@@ -1,9 +1,11 @@
 
+from .fltk_bindings.bindings import CombustUIContext
+
+
 alias Handler = fn() raises
 
 
-@value
-struct EventHandler:
+struct EventHandler(Copyable, Movable):
     """
     EventHandler is a class that allows you to store a handler and a trigger event together
     so that it can be passed to the application and be called when the event is triggered.
@@ -36,10 +38,9 @@ struct EventHandler:
     fn null_handler() raises:
         pass
 
-    fn __init__(out self):
+    fn __init__(out self,):
         self.handler = EventHandler.null_handler
         self.triggerEvent = self.NULL_EVENT
-
 
     fn set(mut self: EventHandler, trigger: Int, handler: Handler):
         self.attachTrigger(trigger)
@@ -53,3 +54,13 @@ struct EventHandler:
     
     fn trigger(read self) raises:
         self.handler()
+
+    fn __copyinit__(out self, other: Self):
+        self.triggerEvent = other.triggerEvent
+        self.handler = other.handler
+
+        
+    fn __moveinit__(out self, deinit existing: Self):
+        self.triggerEvent = existing.triggerEvent
+        self.handler = existing.handler
+

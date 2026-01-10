@@ -1,68 +1,85 @@
 """
 A tiny script that takes a .map.gen and converts it to ffi bindings
+and wraps them inside a struct/class context
 """
 
-import json as j  # Import JSON module with alias `j`
+import json as j
 import sys
+from pathlib import Path
 
 # === READ COMMAND LINE ARGUMENTS ===
-# Get input map file (.map.gen) from first argument if exists
-File = sys.argv[1] if sys.argv.__len__() > 0 else None
-# Get output directory from second argument if exists
-OutputDir = sys.argv[2] if sys.argv.__len__() > 0 else None
+File = sys.argv[1] if len(sys.argv) > 1 else None
+OutputDir = sys.argv[2] if len(sys.argv) > 2 else None
 
-# === PROCESS THE MAP FILE ===
 if File:
-    # Ensure the provided file ends with `.map.gen` to validate format
     if not File.endswith('map.gen'):
-        print('Error: Given file isn\'t an FFI map')
+        print("Error: Given file isn't an FFI map")
         sys.exit(1)
-    
-    # === PARSE THE JSON MAP FILE ===
+
     with open(File, 'r') as f:
         raw_contents = f.read()
         try:
             parsed_contents: dict[str, dict] = j.loads(raw_contents)
         except:
-            print('Error: Given file isn\'t a proper FFI map')
+            print("Error: Given file isn't a proper FFI map")
             sys.exit(1)
-        
-        # === PREPARE OUTPUT ===
-        definations = []  # to hold alias definitions (function signatures)
-        bindings = []     # to hold actual ffi function binding lines
-                    
-        # === LOOP OVER EACH FUNCTION IN THE MAP ===
+
+        # Prepare lists for type aliases
+        definitions = []
+
+        # Prepare struct fields and __init__ assignments
+        struct_fields = []
+        init_assignments = []
+
         for key, value in parsed_contents.items():
-            if key == '?':
+            if key == "?":
                 continue
-            # Build the argument list as `name: Type`
-            args = [f"{arg_name}: {dtype}" for arg_name, dtype in value['arguments'].items()]
-            args_str = ', '.join(args)
 
-            # Generate the function type alias
-            defination = f'{key.upper()}_DEFINATION'
-            defination_alias = (
-                f'alias {defination}= fn({args_str}) -> {value["returns"]}'
+            args = [f"{arg_name}: {dtype}" for arg_name, dtype in value["arguments"].items()]
+            args_str = ", ".join(args)
+
+            # Type alias
+            definition_name = f"{key.upper()}_DEFINATION"
+            definitions.append(f"alias {definition_name}= fn({args_str}) -> {value['returns']}")
+
+            # Struct field name (same as original function name)
+            struct_fields.append(f"    var {key.replace('mjui', '')}: {definition_name}")
+
+            # Init assignment
+            func_name = key if "@cbindto" not in value else value["@cbindto"]
+            init_assignments.append(
+                f"        self.{key.replace('mjui', '')} = __dll.get_function[{definition_name}](\"{func_name}\")"
             )
 
-            # Generate the binding line, using @cbindto override if present
-            function_binding = (
-                f'var {key} = __dll.get_function[{defination}]('
-                f'"{key if "@cbindto" not in value.keys() else value["@cbindto"]}")'
-            )
+        # Join everything
+        joined_definitions = "\n".join(definitions)
+        joined_fields = "\n".join(struct_fields)
+        joined_inits = "\n".join(init_assignments)
 
-            # Append to lists
-            bindings.append(function_binding)
-            definations.append(defination_alias)
-            
-        joined_definitions = "\n".join(definations)
-        joined_bindings = "\n".join(bindings)
+        # Ensure output directory exists
+        Path(OutputDir).parent.mkdir(parents=True, exist_ok=True)
 
-        with open(OutputDir + 'bindings.mojo', 'w') as f:
+        # Write to output
+        with open(Path(OutputDir) / "bindings.mojo", 'w') as f:
             f.write(
-                f'"""Auto generated using maplib"""\n\n\n'
-                f'from .dll import __dll\n'
-                f'from ..types import *\n\n'
-                f'{joined_definitions}\n\n'
-                f'{joined_bindings}'
+f'''"""Auto generated using maplib"""
+
+from .dll import init
+from ..types import *
+
+{joined_definitions}
+
+
+struct CombustUIContext:
+{joined_fields}
+
+    def __init__(out self):
+        var __dll = init()
+
+{joined_inits}
+'''
             )
+
+    print(f"Bindings successfully written to {OutputDir}/bindings.mojo")
+else:
+    print("Usage: python map_to_ffi.py <input.map.gen> <output_dir>")

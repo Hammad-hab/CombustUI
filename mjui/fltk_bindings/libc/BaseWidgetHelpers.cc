@@ -162,6 +162,14 @@ int mjuiEventKey()
     return Fl::event_key();
 }
 
+
+
+void mjuiTakeFocus(Fl_Widget *widget)
+{
+    widget->take_focus();   
+}
+
+
 #endif
 
 // #include<stdio.h>

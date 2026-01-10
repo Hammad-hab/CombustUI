@@ -138,7 +138,7 @@ for file in header_files:
 
 # Write final JSON output to a file
 stringified = json.dumps(ffi_map, indent=2)
-with open('ffi.map.gen', "w") as f:
+with open('ffi.map.gen', "+x") as f:
     f.write(stringified)
 
 # Print summary
