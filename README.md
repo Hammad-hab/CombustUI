@@ -17,6 +17,10 @@
     </li>
 </nav>
 <br/>
+
+> [!NOTE]
+> **CombustUI is an early-stage project and only covers a handful of widgets** (window, button, input, grid, etc.). For a complete, actively maintained GUI toolkit with far more widgets, use [**Mojo-GTK**](https://github.com/Hammad-hab/Mojo-GTK).
+
 CombustUI is a GUI library for Mojo, built on top of FLTK (Fast Light Toolkit) from C++. It provides low-level control by directly calling FLTK functions. Currently, it supports basic event handling and essential widgets such as inputbox, button, window, and grid.
 
 ## Example Application
@@ -119,3 +123,7 @@ For now, the API is functional but as soon as the basics are completed, a struct
 - [ ] Arch
 - [ ] RHEL
   - [x] CentOS
+
+
+CAN you add a small note redirecting users to my better tool: https://github.com/Hammad-hab/Mojo-GTK?
+I mean, mojo GTK is much more complete, powerful and still
